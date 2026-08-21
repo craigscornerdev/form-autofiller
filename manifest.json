@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Charity Form Autofiller",
+  "version": "0.6.1",
+  "description": "Scans charity request forms before suggesting safe autofill values.",
+  "action": {
+    "default_title": "Charity Form Autofiller",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ]
+}

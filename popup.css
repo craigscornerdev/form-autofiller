@@ -1,0 +1,168 @@
+:root {
+  color: #1f2937;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 300px;
+}
+
+.popup {
+  padding: 16px;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.intro,
+.status {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.intro {
+  margin: 0 0 16px;
+}
+
+.confidence-legend {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 11px;
+  gap: 6px;
+  margin: -8px 0 16px;
+}
+
+.confidence-legend span {
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+
+.high {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.low {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+button {
+  background: #166534;
+  border: 0;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 14px;
+  width: 100%;
+}
+
+button:hover:not(:disabled) {
+  background: #14532d;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.status {
+  margin: 14px 0 0;
+}
+
+.status.error {
+  color: #b91c1c;
+}
+
+#results {
+  border-top: 1px solid #d1d5db;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+h2 {
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+.field-list {
+  list-style: none;
+  margin: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.field-list li {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.field-details {
+  color: #4b5563;
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.field-suggestion {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.profile {
+  border-top: 1px solid #d1d5db;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.profile-note {
+  color: #4b5563;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+
+.profile label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 10px 0 4px;
+}
+
+.profile input,
+.profile textarea {
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 8px;
+  width: 100%;
+}
+
+.profile textarea {
+  resize: vertical;
+}
+
+.profile button {
+  margin-top: 14px;
+}

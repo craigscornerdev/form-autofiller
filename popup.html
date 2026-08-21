@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Charity Form Autofiller</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <h1>Charity Form Autofiller</h1>
+      <p class="intro">Scan this page to fill high-confidence fields. Nothing is submitted.</p>
+      <p class="confidence-legend"><span class="high">Green: high confidence</span><span class="medium">Yellow: review</span><span class="low">Red: no fill</span></p>
+
+      <button id="scan-form-button" type="button">Scan Form</button>
+      <p id="status-message" class="status" aria-live="polite">Ready to scan.</p>
+
+      <section id="results" hidden aria-labelledby="results-heading">
+        <h2 id="results-heading">Fields found</h2>
+        <ul id="field-list" class="field-list"></ul>
+      </section>
+
+      <section class="profile" aria-labelledby="profile-heading">
+        <h2 id="profile-heading">Sample charity profile</h2>
+        <p class="profile-note">Sample cat-shelter information. Replace it before using the extension on a real form.</p>
+
+        <form id="profile-form">
+          <label for="organization-name">Organization name</label>
+          <input id="organization-name" name="organizationName" type="text" required>
+
+          <label for="contact-name">Contact name</label>
+          <input id="contact-name" name="contactName" type="text">
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email">
+
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel">
+
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="2"></textarea>
+
+          <label for="website">Website</label>
+          <input id="website" name="website" type="url">
+
+          <label for="ein">EIN</label>
+          <input id="ein" name="ein" type="text">
+
+          <button type="submit">Save Profile</button>
+          <p id="profile-status" class="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="field-matcher.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
