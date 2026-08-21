@@ -28,8 +28,23 @@
           <label for="organization-name">Organization name</label>
           <input id="organization-name" name="organizationName" type="text" required>
 
+          <label for="organization-type">Organization type</label>
+          <select id="organization-type" name="organizationType">
+            <option value="">Select an organization type</option>
+            <option value="Charity">Charity</option>
+            <option value="Nonprofit">Nonprofit</option>
+            <option value="Community">Community</option>
+            <option value="Faith-based">Faith-based</option>
+          </select>
+
+          <label for="mission-statement">Mission statement</label>
+          <textarea id="mission-statement" name="missionStatement" rows="3"></textarea>
+
           <label for="contact-name">Contact name</label>
           <input id="contact-name" name="contactName" type="text">
+
+          <label for="position">Position</label>
+          <input id="position" name="position" type="text">
 
           <label for="email">Email</label>
           <input id="email" name="email" type="email">
@@ -37,14 +52,46 @@
           <label for="phone">Phone</label>
           <input id="phone" name="phone" type="tel">
 
-          <label for="address">Address</label>
-          <textarea id="address" name="address" rows="2"></textarea>
+          <label for="organization-address-street">Street address</label>
+          <input id="organization-address-street" name="organizationAddress.street" type="text">
+
+          <label for="organization-address-city">City</label>
+          <input id="organization-address-city" name="organizationAddress.city" type="text">
+
+          <label for="organization-address-state">State / Province</label>
+          <select id="organization-address-state" name="organizationAddress.state">
+            <option value="">Select a state or province</option>
+            <option value="New York">New York</option>
+            <option value="California">California</option>
+            <option value="Texas">Texas</option>
+            <option value="Ontario">Ontario</option>
+            <option value="British Columbia">British Columbia</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="organization-address-postal-code">Postal code</label>
+          <input id="organization-address-postal-code" name="organizationAddress.postalCode" type="text">
+
+          <label for="organization-address-country">Country</label>
+          <input id="organization-address-country" name="organizationAddress.country" type="text">
 
           <label for="website">Website</label>
           <input id="website" name="website" type="url">
 
           <label for="ein">EIN</label>
           <input id="ein" name="ein" type="text">
+
+          <label for="event-name">Event name</label>
+          <input id="event-name" name="eventName" type="text">
+
+          <label for="event-date">Event date</label>
+          <input id="event-date" name="eventDate" type="date">
+
+          <label for="shipping-date">Shipping date</label>
+          <input id="shipping-date" name="shippingDate" type="date">
+
+          <label for="event-description">Event description</label>
+          <textarea id="event-description" name="eventDescription" rows="3"></textarea>
 
           <button type="submit">Save Profile</button>
           <p id="profile-status" class="status" aria-live="polite"></p>

@@ -7,12 +7,25 @@ const profileStatus = document.getElementById("profile-status");
 
 const sampleProfile = {
   organizationName: "Paws & Whiskers Cat Shelter",
+  organizationType: "Charity",
+  missionStatement: "We rescue and rehome neglected cats while promoting humane care, adoption, and community education.",
   contactName: "Jamie Lee",
+  position: "Development Director",
   email: "contact@pawsandwhiskers.example",
   phone: "(555) 014-0202",
-  address: "123 Maple Lane\nRiverdale, NY 10471",
+  organizationAddress: {
+    street: "123 Maple Lane",
+    city: "Riverdale",
+    state: "New York",
+    postalCode: "10471",
+    country: "United States"
+  },
   website: "https://pawsandwhiskers.example",
-  ein: "12-3456789"
+  ein: "12-3456789",
+  eventName: "Paws & Whiskers Fall Adoption Drive",
+  eventDate: "2026-10-18",
+  shippingDate: "2026-10-08",
+  eventDescription: "A community adoption event featuring cat meet-and-greets, foster volunteer signups, and donation opportunities."
 };
 
 scanButton.addEventListener("click", scanCurrentPage);
@@ -116,8 +129,12 @@ function createNoMatchElement() {
 
 function createSuggestionElement(suggestion) {
   const element = document.createElement("span");
-  element.className = `field-suggestion ${suggestion.confidence}`;
-  element.textContent = `High confidence: ${suggestion.source} — ${suggestion.value}`;
+  const category = suggestion.scoreCategory || suggestion.confidence || "high";
+  const label = category === "high" ? "High confidence" : category === "review" ? "Review" : "Low confidence";
+  const reason = suggestion.reason ? ` • ${suggestion.reason}` : "";
+
+  element.className = `field-suggestion ${suggestion.confidence || category}`;
+  element.textContent = `${label}: ${suggestion.source} — ${suggestion.value}${reason}`;
   return element;
 }
 
@@ -169,15 +186,48 @@ async function saveProfile(event) {
 }
 
 function getProfileFromForm() {
-  return Object.fromEntries(new FormData(profileForm).entries());
+  const profile = {};
+
+  for (const [key, value] of new FormData(profileForm).entries()) {
+    if (!value || String(value).trim() === "") {
+      continue;
+    }
+
+    const path = key.split(".");
+    let current = profile;
+
+    path.forEach((segment, index) => {
+      if (index === path.length - 1) {
+        current[segment] = value;
+      } else {
+        current[segment] = current[segment] || {};
+        current = current[segment];
+      }
+    });
+  }
+
+  return profile;
 }
 
 function populateProfileForm(profile) {
-  Object.entries(profile).forEach(([fieldName, value]) => {
+  const formEntries = Object.entries(profile || {});
+
+  formEntries.forEach(([fieldName, value]) => {
     const field = profileForm.elements.namedItem(fieldName);
 
     if (field) {
       field.value = value;
+      return;
+    }
+
+    if (value && typeof value === "object") {
+      Object.entries(value).forEach(([nestedName, nestedValue]) => {
+        const nestedField = profileForm.elements.namedItem(`${fieldName}.${nestedName}`);
+
+        if (nestedField) {
+          nestedField.value = nestedValue;
+        }
+      });
     }
   });
 }
@@ -284,6 +334,11 @@ function applyHighConfidenceMatches(matches) {
       return { index: match.index, outcome: "already-filled" };
     }
 
+    if (!isSafeFillTarget(field, match.suggestion)) {
+      highlightField(field, "low");
+      return { index: match.index, outcome: "unsupported-control" };
+    }
+
     if (confidence !== "high") {
       highlightField(field, confidence);
       return { index: match.index, outcome: "review-required" };
@@ -302,6 +357,20 @@ function applyHighConfidenceMatches(matches) {
     highlightField(field, confidence);
 
     return { index: match.index, outcome: "filled" };
+  }
+
+  function isSafeFillTarget(field, suggestion) {
+    const unsupportedTypes = ["checkbox", "radio", "button", "submit", "reset", "file", "hidden"].includes(field.type);
+
+    if (unsupportedTypes) {
+      return false;
+    }
+
+    if (field.tagName === "SELECT") {
+      return !!suggestion && !!suggestion.value;
+    }
+
+    return ["text", "email", "tel", "url", "number", "textarea"].includes(field.type || "text");
   }
 
   function formatValueForField(field, suggestion) {

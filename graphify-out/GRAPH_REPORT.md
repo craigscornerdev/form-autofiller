@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-21)
 
 ## Corpus Check
-- 10 files · ~3,276 words
+- 10 files · ~3,775 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 82 nodes · 85 edges · 13 communities (9 shown, 4 thin omitted)
+- 81 nodes · 84 edges · 13 communities (9 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `df4f66ec`
+- Built from commit: `cc9c5290`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,16 +29,16 @@
 - [[_COMMUNITY_Community 11|Community 11]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Changelog` - 12 edges
-2. `Charity Form Autofiller — Prototype Checklist` - 9 edges
-3. `scanCurrentPage()` - 7 edges
+1. `Changelog` - 10 edges
+2. `scanCurrentPage()` - 7 edges
+3. `Major Objective: Match Real-World Charity Forms` - 7 edges
 4. `FieldMatcher` - 5 edges
 5. `Charity Form Autofiller` - 5 edges
-6. `action` - 3 edges
-7. `showScanResult()` - 3 edges
-8. `addSuggestions()` - 3 edges
-9. `getProfileFromForm()` - 3 edges
-10. `scripts` - 2 edges
+6. `Charity Form Autofiller — Agile Backlog` - 4 edges
+7. `action` - 3 edges
+8. `showScanResult()` - 3 edges
+9. `addSuggestions()` - 3 edges
+10. `getProfileFromForm()` - 3 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `scanCurrentPage()` --calls--> `addSuggestions()`  [EXTRACTED]
@@ -56,12 +56,12 @@ Cohesion: 0.15
 Nodes (7): fieldList, profileForm, profileStatus, results, sampleProfile, scanButton, statusMessage
 
 ### Community 1 - "Community 1"
-Cohesion: 0.15
-Nodes (12): 0.1.0 — First extension shell, 0.1.1 — Scan the open page, 0.2.0 — Field details, 0.3.0 — Sample charity profile, 0.4.0 — First conservative match, 0.5.0 — High-confidence fill and color review, 0.6.0 — More exact high-confidence matches, 0.6.1 — EIN number-field support (+4 more)
+Cohesion: 0.18
+Nodes (10): 0.1.0 — date not recorded — First extension shell, 0.1.1 — date not recorded — Scan the open page, 0.2.0 — date not recorded — Field details, 0.3.0 — date not recorded — Sample charity profile, 0.4.0 — date not recorded — First conservative match, 0.5.0 — date not recorded — High-confidence fill and color review, 0.6.0 — date not recorded — More exact high-confidence matches, 0.6.1 — date not recorded — EIN number-field support (+2 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.20
-Nodes (9): Charity Form Autofiller — Prototype Checklist, Goal, Later, Not in the First Prototype, Prototype 1: Extension Shell, Prototype 2: Read a Form, Prototype 3: Store One Charity Profile, Prototype 4: Conservative Matching, Prototype 5: Review and Fill (+1 more)
+Cohesion: 0.18
+Nodes (10): Agile Step 1 — Capture the Form as Test Data, Agile Step 2 — Define Field Semantics and Profile Data, Agile Step 3 — Normalize Labels and Field Context, Agile Step 4 — Add Conservative Fuzzy Matching, Agile Step 5 — Match Values to Controls Safely, Agile Step 6 — Verify, Tune, and Release, Charity Form Autofiller — Agile Backlog, Later Backlog (+2 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.22
@@ -84,7 +84,7 @@ Cohesion: 0.67
 Nodes (3): addSuggestions(), getProfileFromForm(), saveProfile()
 
 ## Knowledge Gaps
-- **44 isolated node(s):** `manifest_version`, `name`, `version`, `description`, `default_title` (+39 more)
+- **42 isolated node(s):** `manifest_version`, `name`, `version`, `description`, `default_title` (+37 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -92,4 +92,4 @@ Nodes (3): addSuggestions(), getProfileFromForm(), saveProfile()
 _Questions this graph is uniquely positioned to answer:_
 
 - **What connects `manifest_version`, `name`, `version` to the rest of the system?**
-  _44 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _42 weakly-connected nodes found - possible documentation gaps or missing edges._

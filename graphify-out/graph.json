@@ -554,114 +554,94 @@
       "norm_label": "changelog"
     },
     {
-      "label": "2026-08-21 \u2014 Automated testing workflow",
+      "label": "0.6.2 \u2014 2026-08-21 \u2014 Project maintenance",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
-      "id": "changelog_2026_08_21_automated_testing_workflow",
+      "id": "changelog_0_6_2_2026_08_21_project_maintenance",
       "community": 1,
-      "norm_label": "2026-08-21 \u2014 automated testing workflow"
+      "norm_label": "0.6.2 \u2014 2026-08-21 \u2014 project maintenance"
     },
     {
-      "label": "2026-08-21 \u2014 Repository graph",
+      "label": "0.6.1 \u2014 date not recorded \u2014 EIN number-field support",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L10",
+      "source_location": "L16",
       "_origin": "ast",
-      "id": "changelog_2026_08_21_repository_graph",
+      "id": "changelog_0_6_1_date_not_recorded_ein_number_field_support",
       "community": 1,
-      "norm_label": "2026-08-21 \u2014 repository graph"
+      "norm_label": "0.6.1 \u2014 date not recorded \u2014 ein number-field support"
     },
     {
-      "label": "2026-08-21 \u2014 Project setup documentation",
+      "label": "0.6.0 \u2014 date not recorded \u2014 More exact high-confidence matches",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L14",
+      "source_location": "L22",
       "_origin": "ast",
-      "id": "changelog_2026_08_21_project_setup_documentation",
+      "id": "changelog_0_6_0_date_not_recorded_more_exact_high_confidence_matches",
       "community": 1,
-      "norm_label": "2026-08-21 \u2014 project setup documentation"
+      "norm_label": "0.6.0 \u2014 date not recorded \u2014 more exact high-confidence matches"
     },
     {
-      "label": "0.6.1 \u2014 EIN number-field support",
+      "label": "0.5.0 \u2014 date not recorded \u2014 High-confidence fill and color review",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L20",
+      "source_location": "L28",
       "_origin": "ast",
-      "id": "changelog_0_6_1_ein_number_field_support",
+      "id": "changelog_0_5_0_date_not_recorded_high_confidence_fill_and_color_review",
       "community": 1,
-      "norm_label": "0.6.1 \u2014 ein number-field support"
+      "norm_label": "0.5.0 \u2014 date not recorded \u2014 high-confidence fill and color review"
     },
     {
-      "label": "0.6.0 \u2014 More exact high-confidence matches",
+      "label": "0.4.0 \u2014 date not recorded \u2014 First conservative match",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L26",
+      "source_location": "L37",
       "_origin": "ast",
-      "id": "changelog_0_6_0_more_exact_high_confidence_matches",
+      "id": "changelog_0_4_0_date_not_recorded_first_conservative_match",
       "community": 1,
-      "norm_label": "0.6.0 \u2014 more exact high-confidence matches"
+      "norm_label": "0.4.0 \u2014 date not recorded \u2014 first conservative match"
     },
     {
-      "label": "0.5.0 \u2014 High-confidence fill and color review",
+      "label": "0.3.0 \u2014 date not recorded \u2014 Sample charity profile",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L32",
+      "source_location": "L43",
       "_origin": "ast",
-      "id": "changelog_0_5_0_high_confidence_fill_and_color_review",
+      "id": "changelog_0_3_0_date_not_recorded_sample_charity_profile",
       "community": 1,
-      "norm_label": "0.5.0 \u2014 high-confidence fill and color review"
+      "norm_label": "0.3.0 \u2014 date not recorded \u2014 sample charity profile"
     },
     {
-      "label": "0.4.0 \u2014 First conservative match",
+      "label": "0.2.0 \u2014 date not recorded \u2014 Field details",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L41",
+      "source_location": "L49",
       "_origin": "ast",
-      "id": "changelog_0_4_0_first_conservative_match",
+      "id": "changelog_0_2_0_date_not_recorded_field_details",
       "community": 1,
-      "norm_label": "0.4.0 \u2014 first conservative match"
+      "norm_label": "0.2.0 \u2014 date not recorded \u2014 field details"
     },
     {
-      "label": "0.3.0 \u2014 Sample charity profile",
+      "label": "0.1.1 \u2014 date not recorded \u2014 Scan the open page",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L47",
+      "source_location": "L55",
       "_origin": "ast",
-      "id": "changelog_0_3_0_sample_charity_profile",
+      "id": "changelog_0_1_1_date_not_recorded_scan_the_open_page",
       "community": 1,
-      "norm_label": "0.3.0 \u2014 sample charity profile"
+      "norm_label": "0.1.1 \u2014 date not recorded \u2014 scan the open page"
     },
     {
-      "label": "0.2.0 \u2014 Field details",
+      "label": "0.1.0 \u2014 date not recorded \u2014 First extension shell",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L53",
+      "source_location": "L61",
       "_origin": "ast",
-      "id": "changelog_0_2_0_field_details",
+      "id": "changelog_0_1_0_date_not_recorded_first_extension_shell",
       "community": 1,
-      "norm_label": "0.2.0 \u2014 field details"
-    },
-    {
-      "label": "0.1.1 \u2014 Scan the open page",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L59",
-      "_origin": "ast",
-      "id": "changelog_0_1_1_scan_the_open_page",
-      "community": 1,
-      "norm_label": "0.1.1 \u2014 scan the open page"
-    },
-    {
-      "label": "0.1.0 \u2014 First extension shell",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L65",
-      "_origin": "ast",
-      "id": "changelog_0_1_0_first_extension_shell",
-      "community": 1,
-      "norm_label": "0.1.0 \u2014 first extension shell"
+      "norm_label": "0.1.0 \u2014 date not recorded \u2014 first extension shell"
     },
     {
       "label": "README.md",
@@ -734,94 +714,104 @@
       "norm_label": "todo.md"
     },
     {
-      "label": "Charity Form Autofiller \u2014 Prototype Checklist",
+      "label": "Charity Form Autofiller \u2014 Agile Backlog",
       "file_type": "document",
       "source_file": "TODO.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "todo_charity_form_autofiller_prototype_checklist",
+      "id": "todo_charity_form_autofiller_agile_backlog",
       "community": 2,
-      "norm_label": "charity form autofiller \u2014 prototype checklist"
+      "norm_label": "charity form autofiller \u2014 agile backlog"
     },
     {
-      "label": "Goal",
+      "label": "Product Goal",
       "file_type": "document",
       "source_file": "TODO.md",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "todo_goal",
+      "id": "todo_product_goal",
       "community": 2,
-      "norm_label": "goal"
+      "norm_label": "product goal"
     },
     {
-      "label": "Prototype 1: Extension Shell",
+      "label": "Major Objective: Match Real-World Charity Forms",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
-      "id": "todo_prototype_1_extension_shell",
+      "id": "todo_major_objective_match_real_world_charity_forms",
       "community": 2,
-      "norm_label": "prototype 1: extension shell"
+      "norm_label": "major objective: match real-world charity forms"
     },
     {
-      "label": "Prototype 2: Read a Form",
+      "label": "Agile Step 1 \u2014 Capture the Form as Test Data",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast",
-      "id": "todo_prototype_2_read_a_form",
+      "id": "todo_agile_step_1_capture_the_form_as_test_data",
       "community": 2,
-      "norm_label": "prototype 2: read a form"
+      "norm_label": "agile step 1 \u2014 capture the form as test data"
     },
     {
-      "label": "Prototype 3: Store One Charity Profile",
-      "file_type": "document",
-      "source_file": "TODO.md",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "todo_prototype_3_store_one_charity_profile",
-      "community": 2,
-      "norm_label": "prototype 3: store one charity profile"
-    },
-    {
-      "label": "Prototype 4: Conservative Matching",
+      "label": "Agile Step 2 \u2014 Define Field Semantics and Profile Data",
       "file_type": "document",
       "source_file": "TODO.md",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "todo_prototype_4_conservative_matching",
+      "id": "todo_agile_step_2_define_field_semantics_and_profile_data",
       "community": 2,
-      "norm_label": "prototype 4: conservative matching"
+      "norm_label": "agile step 2 \u2014 define field semantics and profile data"
     },
     {
-      "label": "Prototype 5: Review and Fill",
+      "label": "Agile Step 3 \u2014 Normalize Labels and Field Context",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L32",
+      "source_location": "L36",
       "_origin": "ast",
-      "id": "todo_prototype_5_review_and_fill",
+      "id": "todo_agile_step_3_normalize_labels_and_field_context",
       "community": 2,
-      "norm_label": "prototype 5: review and fill"
+      "norm_label": "agile step 3 \u2014 normalize labels and field context"
     },
     {
-      "label": "Prototype 6: Test and Improve",
+      "label": "Agile Step 4 \u2014 Add Conservative Fuzzy Matching",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L39",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "todo_prototype_6_test_and_improve",
+      "id": "todo_agile_step_4_add_conservative_fuzzy_matching",
       "community": 2,
-      "norm_label": "prototype 6: test and improve"
+      "norm_label": "agile step 4 \u2014 add conservative fuzzy matching"
     },
     {
-      "label": "Later, Not in the First Prototype",
+      "label": "Agile Step 5 \u2014 Match Values to Controls Safely",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L46",
+      "source_location": "L59",
       "_origin": "ast",
-      "id": "todo_later_not_in_the_first_prototype",
+      "id": "todo_agile_step_5_match_values_to_controls_safely",
       "community": 2,
-      "norm_label": "later, not in the first prototype"
+      "norm_label": "agile step 5 \u2014 match values to controls safely"
+    },
+    {
+      "label": "Agile Step 6 \u2014 Verify, Tune, and Release",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L71",
+      "_origin": "ast",
+      "id": "todo_agile_step_6_verify_tune_and_release",
+      "community": 2,
+      "norm_label": "agile step 6 \u2014 verify, tune, and release"
+    },
+    {
+      "label": "Later Backlog",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "todo_later_backlog",
+      "community": 2,
+      "norm_label": "later backlog"
     }
   ],
   "links": [
@@ -1442,110 +1432,90 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L65",
+      "source_location": "L61",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_1_0_first_extension_shell",
+      "target": "changelog_0_1_0_date_not_recorded_first_extension_shell",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L59",
+      "source_location": "L55",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_1_1_scan_the_open_page",
+      "target": "changelog_0_1_1_date_not_recorded_scan_the_open_page",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L53",
+      "source_location": "L49",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_2_0_field_details",
+      "target": "changelog_0_2_0_date_not_recorded_field_details",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L47",
+      "source_location": "L43",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_3_0_sample_charity_profile",
+      "target": "changelog_0_3_0_date_not_recorded_sample_charity_profile",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L41",
+      "source_location": "L37",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_4_0_first_conservative_match",
+      "target": "changelog_0_4_0_date_not_recorded_first_conservative_match",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L32",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_5_0_high_confidence_fill_and_color_review",
+      "target": "changelog_0_5_0_date_not_recorded_high_confidence_fill_and_color_review",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L26",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_6_0_more_exact_high_confidence_matches",
+      "target": "changelog_0_6_0_date_not_recorded_more_exact_high_confidence_matches",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L20",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_6_1_ein_number_field_support",
+      "target": "changelog_0_6_1_date_not_recorded_ein_number_field_support",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_2026_08_21_automated_testing_workflow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "changelog_changelog",
-      "target": "changelog_2026_08_21_project_setup_documentation",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "changelog_changelog",
-      "target": "changelog_2026_08_21_repository_graph",
+      "target": "changelog_0_6_2_2026_08_21_project_maintenance",
       "confidence_score": 1.0
     },
     {
@@ -1605,7 +1575,27 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "todo",
-      "target": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_charity_form_autofiller_agile_backlog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_agile_backlog",
+      "target": "todo_later_backlog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_agile_backlog",
+      "target": "todo_major_objective_match_real_world_charity_forms",
       "confidence_score": 1.0
     },
     {
@@ -1614,48 +1604,18 @@
       "source_file": "TODO.md",
       "source_location": "L3",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_goal",
+      "source": "todo_charity_form_autofiller_agile_backlog",
+      "target": "todo_product_goal",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L46",
+      "source_location": "L14",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_later_not_in_the_first_prototype",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_1_extension_shell",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_2_read_a_form",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_3_store_one_charity_profile",
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_1_capture_the_form_as_test_data",
       "confidence_score": 1.0
     },
     {
@@ -1664,31 +1624,51 @@
       "source_file": "TODO.md",
       "source_location": "L25",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_4_conservative_matching",
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_2_define_field_semantics_and_profile_data",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L32",
+      "source_location": "L36",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_5_review_and_fill",
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_3_normalize_labels_and_field_context",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L39",
+      "source_location": "L47",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_prototype_checklist",
-      "target": "todo_prototype_6_test_and_improve",
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_4_add_conservative_fuzzy_matching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_5_match_values_to_controls_safely",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "todo_major_objective_match_real_world_charity_forms",
+      "target": "todo_agile_step_6_verify_tune_and_release",
       "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "df4f66ec5d15b935aa519373341ab604c3cce9b4"
+  "built_at_commit": "cc9c5290156e16a2be0ffae56beede73173f4556"
 }
