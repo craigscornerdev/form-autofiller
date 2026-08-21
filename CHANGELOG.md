@@ -2,6 +2,11 @@
 
 This file records visible feature changes. Versions use the format `major.minor.patch`.
 
+## 2026-08-21 — Automated testing workflow
+
+- Added a GitHub Actions workflow that installs dependencies and runs Jest.
+- Added required local test steps to the project coding agent workflow.
+
 ## 2026-08-21 — Repository graph
 
 - Added a graphify code graph with 80 nodes, 83 edges, and 13 communities.

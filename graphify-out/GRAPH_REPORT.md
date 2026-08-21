@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-21)
 
 ## Corpus Check
-- 10 files · ~3,084 words
+- 10 files · ~3,276 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 80 nodes · 83 edges · 13 communities (9 shown, 4 thin omitted)
+- 82 nodes · 85 edges · 13 communities (9 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8495c454`
+- Built from commit: `df4f66ec`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,7 +29,7 @@
 - [[_COMMUNITY_Community 11|Community 11]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Changelog` - 10 edges
+1. `Changelog` - 12 edges
 2. `Charity Form Autofiller — Prototype Checklist` - 9 edges
 3. `scanCurrentPage()` - 7 edges
 4. `FieldMatcher` - 5 edges
@@ -56,8 +56,8 @@ Cohesion: 0.15
 Nodes (7): fieldList, profileForm, profileStatus, results, sampleProfile, scanButton, statusMessage
 
 ### Community 1 - "Community 1"
-Cohesion: 0.18
-Nodes (10): 0.1.0 — First extension shell, 0.1.1 — Scan the open page, 0.2.0 — Field details, 0.3.0 — Sample charity profile, 0.4.0 — First conservative match, 0.5.0 — High-confidence fill and color review, 0.6.0 — More exact high-confidence matches, 0.6.1 — EIN number-field support (+2 more)
+Cohesion: 0.15
+Nodes (12): 0.1.0 — First extension shell, 0.1.1 — Scan the open page, 0.2.0 — Field details, 0.3.0 — Sample charity profile, 0.4.0 — First conservative match, 0.5.0 — High-confidence fill and color review, 0.6.0 — More exact high-confidence matches, 0.6.1 — EIN number-field support (+4 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.20
@@ -84,7 +84,7 @@ Cohesion: 0.67
 Nodes (3): addSuggestions(), getProfileFromForm(), saveProfile()
 
 ## Knowledge Gaps
-- **42 isolated node(s):** `manifest_version`, `name`, `version`, `description`, `default_title` (+37 more)
+- **44 isolated node(s):** `manifest_version`, `name`, `version`, `description`, `default_title` (+39 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -92,4 +92,4 @@ Nodes (3): addSuggestions(), getProfileFromForm(), saveProfile()
 _Questions this graph is uniquely positioned to answer:_
 
 - **What connects `manifest_version`, `name`, `version` to the rest of the system?**
-  _42 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _44 weakly-connected nodes found - possible documentation gaps or missing edges._

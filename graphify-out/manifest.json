@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   ".agent.md": {
-    "mtime": 1787342616.289151,
-    "ast_hash": "e921124ca1c4c9ddf95da2d075c8e350",
+    "mtime": 1787346120.655806,
+    "ast_hash": "d8daee5cb372b661b84cd769873049c2",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787344460.3319778,
-    "ast_hash": "55ae6a301d3a095bedb5b50592f97c73",
+    "mtime": 1787346120.6588056,
+    "ast_hash": "44c4366dbdf0f147b72acdacef698ab0",
     "semantic_hash": ""
   },
   "README.md": {
@@ -52,6 +52,11 @@
   "popup.html": {
     "mtime": 1787278668.7874372,
     "ast_hash": "0ef2d3c121e56250698e490d9fbe61fd",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1787346120.7079742,
+    "ast_hash": "efa8ab070fe6c47edb066b3e3e6b434e",
     "semantic_hash": ""
   }
 }
