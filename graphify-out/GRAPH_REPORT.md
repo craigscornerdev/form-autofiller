@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-21)
 
 ## Corpus Check
-- 10 files · ~3,775 words
+- 17 files · ~12,877 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 81 nodes · 84 edges · 13 communities (9 shown, 4 thin omitted)
+- 134 nodes · 160 edges · 13 communities (8 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cc9c5290`
+- Built from commit: `74502948`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,39 +29,36 @@
 - [[_COMMUNITY_Community 11|Community 11]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Changelog` - 10 edges
-2. `scanCurrentPage()` - 7 edges
-3. `Major Objective: Match Real-World Charity Forms` - 7 edges
-4. `FieldMatcher` - 5 edges
-5. `Charity Form Autofiller` - 5 edges
-6. `Charity Form Autofiller — Agile Backlog` - 4 edges
-7. `action` - 3 edges
-8. `showScanResult()` - 3 edges
-9. `addSuggestions()` - 3 edges
-10. `getProfileFromForm()` - 3 edges
+1. `FieldMatcher` - 14 edges
+2. `Changelog` - 12 edges
+3. `FuzzyFieldMatcher` - 10 edges
+4. `Major Objective: Match Real-World Charity Forms` - 9 edges
+5. `LabelNormalizer` - 7 edges
+6. `scanCurrentPage()` - 7 edges
+7. `Charity Form Autofiller` - 5 edges
+8. `Charity Form Autofiller — Agile Backlog` - 4 edges
+9. `FieldSemantics` - 3 edges
+10. `FieldRegistry` - 3 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `scanCurrentPage()` --calls--> `addSuggestions()`  [EXTRACTED]
-  popup.js → popup.js  _Bridges community 7 → community 8_
-- `scanCurrentPage()` --calls--> `showScanResult()`  [EXTRACTED]
-  popup.js → popup.js  _Bridges community 7 → community 11_
+- None detected - all connections are within the same source files.
 
 ## Import Cycles
 - None detected.
 
-## Communities (13 total, 4 thin omitted)
+## Communities (13 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.15
-Nodes (7): fieldList, profileForm, profileStatus, results, sampleProfile, scanButton, statusMessage
+Cohesion: 0.11
+Nodes (19): addFillResults(), addSuggestions(), fieldList, getActiveTab(), getProfileFromForm(), loadProfile(), populateProfileForm(), profileForm (+11 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.18
-Nodes (10): 0.1.0 — date not recorded — First extension shell, 0.1.1 — date not recorded — Scan the open page, 0.2.0 — date not recorded — Field details, 0.3.0 — date not recorded — Sample charity profile, 0.4.0 — date not recorded — First conservative match, 0.5.0 — date not recorded — High-confidence fill and color review, 0.6.0 — date not recorded — More exact high-confidence matches, 0.6.1 — date not recorded — EIN number-field support (+2 more)
+Cohesion: 0.15
+Nodes (12): 0.1.0 — 2026-08-21 — First extension shell, 0.1.1 — 2026-08-21 — Scan the open page, 0.2.0 — 2026-08-21 — Field details, 0.3.0 — 2026-08-21 — Sample charity profile, 0.4.0 — 2026-08-21 — First conservative match, 0.5.0 — 2026-08-21 — High-confidence fill and color review, 0.6.0 — 2026-08-21 — More exact high-confidence matches, 0.6.1 — 2026-08-21 — EIN number-field support (+4 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.18
-Nodes (10): Agile Step 1 — Capture the Form as Test Data, Agile Step 2 — Define Field Semantics and Profile Data, Agile Step 3 — Normalize Labels and Field Context, Agile Step 4 — Add Conservative Fuzzy Matching, Agile Step 5 — Match Values to Controls Safely, Agile Step 6 — Verify, Tune, and Release, Charity Form Autofiller — Agile Backlog, Later Backlog (+2 more)
+Cohesion: 0.15
+Nodes (12): Agile Step 1 — Capture the Form as Test Data, Agile Step 2 — Define Field Semantics and Profile Data, Agile Step 3 — Normalize Labels and Field Context, Agile Step 4 — Add Conservative Fuzzy Matching, Agile Step 5.1 — Improve Fuzzy Matching for Real-World Labels, Agile Step 5.2 — Generalize Matching and Support Custom Fields, Agile Step 5 — Match Values to Controls Safely, Agile Step 6 — Verify, Tune, and Release (+4 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.22
@@ -76,20 +73,24 @@ Cohesion: 0.33
 Nodes (5): Charity Form Autofiller, Current scope, Development, GitHub workflow, Load the extension in Chrome
 
 ### Community 7 - "Community 7"
-Cohesion: 0.40
-Nodes (5): addFillResults(), getActiveTab(), scanCurrentPage(), setScanningState(), showError()
-
-### Community 8 - "Community 8"
-Cohesion: 0.67
-Nodes (3): addSuggestions(), getProfileFromForm(), saveProfile()
+Cohesion: 0.13
+Nodes (11): { FieldRegistry }, ContextSeparators, FieldRegistry, FieldSemantics, NeverAutoFillFields, ValidationRules, { FieldSemantics }, FieldMatcher (+3 more)
 
 ## Knowledge Gaps
-- **42 isolated node(s):** `manifest_version`, `name`, `version`, `description`, `default_title` (+37 more)
+- **53 isolated node(s):** `{ FieldRegistry }`, `{ FieldSemantics }`, `manifest_version`, `name`, `version` (+48 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `manifest_version`, `name`, `version` to the rest of the system?**
-  _42 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `FieldMatcher` connect `Community 4` to `Community 7`?**
+  _High betweenness centrality (0.052) - this node is a cross-community bridge._
+- **Why does `FuzzyFieldMatcher` connect `Community 8` to `Community 7`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **What connects `{ FieldRegistry }`, `{ FieldSemantics }`, `manifest_version` to the rest of the system?**
+  _53 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Community 0` be split into smaller, more focused modules?**
+  _Cohesion score 0.11333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Community 7` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

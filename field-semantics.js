@@ -373,8 +373,237 @@ const ValidationRules = {
   url: /^https?:\/\/.+/                   // HTTP(S) URL
 };
 
+const inferValueType = (fieldType) => {
+  if (fieldType === 'select') {
+    return 'enum';
+  }
+
+  if (fieldType === 'textarea') {
+    return 'string';
+  }
+
+  return 'string';
+};
+
+const inferAcceptedControlTypes = (fieldType) => {
+  switch (fieldType) {
+    case 'email':
+      return ['email', 'text'];
+    case 'tel':
+      return ['tel', 'text'];
+    case 'textarea':
+      return ['textarea'];
+    case 'select':
+      return ['select'];
+    case 'url':
+      return ['url', 'text'];
+    default:
+      return ['text', 'email', 'tel', 'url', 'number', 'textarea'];
+  }
+};
+
+const inferValidationRule = (fieldName, fieldType) => {
+  if (fieldName === 'ein' || fieldType === 'ein') {
+    return ValidationRules.ein;
+  }
+
+  if (fieldName === 'organizationContactPhone' || fieldName === 'eventOrganizerPhone' || fieldType === 'tel') {
+    return ValidationRules.phone;
+  }
+
+  if (fieldName === 'organizationContactEmail' || fieldName === 'eventOrganizerEmail' || fieldType === 'email') {
+    return ValidationRules.email;
+  }
+
+  if (fieldType === 'url') {
+    return ValidationRules.url;
+  }
+
+  return null;
+};
+
+const getLegacyProfileField = (fieldName, profilePath) => {
+  if (fieldName === 'organizationContactEmail') return 'email';
+  if (fieldName === 'organizationContactPhone') return 'phone';
+  if (fieldName === 'organizationContactTitle') return 'position';
+  if (fieldName === 'organizationWebsite') return 'website';
+  if (fieldName === 'organizationAddress' || profilePath === 'organizationAddress') return 'organizationAddress';
+  if (fieldName === 'organizationStreet') return 'organizationAddress.street';
+  if (fieldName === 'organizationCity') return 'organizationAddress.city';
+  if (fieldName === 'organizationState') return 'organizationAddress.state';
+  if (fieldName === 'organizationPostalCode') return 'organizationAddress.postalCode';
+  if (fieldName === 'organizationCountry') return 'organizationAddress.country';
+  return fieldName;
+};
+
+const FieldRegistry = [
+  {
+    stableId: 'organizationAddress',
+    fieldName: 'organizationAddress',
+    profileField: 'organizationAddress',
+    profilePath: 'organizationAddress',
+    label: 'Organization address',
+    labels: ['Organization address', 'address', 'organization address', 'mailing address', 'street address', 'organization street address'],
+    synonyms: ['address', 'organization address', 'mailing address', 'street address', 'organization street address'],
+    aliases: ['address', 'organization address', 'mailing address', 'street address', 'organization street address'],
+    context: 'organization',
+    valueType: 'string',
+    fieldType: 'text',
+    acceptedControlTypes: ['text', 'textarea'],
+    validationRule: null,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'Organization address',
+    required: true,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: null
+  },
+  {
+    stableId: 'position',
+    fieldName: 'position',
+    profileField: 'position',
+    profilePath: 'organizationContact.title',
+    label: 'Position',
+    labels: ['Position', 'position', 'contact title', 'job title', 'title', 'contact position', 'role'],
+    synonyms: ['position', 'contact title', 'job title', 'title', 'contact position', 'role'],
+    aliases: ['position', 'contact title', 'job title', 'title', 'contact position', 'role'],
+    context: 'organizationContact',
+    valueType: 'string',
+    fieldType: 'text',
+    acceptedControlTypes: ['text', 'email', 'tel', 'url', 'number', 'textarea'],
+    validationRule: null,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'Position',
+    required: false,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: null
+  },
+  {
+    stableId: 'email',
+    fieldName: 'email',
+    profileField: 'email',
+    profilePath: 'organizationContact.email',
+    label: 'Email',
+    labels: ['Email', 'email', 'email address', 'contact email', 'contact email address'],
+    synonyms: ['email', 'email address', 'contact email', 'contact email address'],
+    aliases: ['email', 'email address', 'contact email', 'contact email address'],
+    context: 'organizationContact',
+    valueType: 'string',
+    fieldType: 'email',
+    acceptedControlTypes: ['email', 'text'],
+    validationRule: ValidationRules.email,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'Email',
+    required: true,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: null
+  },
+  {
+    stableId: 'phone',
+    fieldName: 'phone',
+    profileField: 'phone',
+    profilePath: 'organizationContact.phone',
+    label: 'Phone',
+    labels: ['Phone', 'phone', 'phone number', 'contact phone', 'contact phone number', 'telephone'],
+    synonyms: ['phone', 'phone number', 'contact phone', 'contact phone number', 'telephone'],
+    aliases: ['phone', 'phone number', 'contact phone', 'contact phone number', 'telephone'],
+    context: 'organizationContact',
+    valueType: 'string',
+    fieldType: 'tel',
+    acceptedControlTypes: ['tel', 'text'],
+    validationRule: ValidationRules.phone,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'Phone',
+    required: true,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: null
+  },
+  {
+    stableId: 'website',
+    fieldName: 'website',
+    profileField: 'website',
+    profilePath: 'organization.website',
+    label: 'Website',
+    labels: ['Website', 'website', 'organization website', 'charity website', 'nonprofit website'],
+    synonyms: ['website', 'organization website', 'charity website', 'nonprofit website'],
+    aliases: ['website', 'organization website', 'charity website', 'nonprofit website'],
+    context: 'organization',
+    valueType: 'string',
+    fieldType: 'url',
+    acceptedControlTypes: ['url', 'text'],
+    validationRule: ValidationRules.url,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'Website',
+    required: false,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: null
+  },
+  {
+    stableId: 'ein',
+    fieldName: 'ein',
+    profileField: 'ein',
+    profilePath: 'organization.ein',
+    label: 'EIN',
+    labels: ['EIN', 'ein', 'ein number', 'employer identification number'],
+    synonyms: ['ein', 'ein number', 'employer identification number'],
+    aliases: ['ein', 'ein number', 'employer identification number'],
+    context: 'organization',
+    valueType: 'string',
+    fieldType: 'text',
+    acceptedControlTypes: ['text', 'email', 'tel', 'url', 'number', 'textarea'],
+    validationRule: ValidationRules.ein,
+    fillPolicy: 'auto-fill-if-safe',
+    source: 'EIN',
+    required: true,
+    selectOptions: null,
+    addressComponent: null,
+    neverAutoFill: false,
+    format: 'XX-XXXXXXX'
+  },
+  ...Object.entries(FieldSemantics).map(([fieldName, fieldDef]) => {
+    const aliases = [...(fieldDef.aliases || [])];
+    const labels = [fieldDef.source, ...aliases].filter(Boolean);
+    const valueType = fieldDef.valueType || inferValueType(fieldDef.fieldType);
+    const acceptedControlTypes = fieldDef.acceptedControlTypes || inferAcceptedControlTypes(fieldDef.fieldType);
+    const profilePath = fieldDef.profilePath || null;
+
+    return {
+      stableId: fieldName,
+      fieldName,
+      profileField: getLegacyProfileField(fieldName, profilePath),
+      profilePath,
+      label: fieldDef.source,
+      labels,
+      synonyms: aliases,
+      aliases,
+      context: fieldDef.context || 'unknown',
+      valueType,
+      fieldType: fieldDef.fieldType,
+      acceptedControlTypes,
+      validationRule: fieldDef.validationRule || inferValidationRule(fieldName, fieldDef.fieldType),
+      fillPolicy: fieldDef.fillPolicy || (fieldDef.neverAutoFill ? 'manual-review' : 'auto-fill-if-safe'),
+      source: fieldDef.source,
+      required: !!fieldDef.required,
+      selectOptions: fieldDef.selectOptions || null,
+      addressComponent: fieldDef.addressComponent || null,
+      neverAutoFill: !!fieldDef.neverAutoFill,
+      format: fieldDef.format || null
+    };
+  })
+];
+
 module.exports = {
   FieldSemantics,
+  FieldRegistry,
   ContextSeparators,
   NeverAutoFillFields,
   ValidationRules

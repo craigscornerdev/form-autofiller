@@ -1,114 +1,9 @@
+const { FieldRegistry } = require('./field-semantics');
+
 class FieldMatcher {
   constructor(profile = {}) {
     this.profile = profile;
-    this.rules = [
-      {
-        profileField: "organizationName",
-        source: "Organization name",
-        aliases: [
-          "organization name",
-          "name of organization",
-          "charity name",
-          "nonprofit name",
-          "non profit name"
-        ]
-      },
-      {
-        profileField: "organizationType",
-        source: "Organization type",
-        aliases: [
-          "organization type",
-          "type of organization",
-          "charity type",
-          "nonprofit type",
-          "organization category"
-        ]
-      },
-      {
-        profileField: "missionStatement",
-        source: "Mission statement",
-        aliases: [
-          "mission statement",
-          "mission",
-          "organization mission",
-          "our mission"
-        ]
-      },
-      {
-        profileField: "organizationAddress",
-        source: "Organization address",
-        aliases: [
-          "address",
-          "organization address",
-          "mailing address",
-          "street address",
-          "organization street address"
-        ]
-      },
-      {
-        profileField: "organizationAddress.street",
-        source: "Street address",
-        aliases: [
-          "street address",
-          "street",
-          "address line",
-          "address line 1",
-          "organization street"
-        ]
-      },
-      {
-        profileField: "organizationAddress.city",
-        source: "City",
-        aliases: ["city", "organization city", "town"]
-      },
-      {
-        profileField: "organizationAddress.state",
-        source: "State",
-        aliases: ["state", "state province", "state or province", "province", "organization state"]
-      },
-      {
-        profileField: "organizationAddress.postalCode",
-        source: "Postal code",
-        aliases: ["postal code", "zip code", "zip", "postcode", "organization postal code"]
-      },
-      {
-        profileField: "organizationAddress.country",
-        source: "Country",
-        aliases: ["country", "organization country", "country of operation"]
-      },
-      {
-        profileField: "position",
-        source: "Position",
-        aliases: [
-          "position",
-          "contact title",
-          "job title",
-          "title",
-          "contact position",
-          "role"
-        ]
-      },
-      {
-        profileField: "email",
-        source: "Email",
-        aliases: ["email", "email address", "contact email", "contact email address"]
-      },
-      {
-        profileField: "phone",
-        source: "Phone",
-        aliases: ["phone", "phone number", "contact phone", "contact phone number", "telephone"]
-      },
-      {
-        profileField: "website",
-        source: "Website",
-        aliases: ["website", "organization website", "charity website", "nonprofit website"]
-      },
-      {
-        profileField: "ein",
-        source: "EIN",
-        aliases: ["ein", "ein number", "employer identification number"]
-      }
-    ];
+    this.rules = FieldRegistry.map((rule) => ({ ...rule }));
   }
 
   getSuggestion(field = {}) {
@@ -131,7 +26,7 @@ class FieldMatcher {
       return null;
     }
 
-    const profileValue = this.getProfileValue(rule.profileField);
+    const profileValue = this.getProfileValue(rule.profileField, rule);
     if (profileValue === undefined || profileValue === null || String(profileValue).trim() === "") {
       return null;
     }
@@ -161,21 +56,42 @@ class FieldMatcher {
     return this.rules.find((rule) => rule.aliases.includes(normalizedLabel)) || null;
   }
 
-  getProfileValue(profileField) {
+  getProfileValue(profileField, rule = null) {
     if (!profileField) {
       return undefined;
     }
 
-    if (this.profile[profileField] !== undefined) {
-      return this.profile[profileField];
+    const candidatePaths = [];
+    if (rule && rule.profilePath) {
+      candidatePaths.push(rule.profilePath);
+    }
+    candidatePaths.push(profileField);
+
+    for (const candidatePath of candidatePaths) {
+      const value = this.readProfilePath(this.profile, candidatePath);
+      if (value !== undefined && value !== null) {
+        return value;
+      }
     }
 
     if (profileField === "organizationAddress") {
       return this.profile.organizationAddress || {};
     }
 
-    const parts = profileField.split(".");
-    let value = this.profile;
+    return undefined;
+  }
+
+  readProfilePath(source, path) {
+    if (source === undefined || source === null || path === undefined || path === null || path === "") {
+      return undefined;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(source, path)) {
+      return source[path];
+    }
+
+    const parts = String(path).split(".");
+    let value = source;
 
     for (const part of parts) {
       if (value === undefined || value === null) {

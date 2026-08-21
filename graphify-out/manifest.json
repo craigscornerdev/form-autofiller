@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787342616.289151,
-    "ast_hash": "e8be6751b74e20245b2e0d534460cd62",
+    "mtime": 1787354406.448246,
+    "ast_hash": "5f8405ae3966ee1bda635a1da1dae201",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -15,18 +15,18 @@
     "semantic_hash": ""
   },
   "popup.js": {
-    "mtime": 1787279291.4546747,
-    "ast_hash": "eac6e0e5e4a2dad14656ef699fdab1b4",
+    "mtime": 1787352093.4902909,
+    "ast_hash": "964b7ce0e5a6939cefe62b71cddba652",
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787343865.0109978,
-    "ast_hash": "f61965ba5a942b22e70fbe423b79223b",
+    "mtime": 1787352147.5887952,
+    "ast_hash": "17100c5882dc907318109684c20ed1bd",
     "semantic_hash": ""
   },
   ".agent.md": {
-    "mtime": 1787347408.9983633,
-    "ast_hash": "f9830ee9e04a98df72aec3aac6bf5cc7",
+    "mtime": 1787347601.094678,
+    "ast_hash": "ffd3170a511522447ad931858f2ef22c",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787347408.9983633,
-    "ast_hash": "aec63e2892c9b43eecd3e279999dd4b9",
+    "mtime": 1787351610.4926593,
+    "ast_hash": "72f8777a64d136dc0c8d3a1a862ff9af",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,18 +45,58 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787347408.9983633,
-    "ast_hash": "e336a7610f76e7efa89b963c3039e2b9",
+    "mtime": 1787354406.448246,
+    "ast_hash": "d33bf799e9382625b9727ad5d41d70e0",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787278668.7874372,
-    "ast_hash": "0ef2d3c121e56250698e490d9fbe61fd",
+    "mtime": 1787352093.4957986,
+    "ast_hash": "8891406ea55d6711d5c14ed830e8dae1",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
     "mtime": 1787346291.8763273,
     "ast_hash": "efa8ab070fe6c47edb066b3e3e6b434e",
+    "semantic_hash": ""
+  },
+  "field-semantics.js": {
+    "mtime": 1787354723.9999855,
+    "ast_hash": "e22d2a074fd495b6c2130e6a51818b11",
+    "semantic_hash": ""
+  },
+  "fuzzy-field-matcher.js": {
+    "mtime": 1787350546.0999072,
+    "ast_hash": "9d66914ec37a2ffd6bf045ce8d12da7f",
+    "semantic_hash": ""
+  },
+  "label-normalizer.js": {
+    "mtime": 1787349847.936019,
+    "ast_hash": "71f071d9fb9ef3fe01ee4f9bdd1840ed",
+    "semantic_hash": ""
+  },
+  "profile-data-structure.js": {
+    "mtime": 1787351818.7611117,
+    "ast_hash": "d5426d4f19211b456d4061714c403d82",
+    "semantic_hash": ""
+  },
+  "tests/field-semantics.test.js": {
+    "mtime": 1787354723.9999855,
+    "ast_hash": "69947aba301b4b06dc6c714d2cdd9c0a",
+    "semantic_hash": ""
+  },
+  "tests/fuzzy-field-matcher.test.js": {
+    "mtime": 1787350546.1009011,
+    "ast_hash": "576bed91333f5e17aa14532b5022e0e0",
+    "semantic_hash": ""
+  },
+  "tests/label-normalizer.test.js": {
+    "mtime": 1787349847.9380195,
+    "ast_hash": "24a38125bab33c96ffe77522b526734e",
+    "semantic_hash": ""
+  },
+  "charity-form-fixture.html": {
+    "mtime": 1787348881.7081096,
+    "ast_hash": "bd8c97219c1fe1e6eae97f1a440612e5",
     "semantic_hash": ""
   }
 }

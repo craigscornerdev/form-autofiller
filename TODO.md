@@ -83,8 +83,8 @@ filled field has a visible reason that a user can review.
 
 ### Agile Step 5.2 — Generalize Matching and Support Custom Fields
 
-- 5.2.1 [ ] Consolidate the duplicate field rule catalogs in `field-matcher.js` and `field-semantics.js` behind one shared field registry.
-- 5.2.2 [ ] Define a registry contract for every field: stable ID, profile path, labels, synonyms, context, value type, accepted control types, validation rule, and fill policy.
+- 5.2.1 [x] Consolidate the duplicate field rule catalogs in `field-matcher.js` and `field-semantics.js` behind one shared field registry.
+- 5.2.2 [x] Define a registry contract for every field: stable ID, profile path, labels, synonyms, context, value type, accepted control types, validation rule, and fill policy.
 - 5.2.3 [ ] Evaluate a small browser-compatible fuzzy text library, such as Fuse.js, fast-fuzzy, or fuzzysort, against the current matcher and bundle-size constraints.
 - 5.2.4 [ ] Use any library only for ranked candidate retrieval; keep normalization, semantic synonyms, context checks, type compatibility, confidence thresholds, and ambiguity rejection in our own code.
 - 5.2.5 [ ] Add a canonical normalization layer shared by exact matching, fuzzy matching, select-option matching, and custom fields.

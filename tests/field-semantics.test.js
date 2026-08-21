@@ -12,10 +12,13 @@
 
 const {
   FieldSemantics,
+  FieldRegistry,
   ContextSeparators,
   NeverAutoFillFields,
   ValidationRules
 } = require('../field-semantics');
+
+const FieldMatcher = require('../field-matcher');
 
 describe('Field Semantics - Step 2 Validation', () => {
   
@@ -249,6 +252,40 @@ describe('Field Semantics - Step 2 Validation', () => {
 
     test('context separators defined for event', () => {
       expect(ContextSeparators.event).toContain('event');
+    });
+  });
+
+  describe('Shared field registry', () => {
+    test('a shared registry exists and mirrors field semantics', () => {
+      expect(FieldRegistry).toBeDefined();
+      expect(Array.isArray(FieldRegistry)).toBe(true);
+      expect(FieldRegistry.some((entry) => entry.fieldName === 'organizationName')).toBe(true);
+      expect(FieldRegistry.some((entry) => entry.fieldName === 'organizationContactEmail')).toBe(true);
+      expect(FieldRegistry.some((entry) => entry.fieldName === 'eventName')).toBe(true);
+    });
+
+    test('every registry entry exposes the explicit contract fields', () => {
+      const first = FieldRegistry[0];
+      expect(first).toMatchObject({
+        stableId: expect.any(String),
+        profilePath: expect.anything(),
+        label: expect.any(String),
+        labels: expect.any(Array),
+        synonyms: expect.any(Array),
+        context: expect.any(String),
+        valueType: expect.any(String),
+        acceptedControlTypes: expect.any(Array),
+        fillPolicy: expect.any(String)
+      });
+      expect(first.validationRule === null || first.validationRule instanceof RegExp).toBe(true);
+    });
+
+    test('FieldMatcher uses the shared registry as its source of truth', () => {
+      const matcher = new FieldMatcher({ organization: { name: 'Red Cross' } });
+      expect(Array.isArray(matcher.rules)).toBe(true);
+      expect(matcher.rules.length).toBeGreaterThan(0);
+      expect(matcher.rules.some((rule) => rule.profileField === 'organizationName')).toBe(true);
+      expect(matcher.rules).toEqual(FieldRegistry);
     });
   });
 });
