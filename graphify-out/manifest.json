@@ -1,0 +1,57 @@
+{
+  "field-matcher.js": {
+    "mtime": 1787342616.289151,
+    "ast_hash": "e8be6751b74e20245b2e0d534460cd62",
+    "semantic_hash": ""
+  },
+  "manifest.json": {
+    "mtime": 1787279278.4812994,
+    "ast_hash": "a40f84ca9253c3aa969b8a7b1bd3e0d0",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1787342616.289151,
+    "ast_hash": "bf765086f100b59c0ab781f68c5a54b5",
+    "semantic_hash": ""
+  },
+  "popup.js": {
+    "mtime": 1787279291.4546747,
+    "ast_hash": "eac6e0e5e4a2dad14656ef699fdab1b4",
+    "semantic_hash": ""
+  },
+  "tests/field-matcher.test.js": {
+    "mtime": 1787343865.0109978,
+    "ast_hash": "f61965ba5a942b22e70fbe423b79223b",
+    "semantic_hash": ""
+  },
+  ".agent.md": {
+    "mtime": 1787342616.289151,
+    "ast_hash": "e921124ca1c4c9ddf95da2d075c8e350",
+    "semantic_hash": ""
+  },
+  ".github/copilot-instructions.md": {
+    "mtime": 1787342252.4769661,
+    "ast_hash": "2b23503628bf2ec71d067a85ca8948ab",
+    "semantic_hash": ""
+  },
+  "CHANGELOG.md": {
+    "mtime": 1787344460.3319778,
+    "ast_hash": "55ae6a301d3a095bedb5b50592f97c73",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1787344416.7829356,
+    "ast_hash": "66f8789036b96f0f7c9b0bdf510a50ab",
+    "semantic_hash": ""
+  },
+  "TODO.md": {
+    "mtime": 1787344074.880615,
+    "ast_hash": "63e1ffcf6260775676895b564672b448",
+    "semantic_hash": ""
+  },
+  "popup.html": {
+    "mtime": 1787278668.7874372,
+    "ast_hash": "0ef2d3c121e56250698e490d9fbe61fd",
+    "semantic_hash": ""
+  }
+}

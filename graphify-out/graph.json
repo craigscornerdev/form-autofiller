@@ -1,0 +1,1654 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "field-matcher.js",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "field_matcher",
+      "community": 4,
+      "norm_label": "field-matcher.js"
+    },
+    {
+      "label": "FieldMatcher",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "field_matcher_fieldmatcher",
+      "community": 4,
+      "norm_label": "fieldmatcher"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "field_matcher_fieldmatcher_constructor",
+      "community": 4,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".getSuggestion()",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "field_matcher_fieldmatcher_getsuggestion",
+      "community": 4,
+      "norm_label": ".getsuggestion()"
+    },
+    {
+      "label": ".getMatchingRule()",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "field_matcher_fieldmatcher_getmatchingrule",
+      "community": 4,
+      "norm_label": ".getmatchingrule()"
+    },
+    {
+      "label": ".normalize()",
+      "file_type": "code",
+      "source_file": "field-matcher.js",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "field_matcher_fieldmatcher_normalize",
+      "community": 4,
+      "norm_label": ".normalize()"
+    },
+    {
+      "label": "manifest.json",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "manifest",
+      "community": 3,
+      "norm_label": "manifest.json"
+    },
+    {
+      "label": "manifest_version",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "manifest_manifest_version",
+      "community": 3,
+      "norm_label": "manifest_version"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "manifest_name",
+      "community": 3,
+      "norm_label": "name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "manifest_version",
+      "community": 3,
+      "norm_label": "version"
+    },
+    {
+      "label": "description",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "manifest_description",
+      "community": 3,
+      "norm_label": "description"
+    },
+    {
+      "label": "action",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "manifest_action",
+      "community": 3,
+      "norm_label": "action"
+    },
+    {
+      "label": "default_title",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "manifest_action_default_title",
+      "community": 3,
+      "norm_label": "default_title"
+    },
+    {
+      "label": "default_popup",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "manifest_action_default_popup",
+      "community": 3,
+      "norm_label": "default_popup"
+    },
+    {
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": "manifest.json",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "manifest_permissions",
+      "community": 3,
+      "norm_label": "permissions"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "package",
+      "community": 5,
+      "norm_label": "package.json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "package_name",
+      "community": 5,
+      "norm_label": "name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "package_version",
+      "community": 5,
+      "norm_label": "version"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "package_private",
+      "community": 5,
+      "norm_label": "private"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "package_scripts",
+      "community": 5,
+      "norm_label": "scripts"
+    },
+    {
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "package_scripts_test",
+      "community": 5,
+      "norm_label": "test"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "package_devdependencies",
+      "community": 5,
+      "norm_label": "devdependencies"
+    },
+    {
+      "label": "jest",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "package_devdependencies_jest",
+      "community": 5,
+      "norm_label": "jest"
+    },
+    {
+      "label": "popup.js",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "popup",
+      "community": 0,
+      "norm_label": "popup.js"
+    },
+    {
+      "label": "scanButton",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "popup_scanbutton",
+      "community": 0,
+      "norm_label": "scanbutton"
+    },
+    {
+      "label": "statusMessage",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "popup_statusmessage",
+      "community": 0,
+      "norm_label": "statusmessage"
+    },
+    {
+      "label": "results",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "popup_results",
+      "community": 0,
+      "norm_label": "results"
+    },
+    {
+      "label": "fieldList",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "popup_fieldlist",
+      "community": 0,
+      "norm_label": "fieldlist"
+    },
+    {
+      "label": "profileForm",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "popup_profileform",
+      "community": 0,
+      "norm_label": "profileform"
+    },
+    {
+      "label": "profileStatus",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "popup_profilestatus",
+      "community": 0,
+      "norm_label": "profilestatus"
+    },
+    {
+      "label": "sampleProfile",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "popup_sampleprofile",
+      "community": 0,
+      "norm_label": "sampleprofile"
+    },
+    {
+      "label": "scanCurrentPage()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "popup_scancurrentpage",
+      "community": 7,
+      "norm_label": "scancurrentpage()"
+    },
+    {
+      "label": "getActiveTab()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "popup_getactivetab",
+      "community": 7,
+      "norm_label": "getactivetab()"
+    },
+    {
+      "label": "setScanningState()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "popup_setscanningstate",
+      "community": 7,
+      "norm_label": "setscanningstate()"
+    },
+    {
+      "label": "showScanResult()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "popup_showscanresult",
+      "community": 11,
+      "norm_label": "showscanresult()"
+    },
+    {
+      "label": "showError()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "popup_showerror",
+      "community": 7,
+      "norm_label": "showerror()"
+    },
+    {
+      "label": "renderFieldList()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L82",
+      "_origin": "ast",
+      "id": "popup_renderfieldlist",
+      "community": 11,
+      "norm_label": "renderfieldlist()"
+    },
+    {
+      "label": "createNoMatchElement()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L110",
+      "_origin": "ast",
+      "id": "popup_createnomatchelement",
+      "community": 0,
+      "norm_label": "createnomatchelement()"
+    },
+    {
+      "label": "createSuggestionElement()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "popup_createsuggestionelement",
+      "community": 0,
+      "norm_label": "createsuggestionelement()"
+    },
+    {
+      "label": "addSuggestions()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "popup_addsuggestions",
+      "community": 8,
+      "norm_label": "addsuggestions()"
+    },
+    {
+      "label": "addFillResults()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "popup_addfillresults",
+      "community": 7,
+      "norm_label": "addfillresults()"
+    },
+    {
+      "label": "buildFieldDetails()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L142",
+      "_origin": "ast",
+      "id": "popup_buildfielddetails",
+      "community": 0,
+      "norm_label": "buildfielddetails()"
+    },
+    {
+      "label": "loadProfile()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L156",
+      "_origin": "ast",
+      "id": "popup_loadprofile",
+      "community": 10,
+      "norm_label": "loadprofile()"
+    },
+    {
+      "label": "saveProfile()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L161",
+      "_origin": "ast",
+      "id": "popup_saveprofile",
+      "community": 8,
+      "norm_label": "saveprofile()"
+    },
+    {
+      "label": "getProfileFromForm()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L171",
+      "_origin": "ast",
+      "id": "popup_getprofilefromform",
+      "community": 8,
+      "norm_label": "getprofilefromform()"
+    },
+    {
+      "label": "populateProfileForm()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L175",
+      "_origin": "ast",
+      "id": "popup_populateprofileform",
+      "community": 10,
+      "norm_label": "populateprofileform()"
+    },
+    {
+      "label": "scanPageFields()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L185",
+      "_origin": "ast",
+      "id": "popup_scanpagefields",
+      "community": 0,
+      "norm_label": "scanpagefields()"
+    },
+    {
+      "label": "applyHighConfidenceMatches()",
+      "file_type": "code",
+      "source_file": "popup.js",
+      "source_location": "L251",
+      "_origin": "ast",
+      "id": "popup_applyhighconfidencematches",
+      "community": 0,
+      "norm_label": "applyhighconfidencematches()"
+    },
+    {
+      "label": "field-matcher.test.js",
+      "file_type": "code",
+      "source_file": "tests/field-matcher.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_field_matcher_test",
+      "community": 4,
+      "norm_label": "field-matcher.test.js"
+    },
+    {
+      "label": "FieldMatcher",
+      "file_type": "code",
+      "source_file": "tests/field-matcher.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_field_matcher_test_fieldmatcher",
+      "community": 4,
+      "norm_label": "fieldmatcher"
+    },
+    {
+      "label": ".agent.md",
+      "file_type": "document",
+      "source_file": ".agent.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agent",
+      "community": 12,
+      "norm_label": ".agent.md"
+    },
+    {
+      "label": "copilot-instructions.md",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "github_copilot_instructions",
+      "community": 9,
+      "norm_label": "copilot-instructions.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "github_copilot_instructions_graphify",
+      "community": 9,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "CHANGELOG.md",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "changelog",
+      "community": 1,
+      "norm_label": "changelog.md"
+    },
+    {
+      "label": "Changelog",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "changelog_changelog",
+      "community": 1,
+      "norm_label": "changelog"
+    },
+    {
+      "label": "2026-08-21 \u2014 Project setup documentation",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "changelog_2026_08_21_project_setup_documentation",
+      "community": 1,
+      "norm_label": "2026-08-21 \u2014 project setup documentation"
+    },
+    {
+      "label": "0.6.1 \u2014 EIN number-field support",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "changelog_0_6_1_ein_number_field_support",
+      "community": 1,
+      "norm_label": "0.6.1 \u2014 ein number-field support"
+    },
+    {
+      "label": "0.6.0 \u2014 More exact high-confidence matches",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "changelog_0_6_0_more_exact_high_confidence_matches",
+      "community": 1,
+      "norm_label": "0.6.0 \u2014 more exact high-confidence matches"
+    },
+    {
+      "label": "0.5.0 \u2014 High-confidence fill and color review",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "changelog_0_5_0_high_confidence_fill_and_color_review",
+      "community": 1,
+      "norm_label": "0.5.0 \u2014 high-confidence fill and color review"
+    },
+    {
+      "label": "0.4.0 \u2014 First conservative match",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "changelog_0_4_0_first_conservative_match",
+      "community": 1,
+      "norm_label": "0.4.0 \u2014 first conservative match"
+    },
+    {
+      "label": "0.3.0 \u2014 Sample charity profile",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "changelog_0_3_0_sample_charity_profile",
+      "community": 1,
+      "norm_label": "0.3.0 \u2014 sample charity profile"
+    },
+    {
+      "label": "0.2.0 \u2014 Field details",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "changelog_0_2_0_field_details",
+      "community": 1,
+      "norm_label": "0.2.0 \u2014 field details"
+    },
+    {
+      "label": "0.1.1 \u2014 Scan the open page",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "changelog_0_1_1_scan_the_open_page",
+      "community": 1,
+      "norm_label": "0.1.1 \u2014 scan the open page"
+    },
+    {
+      "label": "0.1.0 \u2014 First extension shell",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "changelog_0_1_0_first_extension_shell",
+      "community": 1,
+      "norm_label": "0.1.0 \u2014 first extension shell"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 6,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Charity Form Autofiller",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_charity_form_autofiller",
+      "community": 6,
+      "norm_label": "charity form autofiller"
+    },
+    {
+      "label": "Load the extension in Chrome",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "readme_load_the_extension_in_chrome",
+      "community": 6,
+      "norm_label": "load the extension in chrome"
+    },
+    {
+      "label": "Current scope",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "readme_current_scope",
+      "community": 6,
+      "norm_label": "current scope"
+    },
+    {
+      "label": "Development",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "readme_development",
+      "community": 6,
+      "norm_label": "development"
+    },
+    {
+      "label": "GitHub workflow",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "readme_github_workflow",
+      "community": 6,
+      "norm_label": "github workflow"
+    },
+    {
+      "label": "TODO.md",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "todo",
+      "community": 2,
+      "norm_label": "todo.md"
+    },
+    {
+      "label": "Charity Form Autofiller \u2014 Prototype Checklist",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "todo_charity_form_autofiller_prototype_checklist",
+      "community": 2,
+      "norm_label": "charity form autofiller \u2014 prototype checklist"
+    },
+    {
+      "label": "Goal",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "todo_goal",
+      "community": 2,
+      "norm_label": "goal"
+    },
+    {
+      "label": "Prototype 1: Extension Shell",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "todo_prototype_1_extension_shell",
+      "community": 2,
+      "norm_label": "prototype 1: extension shell"
+    },
+    {
+      "label": "Prototype 2: Read a Form",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "todo_prototype_2_read_a_form",
+      "community": 2,
+      "norm_label": "prototype 2: read a form"
+    },
+    {
+      "label": "Prototype 3: Store One Charity Profile",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "todo_prototype_3_store_one_charity_profile",
+      "community": 2,
+      "norm_label": "prototype 3: store one charity profile"
+    },
+    {
+      "label": "Prototype 4: Conservative Matching",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "todo_prototype_4_conservative_matching",
+      "community": 2,
+      "norm_label": "prototype 4: conservative matching"
+    },
+    {
+      "label": "Prototype 5: Review and Fill",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "todo_prototype_5_review_and_fill",
+      "community": 2,
+      "norm_label": "prototype 5: review and fill"
+    },
+    {
+      "label": "Prototype 6: Test and Improve",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "todo_prototype_6_test_and_improve",
+      "community": 2,
+      "norm_label": "prototype 6: test and improve"
+    },
+    {
+      "label": "Later, Not in the First Prototype",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "todo_later_not_in_the_first_prototype",
+      "community": 2,
+      "norm_label": "later, not in the first prototype"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "field_matcher",
+      "target": "field_matcher_fieldmatcher",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/field-matcher.test.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_field_matcher_test",
+      "target": "field_matcher",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher",
+      "target": "field_matcher_fieldmatcher_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher",
+      "target": "field_matcher_fieldmatcher_getmatchingrule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher",
+      "target": "field_matcher_fieldmatcher_getsuggestion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher",
+      "target": "field_matcher_fieldmatcher_normalize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher_getsuggestion",
+      "target": "field_matcher_fieldmatcher_getmatchingrule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "field-matcher.js",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "field_matcher_fieldmatcher_getmatchingrule",
+      "target": "field_matcher_fieldmatcher_normalize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_action",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_description",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_manifest_version",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "manifest",
+      "target": "manifest_version",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "manifest_action",
+      "target": "manifest_action_default_popup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "manifest.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "manifest_action",
+      "target": "manifest_action_default_title",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_devdependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_private",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_scripts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_version",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_jest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_addfillresults",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_addsuggestions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L251",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_applyhighconfidencematches",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L142",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_buildfielddetails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_createnomatchelement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_createsuggestionelement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_fieldlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_getactivetab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L171",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_getprofilefromform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_loadprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L175",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_populateprofileform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_profileform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_profilestatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_renderfieldlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_results",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_sampleprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_saveprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_scanbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_scancurrentpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L185",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_scanpagefields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_setscanningstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_showerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_showscanresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "popup",
+      "target": "popup_statusmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_addfillresults",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_addsuggestions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_getactivetab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_setscanningstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_showerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "popup_scancurrentpage",
+      "target": "popup_showscanresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "popup_showscanresult",
+      "target": "popup_renderfieldlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "popup_addsuggestions",
+      "target": "popup_getprofilefromform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "popup_loadprofile",
+      "target": "popup_populateprofileform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "popup.js",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "popup_saveprofile",
+      "target": "popup_getprofilefromform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/field-matcher.test.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_field_matcher_test",
+      "target": "tests_field_matcher_test_fieldmatcher",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "github_copilot_instructions",
+      "target": "github_copilot_instructions_graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "changelog",
+      "target": "changelog_changelog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_1_0_first_extension_shell",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_1_1_scan_the_open_page",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_2_0_field_details",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_3_0_sample_charity_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_4_0_first_conservative_match",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_5_0_high_confidence_fill_and_color_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_6_0_more_exact_high_confidence_matches",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_6_1_ein_number_field_support",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_2026_08_21_project_setup_documentation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "readme",
+      "target": "readme_charity_form_autofiller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "readme_charity_form_autofiller",
+      "target": "readme_current_scope",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "readme_charity_form_autofiller",
+      "target": "readme_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "readme_charity_form_autofiller",
+      "target": "readme_github_workflow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "readme_charity_form_autofiller",
+      "target": "readme_load_the_extension_in_chrome",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "todo",
+      "target": "todo_charity_form_autofiller_prototype_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_goal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_later_not_in_the_first_prototype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_1_extension_shell",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_2_read_a_form",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_3_store_one_charity_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_4_conservative_matching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_5_review_and_fill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "todo_charity_form_autofiller_prototype_checklist",
+      "target": "todo_prototype_6_test_and_improve",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "8495c454200963206de84db6a94a3dd0df7c6016"
+}

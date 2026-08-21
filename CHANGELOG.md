@@ -2,6 +2,10 @@
 
 This file records visible feature changes. Versions use the format `major.minor.patch`.
 
+## 2026-08-21 — Repository graph
+
+- Added a graphify code graph with 80 nodes, 83 edges, and 13 communities.
+
 ## 2026-08-21 — Project setup documentation
 
 - Added Git and GitHub workflow instructions to the README.
