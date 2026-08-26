@@ -601,10 +601,18 @@ const FieldRegistry = [
   })
 ];
 
-module.exports = {
+const semanticExports = {
   FieldSemantics,
   FieldRegistry,
   ContextSeparators,
   NeverAutoFillFields,
   ValidationRules
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = semanticExports;
+}
+
+if (typeof globalThis !== 'undefined') {
+  globalThis.CharityFieldSemantics = semanticExports;
+}

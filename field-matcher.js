@@ -1,9 +1,12 @@
-const { FieldRegistry } = require('./field-semantics');
+const semantics = typeof module !== 'undefined' && module.exports
+  ? require('./field-semantics')
+  : globalThis.CharityFieldSemantics;
+const fieldRegistry = semantics.FieldRegistry;
 
 class FieldMatcher {
   constructor(profile = {}) {
     this.profile = profile;
-    this.rules = FieldRegistry.map((rule) => ({ ...rule }));
+    this.rules = fieldRegistry.map((rule) => ({ ...rule }));
   }
 
   getSuggestion(field = {}) {
@@ -233,4 +236,10 @@ class FieldMatcher {
   }
 }
 
-module.exports = FieldMatcher;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = FieldMatcher;
+}
+
+if (typeof globalThis !== 'undefined') {
+  globalThis.FieldMatcher = FieldMatcher;
+}

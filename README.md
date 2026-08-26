@@ -11,8 +11,9 @@ It also includes one editable charity profile. Profile information is saved loca
 3. Select **Load unpacked**.
 4. Select this project folder.
 5. Pin **Charity Form Autofiller** to the Chrome toolbar.
-6. Open a webpage with a form and select the extension icon.
-7. Select **Scan Form**.
+7. Open the extension's **Details** page and enable **Allow access to file URLs** if you are testing `charity-form-fixture.html` locally.
+8. Open a webpage with a form and select the extension icon.
+9. Select **Scan Form**.
 
 ## Current scope
 

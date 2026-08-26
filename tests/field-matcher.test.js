@@ -1,6 +1,19 @@
 const FieldMatcher = require('../field-matcher');
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
 
 describe('FieldMatcher', () => {
+  test('loads in a browser-like context without CommonJS require', () => {
+    const context = { console };
+    vm.createContext(context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
+
+    const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
+    expect(matcher.getSuggestion({ label: 'Email' }).value).toBe('alice@example.org');
+  });
+
   test('normalize lowercases and trims punctuation', () => {
     const fm = new FieldMatcher({});
     expect(fm.normalize('  Email Address (Work) ')).toBe('email address work');

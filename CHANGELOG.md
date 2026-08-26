@@ -10,6 +10,9 @@ This file records completed work and version history. New entries use the format
 - Added explicit reason text to each suggestion and surfaced it in the popup UI.
 - Kept the form scan non-destructive: no clicks, submissions, or automatic form actions are triggered.
 - Added regression tests for safe fill behavior, existing values, select handling, and unsupported control types.
+- Evaluated Fuse.js, fast-fuzzy, and fuzzysort; deferred adding a dependency until the retrieval-only integration in Step 5.2.4 is needed.
+- Enabled scanning of local HTML fixtures with the required `file://` host permission and documented Chrome's **Allow access to file URLs** setting.
+- Made the field semantics and matcher scripts load in both Chrome extension pages and CommonJS tests, with browser-loading regression coverage.
 
 ## 0.7.0 — 2026-08-21 — Foundation for conservative fuzzy matching (Steps 1-4)
 

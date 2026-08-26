@@ -88,8 +88,16 @@ function showScanResult(scanResult) {
 function showError(error) {
   results.hidden = true;
   statusMessage.classList.add("error");
-  statusMessage.textContent = "This page cannot be scanned. Open a normal website and try again.";
+  statusMessage.textContent = getScanErrorMessage(error);
   console.error("Form scan failed:", error);
+}
+
+function getScanErrorMessage(error) {
+  if (error?.message?.includes("Cannot access contents of the page")) {
+    return "This local page is blocked. Enable Allow access to file URLs for this extension, then scan again.";
+  }
+
+  return "This page cannot be scanned. Open a normal website and try again.";
 }
 
 function renderFieldList(fields) {
