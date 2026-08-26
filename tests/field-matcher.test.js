@@ -144,6 +144,14 @@ describe('FieldMatcher', () => {
     expect(positionSuggestion.value).toBe('Development Director');
   });
 
+  test('fills a mission statement textarea', () => {
+    const fm = new FieldMatcher({ missionStatement: 'We help cats.' });
+    const suggestion = fm.getSuggestion({ label: 'Mission Statement', type: 'textarea' });
+
+    expect(suggestion).not.toBeNull();
+    expect(suggestion.value).toBe('We help cats.');
+  });
+
   test('selects the option matching the saved organization type', () => {
     const fm = new FieldMatcher({ organizationType: 'Charity' });
     const suggestion = fm.getSuggestion({

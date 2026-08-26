@@ -301,7 +301,7 @@ function scanPageFields() {
     }
 
     if (field.tagName === "TEXTAREA") {
-      return "text area";
+      return "textarea";
     }
 
     return field.type || "text";

@@ -14,6 +14,7 @@ This file records completed work and version history. New entries use the format
 - Integrated Fuse.js for ranked alias retrieval while retaining the existing normalization, context, type, confidence, and ambiguity safeguards.
 - Added the normalized `ein tax id` alias so combined EIN labels such as `EIN / TAX ID` fill from the saved profile.
 - Fixed select scanning by including option metadata and matching options against saved profile values, allowing organization type to fill correctly.
+- Fixed textarea metadata so mission statement fields use the canonical `textarea` type and can be filled.
 - Enabled scanning of local HTML fixtures with the required `file://` host permission and documented Chrome's **Allow access to file URLs** setting.
 - Made the field semantics and matcher scripts load in both Chrome extension pages and CommonJS tests, with browser-loading regression coverage.
 
