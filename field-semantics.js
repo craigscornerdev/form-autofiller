@@ -129,6 +129,7 @@ const FieldSemantics = {
     aliases: [
       "state",
       "state/province",
+      "state province",
       "state or province",
       "province",
       "organization state"

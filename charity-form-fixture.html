@@ -143,27 +143,36 @@
 
             <div class="form-group">
                 <label for="org-street" class="required">STREET ADDRESS</label>
-                <input type="text" id="org-street" name="organization_street" placeholder="Street address">
+                <input type="text" id="org-street" name="organization_street" autocomplete="address-line1" placeholder="Street address">
             </div>
 
             <div class="form-group">
                 <label for="org-city" class="required">CITY</label>
-                <input type="text" id="org-city" name="organization_city" placeholder="City">
-            </div>
-
-            <div class="form-group">
-                <label for="org-state" class="required">STATE / PROVINCE</label>
-                <input type="text" id="org-state" name="organization_state" placeholder="State or Province">
-            </div>
-
-            <div class="form-group">
-                <label for="org-postal" class="required">POSTAL CODE</label>
-                <input type="text" id="org-postal" name="organization_postal_code" placeholder="Postal Code">
+                <input type="text" id="org-city" name="organization_city" autocomplete="address-level2" placeholder="City">
             </div>
 
             <div class="form-group">
                 <label for="org-country">COUNTRY</label>
-                <input type="text" id="org-country" name="organization_country" placeholder="Country">
+                <select id="org-country" name="organization_country" autocomplete="country">
+                    <option value="">Select a country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="org-state" class="required">STATE / PROVINCE</label>
+                <select id="org-state" name="organization_state" autocomplete="address-level1" data-country-dependent>
+                    <option value="">Select a state or province</option>
+                    <option value="US-NY">New York</option>
+                    <option value="US-CA">California</option>
+                    <option value="US-TX">Texas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="org-postal" class="required">POSTAL CODE</label>
+                <input type="text" id="org-postal" name="organization_postal_code" autocomplete="postal-code" placeholder="Postal Code">
             </div>
 
         </div>
@@ -247,6 +256,34 @@
         document.getElementById('charity-form').addEventListener('submit', function(e) {
             e.preventDefault();
             console.log('Form submission prevented for testing');
+        });
+    </script>
+    <script>
+        const stateOptionsByCountry = {
+            US: [
+                ["US-NY", "New York"],
+                ["US-CA", "California"],
+                ["US-TX", "Texas"]
+            ],
+            CA: [
+                ["CA-ON", "Ontario"],
+                ["CA-BC", "British Columbia"]
+            ]
+        };
+
+        const countryField = document.getElementById("org-country");
+        const stateField = document.getElementById("org-state");
+
+        countryField.addEventListener("change", () => {
+            const currentValue = stateField.value;
+            const options = stateOptionsByCountry[countryField.value] || [];
+
+            stateField.replaceChildren(new Option("Select a state or province", ""));
+            options.forEach(([value, label]) => stateField.add(new Option(label, value)));
+
+            if (options.some(([value]) => value === currentValue)) {
+                stateField.value = currentValue;
+            }
         });
     </script>
 </body>

@@ -2,8 +2,15 @@ const FieldMatcher = require('../field-matcher');
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+const { LocationData } = require('../location-data');
 
 describe('FieldMatcher', () => {
+  test('supports ISO country and subdivision values from the local database', () => {
+    expect(LocationData.US.name).toBe('United States');
+    expect(LocationData.US.subdivisions).toContainEqual(['US-NY', 'New York']);
+    expect(LocationData.CA.subdivisions).toContainEqual(['CA-ON', 'Ontario']);
+  });
+
   test('loads in a browser-like context without CommonJS require', () => {
     const context = { console };
     vm.createContext(context);
@@ -152,6 +159,26 @@ describe('FieldMatcher', () => {
     expect(suggestion.value).toBe('We help cats.');
   });
 
+  test('fills saved event details', () => {
+    const fm = new FieldMatcher({
+      eventName: 'Fall Adoption Drive',
+      eventDate: '2026-10-18',
+      eventDescription: 'A community adoption event.'
+    });
+
+    expect(fm.getSuggestion({ label: 'Event Name', type: 'text' }).value).toBe('Fall Adoption Drive');
+    expect(fm.getSuggestion({ label: 'Event Date', type: 'text' }).value).toBe('2026-10-18');
+    expect(fm.getSuggestion({ label: 'Event Description', type: 'textarea' }).value).toBe('A community adoption event.');
+  });
+
+  test('does not suggest event details when they are not saved', () => {
+    const fm = new FieldMatcher({});
+
+    expect(fm.getSuggestion({ label: 'Event Name', type: 'text' })).toBeNull();
+    expect(fm.getSuggestion({ label: 'Event Date', type: 'text' })).toBeNull();
+    expect(fm.getSuggestion({ label: 'Event Description', type: 'textarea' })).toBeNull();
+  });
+
   test('selects the option matching the saved organization type', () => {
     const fm = new FieldMatcher({ organizationType: 'Charity' });
     const suggestion = fm.getSuggestion({
@@ -166,5 +193,34 @@ describe('FieldMatcher', () => {
 
     expect(suggestion).not.toBeNull();
     expect(suggestion.value).toBe('charity');
+  });
+
+  test('selects an ISO subdivision value from a saved state name', () => {
+    const fm = new FieldMatcher({ organizationAddress: { state: 'New York' } });
+    const suggestion = fm.getSuggestion({
+      label: 'State / Province',
+      type: 'select',
+      options: [
+        { value: '', text: 'Select a state or province' },
+        { value: 'US-NY', text: 'New York' },
+        { value: 'US-CA', text: 'California' }
+      ]
+    });
+
+    expect(suggestion).not.toBeNull();
+    expect(suggestion.value).toBe('US-NY');
+  });
+
+  test('uses standard autocomplete semantics when a website label is ambiguous', () => {
+    const fm = new FieldMatcher({ organizationAddress: { state: 'New York' } });
+    const suggestion = fm.getSuggestion({
+      label: 'Administrative region',
+      autocomplete: 'address-level1',
+      type: 'select',
+      options: [{ value: 'US-NY', text: 'New York' }]
+    });
+
+    expect(suggestion).not.toBeNull();
+    expect(suggestion.value).toBe('US-NY');
   });
 });

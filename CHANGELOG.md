@@ -15,6 +15,10 @@ This file records completed work and version history. New entries use the format
 - Added the normalized `ein tax id` alias so combined EIN labels such as `EIN / TAX ID` fill from the saved profile.
 - Fixed select scanning by including option metadata and matching options against saved profile values, allowing organization type to fill correctly.
 - Fixed textarea metadata so mission statement fields use the canonical `textarea` type and can be filled.
+- Added standards-aware country and subdivision controls to the profile and country-first rescanning for dependent website dropdowns.
+- Recognized standard `autocomplete` address tokens as semantic signals when website labels are ambiguous.
+- Added a local ISO-style common-country and subdivision database to populate profile address controls without a network request.
+- Event name, date, and description now fill when explicitly saved in the profile and remain blank when no event value is saved.
 - Enabled scanning of local HTML fixtures with the required `file://` host permission and documented Chrome's **Allow access to file URLs** setting.
 - Made the field semantics and matcher scripts load in both Chrome extension pages and CommonJS tests, with browser-loading regression coverage.
 

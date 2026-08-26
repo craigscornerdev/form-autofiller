@@ -16,9 +16,9 @@ const sampleProfile = {
   organizationAddress: {
     street: "123 Maple Lane",
     city: "Riverdale",
-    state: "New York",
+    state: "US-NY",
     postalCode: "10471",
-    country: "United States"
+    country: "US"
   },
   website: "https://pawsandwhiskers.example",
   ein: "12-3456789",
@@ -30,6 +30,8 @@ const sampleProfile = {
 
 scanButton.addEventListener("click", scanCurrentPage);
 profileForm.addEventListener("submit", saveProfile);
+profileForm.elements.namedItem("organizationAddress.country").addEventListener("change", updateProfileSubdivisionOptions);
+populateProfileCountryOptions();
 loadProfile();
 
 async function scanCurrentPage() {
@@ -42,18 +44,48 @@ async function scanCurrentPage() {
       func: scanPageFields
     });
     const fields = addSuggestions(scanResults[0]?.result?.fields ?? []);
+    const countryFields = fields.filter(isCountryField);
+    const countryFillResults = await chrome.scripting.executeScript({
+      target: { tabId: activeTab.id },
+      func: applyHighConfidenceMatches,
+      args: [countryFields]
+    });
+
+    if (countryFillResults[0]?.result?.some((result) => result.outcome === "filled")) {
+      await waitForDependentFields();
+    }
+
+    const refreshedScanResults = await chrome.scripting.executeScript({
+      target: { tabId: activeTab.id },
+      func: scanPageFields
+    });
+    const refreshedFields = addSuggestions(refreshedScanResults[0]?.result?.fields ?? []);
+    const fieldsToFill = refreshedFields.filter((field) => !isCountryField(field));
     const fillResults = await chrome.scripting.executeScript({
       target: { tabId: activeTab.id },
       func: applyHighConfidenceMatches,
-      args: [fields]
+      args: [fieldsToFill]
     });
+    const allFillResults = [
+      ...(countryFillResults[0]?.result ?? []),
+      ...(fillResults[0]?.result ?? [])
+    ];
 
-    showScanResult({ fields: addFillResults(fields, fillResults[0]?.result ?? []) });
+    showScanResult({ fields: addFillResults(refreshedFields, allFillResults) });
   } catch (error) {
     showError(error);
   } finally {
     scanButton.disabled = false;
   }
+}
+
+function isCountryField(field) {
+  return field.autocomplete === "country"
+    || field.label.toLowerCase().trim() === "country";
+}
+
+function waitForDependentFields() {
+  return new Promise((resolve) => setTimeout(resolve, 250));
 }
 
 function getActiveTab() {
@@ -181,6 +213,32 @@ function buildFieldDetails(field) {
 async function loadProfile() {
   const savedData = await chrome.storage.local.get("organizationProfile");
   populateProfileForm(savedData.organizationProfile || sampleProfile);
+  updateProfileSubdivisionOptions();
+}
+
+function populateProfileCountryOptions() {
+  const countryField = profileForm.elements.namedItem("organizationAddress.country");
+  const selectedCountry = countryField.value;
+
+  countryField.replaceChildren(new Option("Select a country", ""));
+  CharityLocationData.LocationCountries.forEach((country) => {
+    countryField.add(new Option(country.name, country.code));
+  });
+  countryField.value = selectedCountry;
+}
+
+function updateProfileSubdivisionOptions() {
+  const countryField = profileForm.elements.namedItem("organizationAddress.country");
+  const stateField = profileForm.elements.namedItem("organizationAddress.state");
+  const selectedState = stateField.value;
+  const subdivisions = CharityLocationData.LocationData[countryField.value]?.subdivisions || [];
+
+  stateField.replaceChildren(new Option("Select a state or province", ""));
+  subdivisions.forEach(([code, name]) => {
+    stateField.add(new Option(name, code));
+  });
+  stateField.add(new Option("Other / custom", "Other"));
+  stateField.value = subdivisions.some(([code]) => code === selectedState) ? selectedState : "";
 }
 
 async function saveProfile(event) {
@@ -267,6 +325,7 @@ function scanPageFields() {
       type: getFieldType(field),
       required: field.required,
       placeholder: field.placeholder || "",
+      autocomplete: field.autocomplete || "",
       options: field.tagName === "SELECT"
         ? Array.from(field.options).map((option) => ({
           text: option.text,

@@ -23,6 +23,8 @@ It also includes one editable charity profile. Profile information is saved loca
 - Reports the total number of fields found and lists their details.
 - Scans the page only after the user selects **Scan Form**.
 - Includes a locally saved charity profile with sample cat-shelter data.
+- Stores country as an ISO 3166-1 alpha-2 code and state/province as an ISO 3166-2-style code when using standardized controls.
+- Includes a local common-country location database covering complete first-level subdivisions for the US, Canada, UK, Australia, Germany, and France, plus common entries for India and Mexico.
 - Matches organization name, email, phone, website, and EIN only for exact approved labels.
 - Formats an EIN without punctuation when a form requires numbers only.
 - Does not match an organization-address field to the organization name.

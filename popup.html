@@ -53,27 +53,31 @@
           <input id="phone" name="phone" type="tel">
 
           <label for="organization-address-street">Street address</label>
-          <input id="organization-address-street" name="organizationAddress.street" type="text">
+          <input id="organization-address-street" name="organizationAddress.street" type="text" autocomplete="address-line1">
 
           <label for="organization-address-city">City</label>
-          <input id="organization-address-city" name="organizationAddress.city" type="text">
+          <input id="organization-address-city" name="organizationAddress.city" type="text" autocomplete="address-level2">
 
           <label for="organization-address-state">State / Province</label>
-          <select id="organization-address-state" name="organizationAddress.state">
+          <select id="organization-address-state" name="organizationAddress.state" autocomplete="address-level1">
             <option value="">Select a state or province</option>
-            <option value="New York">New York</option>
-            <option value="California">California</option>
-            <option value="Texas">Texas</option>
-            <option value="Ontario">Ontario</option>
-            <option value="British Columbia">British Columbia</option>
+            <option value="US-NY">New York</option>
+            <option value="US-CA">California</option>
+            <option value="US-TX">Texas</option>
+            <option value="CA-ON">Ontario</option>
+            <option value="CA-BC">British Columbia</option>
             <option value="Other">Other</option>
           </select>
 
           <label for="organization-address-postal-code">Postal code</label>
-          <input id="organization-address-postal-code" name="organizationAddress.postalCode" type="text">
+          <input id="organization-address-postal-code" name="organizationAddress.postalCode" type="text" autocomplete="postal-code">
 
           <label for="organization-address-country">Country</label>
-          <input id="organization-address-country" name="organizationAddress.country" type="text">
+          <select id="organization-address-country" name="organizationAddress.country" autocomplete="country">
+            <option value="">Select a country</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+          </select>
 
           <label for="website">Website</label>
           <input id="website" name="website" type="url">
@@ -100,6 +104,7 @@
     </main>
 
     <script src="field-semantics.js"></script>
+    <script src="location-data.js"></script>
     <script src="field-matcher.js"></script>
     <script src="popup.js"></script>
   </body>

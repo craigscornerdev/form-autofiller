@@ -74,7 +74,7 @@ filled field has a visible reason that a user can review.
 - 5.1.2 [ ] Add canonical normalization for word variants so equivalent labels collapse before scoring, including hyphenation, punctuation, abbreviations, and repeated wording.
 - 5.1.3 [ ] Expand alias and synonym sets for mission statements, EIN and tax ID fields, and event-related labels without widening the matcher to clearly unrelated fields.
 - 5.1.4 [ ] Review type compatibility rules for textarea and select controls so labels like mission statement or event description are not filtered out by a strict field-type mismatch.
-- 5.1.5 [ ] Decide the safe policy for event-specific fields: either a lower-confidence review path or an explicit manual-review rule, instead of silently excluding them from matching.
+- 5.1.5 [x] Use explicitly saved event details when present, while leaving missing event values unmatched.
 - 5.1.6 [ ] Add failing tests for the specific misses: nonprofit vs non-profit, EIN and tax ID variants, mission statement variants, and event name/date/description labels.
 - 5.1.7 [ ] Re-tune confidence thresholds and ambiguity checks so near-equivalent labels can match, but still reject garbled or misleading choices.
 - 5.1.8 [ ] Re-run the fixture scan and confirm the improved matcher still avoids false positives.

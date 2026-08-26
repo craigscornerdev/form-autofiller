@@ -20,9 +20,9 @@ const ProfileDataStructure = {
   organizationAddress: {
     street: "string",            // Street address line
     city: "string",              // City
-    state: "enum | string",      // State / Province from dropdown, or "Other" for custom input
+    state: "ISO 3166-2 code | string", // e.g. US-NY; or a name for free-text/custom fields
     postalCode: "string",        // Postal/ZIP code
-    country: "string"            // Country name
+    country: "ISO 3166-1 alpha-2 | string" // e.g. US; or a name for free-text/custom fields
   },
 
   // Organization Contact Information

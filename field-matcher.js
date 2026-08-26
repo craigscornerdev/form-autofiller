@@ -11,13 +11,9 @@ class FieldMatcher {
 
   getSuggestion(field = {}) {
     const label = field.label || "";
-    const rule = this.getMatchingRule(label);
+    const rule = this.getMatchingRule(label, field.autocomplete);
 
     if (!rule) {
-      return null;
-    }
-
-    if (this.isNeverAutoFillRule(rule.profileField)) {
       return null;
     }
 
@@ -49,8 +45,24 @@ class FieldMatcher {
     };
   }
 
-  getMatchingRule(label) {
+  getMatchingRule(label, autocomplete = "") {
     const normalizedLabel = this.normalize(label);
+
+    const autocompleteFieldMap = {
+      country: "organizationCountry",
+      "country-name": "organizationCountry",
+      "address-level1": "organizationState",
+      "address-level2": "organizationCity"
+    };
+
+    if (autocompleteFieldMap[autocomplete]) {
+      const semanticFieldName = autocompleteFieldMap[autocomplete];
+      const semanticRule = this.rules.find((rule) => rule.fieldName === semanticFieldName);
+
+      if (semanticRule) {
+        return semanticRule;
+      }
+    }
 
     if (!normalizedLabel) {
       return null;
