@@ -9,7 +9,13 @@
  * - Field type compatibility checking
  */
 
-const { FieldSemantics } = require('./field-semantics');
+const semantics = typeof module !== 'undefined' && module.exports
+  ? require('./field-semantics')
+  : globalThis.CharityFieldSemantics;
+const { FieldSemantics } = semantics;
+const Fuse = typeof module !== 'undefined' && module.exports
+  ? require('fuse.js')
+  : globalThis.Fuse;
 
 class FuzzyFieldMatcher {
   constructor() {
@@ -37,6 +43,18 @@ class FuzzyFieldMatcher {
       select: ['select'],
       url: ['url', 'text']
     };
+
+    this.fieldEntries = Object.entries(FieldSemantics).flatMap(([fieldName, fieldDef]) => (
+      fieldDef.aliases || []
+    ).map((alias) => ({ fieldName, alias })));
+    this.fuzzyIndex = typeof Fuse === 'function'
+      ? new Fuse(this.fieldEntries, {
+        keys: ['alias'],
+        includeScore: true,
+        ignoreLocation: true,
+        threshold: 0.8
+      })
+      : null;
   }
 
   /**
@@ -48,8 +66,9 @@ class FuzzyFieldMatcher {
   findBestMatch(normalizedLabel, fieldContext) {
     const candidates = [];
 
-    // Score all defined fields
-    Object.entries(FieldSemantics).forEach(([fieldName, fieldDef]) => {
+    // Fuse only retrieves likely aliases; our scorer still owns all safety decisions.
+    this._retrieveFieldNames(normalizedLabel).forEach((fieldName) => {
+      const fieldDef = FieldSemantics[fieldName];
       const score = this._scoreMatch(normalizedLabel, fieldContext, fieldName, fieldDef);
       
       if (score > 0) {
@@ -77,6 +96,24 @@ class FuzzyFieldMatcher {
       reason: bestMatch ? bestMatch.reason : 'No matching field found',
       allCandidates: candidates.slice(0, 5)  // Top 5 candidates for debugging
     };
+  }
+
+  _retrieveFieldNames(normalizedLabel) {
+    if (!this.fuzzyIndex) {
+      return Object.keys(FieldSemantics);
+    }
+
+    const fieldNames = [];
+    const seen = new Set();
+
+    this.fuzzyIndex.search(normalizedLabel).forEach((result) => {
+      if (!seen.has(result.item.fieldName)) {
+        seen.add(result.item.fieldName);
+        fieldNames.push(result.item.fieldName);
+      }
+    });
+
+    return fieldNames;
   }
 
   /**
@@ -276,4 +313,10 @@ class FuzzyFieldMatcher {
   }
 }
 
-module.exports = FuzzyFieldMatcher;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = FuzzyFieldMatcher;
+}
+
+if (typeof globalThis !== 'undefined') {
+  globalThis.FuzzyFieldMatcher = FuzzyFieldMatcher;
+}

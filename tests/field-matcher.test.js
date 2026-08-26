@@ -33,6 +33,14 @@ describe('FieldMatcher', () => {
     expect(rule.profileField).toBe('email');
   });
 
+  test('matches combined EIN and tax ID labels from the fixture', () => {
+    const fm = new FieldMatcher({ ein: '12-3456789' });
+    const suggestion = fm.getSuggestion({ label: 'EIN / TAX ID', type: 'text' });
+
+    expect(suggestion).not.toBeNull();
+    expect(suggestion.value).toBe('12-3456789');
+  });
+
   test('getSuggestion returns null when profile value missing or empty', () => {
     const profile = { email: '   ' };
     const fm = new FieldMatcher(profile);
@@ -134,5 +142,21 @@ describe('FieldMatcher', () => {
     expect(typeSuggestion.value).toBe('Charity');
     expect(positionSuggestion).not.toBeNull();
     expect(positionSuggestion.value).toBe('Development Director');
+  });
+
+  test('selects the option matching the saved organization type', () => {
+    const fm = new FieldMatcher({ organizationType: 'Charity' });
+    const suggestion = fm.getSuggestion({
+      label: 'Organization Type',
+      type: 'select',
+      options: [
+        { value: '', text: '-- Select an option --' },
+        { value: 'nonprofit', text: 'Non-Profit' },
+        { value: 'charity', text: 'Registered Charity' }
+      ]
+    });
+
+    expect(suggestion).not.toBeNull();
+    expect(suggestion.value).toBe('charity');
   });
 });

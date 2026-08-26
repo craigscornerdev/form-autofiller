@@ -24,7 +24,7 @@ The package tarball sizes were 113.2 KB for Fuse.js, 9.4 KB for fast-fuzzy, and 
 
 ## Decision
 
-Do not add a fuzzy library in 5.2.3. The current matcher is dependency-free and already has the safety policy that a retrieval library cannot provide. If broader ranked retrieval is needed in 5.2.4, use **Fuse.js** behind the existing matcher pipeline: its ESM/CJS distribution is straightforward, and the smoke test handled both abbreviated and extra-token labels. The cost is approximately 26 KB minified, which should be measured against the eventual packaged extension size before adoption.
+Step 5.2.4 integrates **Fuse.js** behind the existing matcher pipeline. Fuse.js retrieves and ranks likely alias records, while the current matcher remains responsible for normalization, scoring, context, type compatibility, confidence, and ambiguity decisions. The smoke test handled both abbreviated and extra-token labels. The cost is approximately 26 KB minified and should be measured against the packaged extension size as browser bundling is added.
 
 fast-fuzzy is the smallest source option, but its lack of a browser-specific/minified distribution adds packaging uncertainty. fuzzysort is easy to load directly in a browser, but its default retrieval was weaker for the representative URL variant.
 

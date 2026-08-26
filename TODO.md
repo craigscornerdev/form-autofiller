@@ -86,7 +86,7 @@ filled field has a visible reason that a user can review.
 - 5.2.1 [x] Consolidate the duplicate field rule catalogs in `field-matcher.js` and `field-semantics.js` behind one shared field registry.
 - 5.2.2 [x] Define a registry contract for every field: stable ID, profile path, labels, synonyms, context, value type, accepted control types, validation rule, and fill policy.
 - 5.2.3 [x] Evaluate Fuse.js, fast-fuzzy, and fuzzysort against the current matcher and bundle-size constraints; see [FUZZY-LIBRARY-EVALUATION.md](FUZZY-LIBRARY-EVALUATION.md).
-- 5.2.4 [ ] Use any library only for ranked candidate retrieval; keep normalization, semantic synonyms, context checks, type compatibility, confidence thresholds, and ambiguity rejection in our own code.
+- 5.2.4 [x] Use Fuse.js only for ranked candidate retrieval; keep normalization, semantic synonyms, context checks, type compatibility, confidence thresholds, and ambiguity rejection in our own code.
 - 5.2.5 [ ] Add a canonical normalization layer shared by exact matching, fuzzy matching, select-option matching, and custom fields.
 - 5.2.6 [ ] Make the matcher consume registry entries rather than hard-coded field-specific branches so new fields use the same pipeline.
 - 5.2.7 [ ] Design custom field definitions that let users provide a field name, one or more aliases, optional examples, context, expected control type, value type, and fill policy.

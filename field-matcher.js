@@ -139,6 +139,7 @@ class FieldMatcher {
       return null;
     }
 
+    const profileText = this.normalize(typeof profileValue === "string" ? profileValue : "");
     const labelText = this.normalize(field.label || rule.source || "");
     let bestOption = null;
     let bestScore = 0;
@@ -147,7 +148,12 @@ class FieldMatcher {
       const optionText = typeof option === "string" ? option : (option.text || option.label || option.value || "");
       const optionValue = typeof option === "string" ? option : (option.value || option.text || option.label || "");
       const normalizedOption = this.normalize(optionText);
-      const score = this.scoreSelectOption(labelText, normalizedOption);
+      const normalizedOptionValue = this.normalize(optionValue);
+      const profileScore = Math.max(
+        this.scoreSelectOption(profileText, normalizedOption),
+        this.scoreSelectOption(profileText, normalizedOptionValue)
+      );
+      const score = profileScore || this.scoreSelectOption(labelText, normalizedOption);
 
       if (score > bestScore) {
         bestScore = score;

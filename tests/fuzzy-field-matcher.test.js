@@ -20,6 +20,31 @@ describe('Fuzzy Field Matcher - Step 4 Validation', () => {
     matcher = new FuzzyFieldMatcher();
   });
 
+  describe('Retrieval-Only Fuzzy Index', () => {
+    test('retrieves a variant label before applying our conservative score', () => {
+      const result = matcher.findBestMatch('org name', {
+        fieldType: 'text',
+        context: 'organization',
+        rawLabel: 'Org Name'
+      });
+
+      expect(result.allCandidates.some((candidate) => candidate.fieldName === 'organizationName')).toBe(true);
+      expect(result.score).toBeLessThan(0.7);
+      expect(result.confidence).toBe('no-match');
+    });
+
+    test('keeps unrelated labels out of the retrieval candidate list', () => {
+      const result = matcher.findBestMatch('favorite color', {
+        fieldType: 'text',
+        context: 'unknown',
+        rawLabel: 'Favorite Color'
+      });
+
+      expect(result.allCandidates).toHaveLength(0);
+      expect(result.matchedField).toBeNull();
+    });
+  });
+
   // Test 1: Exact alias matching (highest priority)
   describe('Exact Alias Matching', () => {
     test('returns high score for exact alias with matching context', () => {

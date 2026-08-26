@@ -266,7 +266,13 @@ function scanPageFields() {
       label: getFieldLabel(field),
       type: getFieldType(field),
       required: field.required,
-      placeholder: field.placeholder || ""
+      placeholder: field.placeholder || "",
+      options: field.tagName === "SELECT"
+        ? Array.from(field.options).map((option) => ({
+          text: option.text,
+          value: option.value
+        }))
+        : []
     };
   }
 
@@ -291,7 +297,7 @@ function scanPageFields() {
 
   function getFieldType(field) {
     if (field.tagName === "SELECT") {
-      return "dropdown";
+      return "select";
     }
 
     if (field.tagName === "TEXTAREA") {
