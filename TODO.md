@@ -1,123 +1,437 @@
-# Charity Form Autofiller — Agile Backlog
+# Form Autofiller — Backlog
 
-## Product Goal
+Future work only. Shipped work is in `CHANGELOG.md`. Architecture is in
+`DESIGN.md` — read the referenced section before starting a step. Demos and how
+to run them are in `demos/README.md`.
 
-Suggest safe values for clearly identified charity-form fields. The user
-reviews every suggestion and submits the form.
+**Each numbered step is one agent session:** read the named files + the DESIGN
+section, make the change, add/update the one named test, `npm test` until green,
+`graphify update .`, add a dated `CHANGELOG.md` entry, tick the box here, commit
+locally. Steps within a phase are ordered. Steps marked ▶ end with a runnable
+demo the user can watch.
 
-## Major Objective: Match Real-World Charity Forms
+**Before the first step:** confirm `npm test` is green on a clean tree, then run
+`graphify update .` once — the committed graph predates recent commits, so step 2
+of the workflow needs a fresh baseline.
 
-The matcher must support forms like the attached organization-information form.
-The form includes uppercase labels, required markers, select fields, multiline
-address fields, organization details, and event-organizer contact details.
+## Vision
 
-### Agile Step 1 — Capture the Form as Test Data
+A domain-agnostic smart autofiller. The user enters each piece of data once; the
+extension matches it to however a form labels that field, fills everything above
+a confidence floor, and shows each result on a red→green spectrum (red = left
+blank, green = exact match, gradient between for looser / composed / learned
+values). The user reviews and submits — never automatic. Charity forms are the
+default preset, not a code path.
 
-- [x] Create a local HTML fixture that represents the target form.
-- [x] Include text inputs, email inputs, telephone inputs, selects, and a textarea.
-- [x] Include required markers, uppercase labels, placeholders, and common field attributes.
-- [x] Include organization fields and event-organizer contact fields.
-- [x] Do not use real personal or organization data in the fixture.
+## Scoring model (target — DESIGN.md §6)
 
-**Acceptance criteria:** The fixture loads locally and contains every field type
-needed for the first matching pass.
+`confidence = clamp01(S_label × S_prov)`, multiplicative.
+`S_label`: 1.0 exact/autocomplete · 0.60–0.89 embedding · ≤0.855 token-overlap ·
+×0.7–0.95 context. `S_prov`: 1.0 scalar profile · 0.85 composed/enum ·
+0.40–0.90 learned. Bands: `blank` <0.60 ≤ `review` <0.90 ≤ `high`. Green needs
+`S_label == 1.0` **and** `S_prov == 1.0`. `blank` writes nothing.
 
-### Agile Step 2 — Define Field Semantics and Profile Data
+---
 
-- [x] Map target labels to profile fields and approved aliases.
-- [x] Separate organization contact data from event-organizer contact data.
-- [x] Define address components: street, city, state or province, and postal code.
-- [x] Define rules for required fields and select options.
-- [x] Define fields that must never receive an automatic suggestion.
+## Phase A — Confidence spectrum
 
-**Acceptance criteria:** Each target field has one documented profile source,
-or is explicitly marked as unsupported or manual review.
+### A1 — Gradient + fill-policy helpers
+Files: `confidence-gradient.js`, `fill-policy.js` (new, pure, dual export)
+Tests: `tests/confidence-gradient.test.js`, `tests/fill-policy.test.js` (new)
+Read: DESIGN.md §6
+- [ ] `confidence-gradient.js`: `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`,
+  `hueFor` (0→120 across floor→1.0), `colorFor` (→ `{band, hue, outline,
+  background, text, dashed}`; sub-floor = fixed dark red + `dashed:true`),
+  `describe`.
+- [ ] `fill-policy.js`: `fillDecision(suggestion, thresholds)` → `'fill'` unless
+  no suggestion or `band === 'blank'`.
 
-### Agile Step 3 — Normalize Labels and Field Context
+### A2 — Numeric score through the matcher
+Files: `field-matcher.js` (add the dual-import for `confidence-gradient.js`)
+Tests: `tests/field-matcher.test.js` (update the two full-shape `toEqual` blocks;
+in the `vm.runInContext` loader, load `confidence-gradient.js` **before**
+`field-matcher.js`), `tests/confidence-model.test.js` (new)
+Read: DESIGN.md §6; `fuzzy-field-matcher.js` (`findBestMatch` return shape, read-only)
+- [ ] Replace `_fuzzyConfidence` (string) with `_labelMatch {strategy, strength,
+  matchedAlias, normalizedLabel}` + `_rejected` (from `allCandidates`). Attach to
+  a per-call clone in all three `getMatchingRule` branches (autocomplete, exact
+  alias, fuzzy) — never mutate `this.rules` (`tests/field-semantics.test.js`
+  asserts `matcher.rules` deep-equals the registry).
+- [ ] `S_label`: `1.0` for the autocomplete and exact-alias branches;
+  `result.score` for the fuzzy branch — that score already includes the context
+  and type-compatibility factors, so use it directly, do not re-multiply.
+- [ ] Add pure `valueProvenance(field, rule)` mirroring the `resolveValue`
+  branches (select / address-object → `derived` 0.85; scalar → `profile-field`
+  1.0).
+- [ ] `getSuggestion`: compute `S_label`, `S_prov`, numeric `confidence`, `band`
+  (via `ConfidenceGradient.bandFor`); return `{source, value, confidence, band,
+  reason, signals:{labelMatch, provenance, rejected}}`. Remove `scoreCategory`.
+- [ ] `getReason`: drive off `_labelMatch.strategy`; keep wording.
 
-- [x] Normalize case, punctuation, required markers, and repeated whitespace.
-- [x] Read label text together with `name`, `id`, `placeholder`, and accessibility text.
-- [x] Detect section context such as organization information and event organizer.
-- [x] Preserve the raw label for display and audit messages.
-- [x] Add tests for uppercase labels, asterisks, abbreviations, and punctuation.
+Note: after A2 the extension is `require`-clean (tests pass) but not loadable in
+Chrome until A3 adds the `<script>` tag — verify A2 + A3 together in-browser.
 
-**Acceptance criteria:** Equivalent labels produce the same normalized representation,
-while organization and event-contact fields remain distinguishable.
+### A3 ▶ — Render the spectrum
+Files: `popup.js`, `popup.html`, `popup.css`; tune `demos/spectrum-demo.html`
+Tests: none new (DOM); covered manually by the demo
+Read: `popup.js`, DESIGN.md §6, `demos/README.md`, `demos/spectrum-demo.html`
+- [ ] `popup.html`: load `confidence-gradient.js` and `fill-policy.js` before
+  `field-matcher.js` (put them ahead of `fuzzy-field-matcher.js`).
+- [ ] `addSuggestions`: attach `suggestion.display =
+  ConfidenceGradient.colorFor(confidence)` and `suggestion.decision` before
+  injection.
+- [ ] `createSuggestionElement` / `createNoMatchElement`: color + label from
+  `suggestion.display` / `describe`; stop keying on `high|review|medium|low`.
+- [ ] Rename `applyHighConfidenceMatches` → `fillSuggestedValues` (both `func:`
+  refs). Fill when `band !== 'blank'`; `blank` → paint dashed red, write
+  nothing. Injected fn does no math — applies `suggestion.display`. Keep every
+  safety invariant.
+- [ ] `popup.css`: gradient-bar legend + a dashed-red "Left blank" chip.
+- [ ] `demos/spectrum-demo.html` exists; once the real alias list is known,
+  adjust any label that lands in the wrong band so every band is populated.
+- [ ] **Demo:** load the extension unpacked, open `demos/spectrum-demo.html`,
+  click Scan. Expect (default sample profile): Organization Name, EIN / Tax ID,
+  Mission Statement, Street Address, City, Postal Code, Contact Name, Contact
+  Phone → solid green + filled; Organization Type (select pick), Email Address
+  for Contact (fuzzy), Mailing Address (composed) → yellow + filled; Favourite
+  Colour, How did you hear about us? → dashed red + empty; Website → untouched
+  (already has a value). Every popup-row left-border color matches that field's
+  on-page outline color.
 
-### Agile Step 4 — Add Conservative Fuzzy Matching
+**Phase A acceptance:** one 0–1 score drives both surfaces from one helper;
+review-band values fill in place; sub-floor visibly blank; charity fixture shows
+no exact-match regression.
 
-- [x] Add token-based similarity for labels that are close but not exact.
-- [x] Score label evidence and field context separately.
-- [x] Use explicit thresholds for high-confidence, review, and no-match results.
-- [x] Reject ambiguous ties instead of selecting a best guess.
-- [x] Keep exact approved aliases stronger than fuzzy matches.
-- [x] Exclude address and other incompatible field types from unrelated suggestions.
+---
 
-**Acceptance criteria:** Fuzzy matching improves recall on the fixture without
-creating a high-confidence match for an incorrect field.
+## Phase B — Generic concept model (remove the charity coupling)
 
-### Agile Step 5 — Match Values to Controls Safely
+Build the neutral structure in parallel (B1–B3), swap onto it (B4), then refine.
+`charity` preset stays default-enabled the whole time. DESIGN.md §3–§5.
 
-- [x] Fill text, email, telephone, and textarea controls only when appropriate.
-- [x] Match select values by visible option text or a documented value mapping.
-- [x] Leave unsupported controls, including unchecked choices, for manual review.
-- [x] Do not overwrite an existing value.
-- [x] Never click or submit the form.
-- [x] Explain the source, score category, and reason for each suggestion.
+### B1 — FieldConcept schema + registry loader
+Files: `concept-registry.js`, `presets/base.js` (new)
+Tests: `tests/concept-registry.test.js` (new)
+Read: DESIGN.md §3
+- [ ] `FieldConcept` JSDoc typedef. `concept-registry.js`:
+  `load(enabledPresets, customConcepts)` → validated, unioned active registry;
+  rejects malformed concepts.
+- [ ] `presets/base.js`: the concepts every domain shares (`contact.*`,
+  `address.*`) as `FieldConcept[]`.
 
-**Acceptance criteria:** The fixture receives only safe suggestions, and every
-filled field has a visible reason that a user can review.
+### B2 — Port the charity vocabulary to a preset
+Files: `presets/charity.js` (new)
+Tests: `tests/presets-charity.test.js` (new — parity with the current registry:
+every field present, aliases preserved, `neverAutoFill` → `fillPolicy`)
+Read: `field-semantics.js`, DESIGN.md §3.1
+- [ ] All current fields as `FieldConcept[]` in `presets/charity.js` (+ `extends:
+  "base"`). Nothing consumes it yet; the old path is untouched.
 
-### Agile Step 5.1 — Improve Fuzzy Matching for Real-World Labels
+### B3 — One canonical normalizer
+Files: `label-normalizer.js`, `field-matcher.js`, `fuzzy-field-matcher.js`
+Tests: `tests/label-normalizer.test.js` (add cross-call-site parity cases);
+adjust `tests/field-matcher.test.js` normalize case
+Read: DESIGN.md §3.2, all three files
+- [ ] Dual-export footer on `label-normalizer.js`. Delete `FieldMatcher.normalize`
+  and the inline normalize in `fuzzy-field-matcher.js`; both delegate to it. Run
+  every concept alias through it at load. Preserves `/` — verify no alias relies
+  on `/`→space first.
 
-- 5.1.1 [ ] Diagnose alias coverage gaps for hyphenated and equivalent terms such as `nonprofit` vs `non-profit`, `tax id` vs `tax identification`, and `mission` vs `organization mission`.
-- 5.1.2 [ ] Add canonical normalization for word variants so equivalent labels collapse before scoring, including hyphenation, punctuation, abbreviations, and repeated wording.
-- 5.1.3 [ ] Expand alias and synonym sets for mission statements, EIN and tax ID fields, and event-related labels without widening the matcher to clearly unrelated fields.
-- 5.1.4 [ ] Review type compatibility rules for textarea and select controls so labels like mission statement or event description are not filtered out by a strict field-type mismatch.
-- 5.1.5 [x] Use explicitly saved event details when present, while leaving missing event values unmatched.
-- 5.1.6 [ ] Add failing tests for the specific misses: nonprofit vs non-profit, EIN and tax ID variants, mission statement variants, and event name/date/description labels.
-- 5.1.7 [ ] Re-tune confidence thresholds and ambiguity checks so near-equivalent labels can match, but still reject garbled or misleading choices.
-- 5.1.8 [ ] Re-run the fixture scan and confirm the improved matcher still avoids false positives.
+### B4 ▶ — Swap the matcher onto the registry
+Files: `field-matcher.js`, `fuzzy-field-matcher.js`; delete `field-semantics.js`,
+`profile-data-structure.js`
+Tests: update every test importing `field-semantics` / `FieldRegistry`
+Read: DESIGN.md §4, `concept-registry.js`, `presets/charity.js`
+- [ ] Matcher consumes `concept-registry.load(['charity'])` instead of
+  `FieldRegistry`. `autocompleteFieldMap` → `concept.autocompleteTokens`. Delete
+  `isNeverAutoFillRule`. `fillPolicy` / `sensitive` gates from the concept.
+- [ ] **Demo:** re-run the Phase A `demos/spectrum-demo.html` scan — behavior is
+  byte-for-byte the same as end of Phase A. This step is a regression checkpoint,
+  not a feature.
 
-**Acceptance criteria:** The matcher recognizes common label variants and still refuses ambiguous matches.
+### B5 — Generic value composition
+Files: `value-compose.js` (new), `field-matcher.js`
+Tests: `tests/value-compose.test.js` (new); update the address tests in
+`tests/field-matcher.test.js`
+Read: DESIGN.md §5.2
+- [ ] `value-compose.js`: named joiners `addressLine`, `fullName`, `join`.
+  `field-matcher` uses `concept.compose` instead of `combineAddress`. `getReason`
+  → generic templates keyed by `strategy` + `valueType`.
 
-### Agile Step 5.2 — Generalize Matching and Support Custom Fields
+### B6 ▶ — Generic context signal
+Files: `popup.js` (scan fn), `label-normalizer.js`, `fuzzy-field-matcher.js`,
+`demos/sections-demo.html` (new)
+Tests: update context cases in `tests/label-normalizer.test.js`,
+`tests/fuzzy-field-matcher.test.js`
+Read: DESIGN.md §3.2
+- [ ] `scanPageFields` captures the nearest preceding `<h1..6>` / `<legend>`
+  text per field. Matcher token-matches it against `concept.groupHints` for the
+  context multiplier; absent heading ⇒ neutral. Delete `detectContext`'s keyword
+  table and `ContextSeparators`.
+- [ ] Build `demos/sections-demo.html`: the label "Name" appears under an
+  "Organization" heading and again under a "Primary contact" heading; likewise
+  "Email".
+- [ ] **Demo:** scan `demos/sections-demo.html`. Expect: the org-section "Name"
+  fills with the organization name, the contact-section "Name" fills with the
+  contact name — heading text alone disambiguated them, no charity code involved.
 
-- 5.2.1 [x] Consolidate the duplicate field rule catalogs in `field-matcher.js` and `field-semantics.js` behind one shared field registry.
-- 5.2.2 [x] Define a registry contract for every field: stable ID, profile path, labels, synonyms, context, value type, accepted control types, validation rule, and fill policy.
-- 5.2.3 [x] Evaluate Fuse.js, fast-fuzzy, and fuzzysort against the current matcher and bundle-size constraints; see [FUZZY-LIBRARY-EVALUATION.md](FUZZY-LIBRARY-EVALUATION.md).
-- 5.2.4 [x] Use Fuse.js only for ranked candidate retrieval; keep normalization, semantic synonyms, context checks, type compatibility, confidence thresholds, and ambiguity rejection in our own code.
-- 5.2.5 [ ] Add a canonical normalization layer shared by exact matching, fuzzy matching, select-option matching, and custom fields.
-- 5.2.6 [ ] Make the matcher consume registry entries rather than hard-coded field-specific branches so new fields use the same pipeline.
-- 5.2.7 [ ] Design custom field definitions that let users provide a field name, one or more aliases, optional examples, context, expected control type, value type, and fill policy.
-- 5.2.8 [ ] Store custom field definitions and values separately from built-in semantics, with stable IDs and schema validation.
-- 5.2.9 [ ] Default custom fields to review-only until they have sufficient aliases, a compatible control type, and an unambiguous match history.
-- 5.2.10 [ ] Add diagnostics showing candidate scores, matched signals, rejected candidates, and the reason a custom field was accepted, sent for review, or rejected.
-- 5.2.11 [ ] Add tests proving built-in and custom fields share the same normalization, fuzzy retrieval, context filtering, control compatibility, and tie-breaking behavior.
-- 5.2.12 [ ] Add negative tests for generic or ambiguous custom labels so extensibility does not weaken the no-guessing policy.
+### B7 ▶ — Generic profile store + generated profile UI
+Files: `popup.js`, `popup.html`, `popup.css`
+Tests: `tests/profile-store.test.js` (new — form ⇄ `{conceptId:{value}}`, and
+migration of a legacy `organizationProfile` object)
+Read: DESIGN.md §3.3, `popup.js`
+- [ ] Profile persisted as `{conceptId: {value, updatedAt}}`. `loadProfile` /
+  `saveProfile` / `getProfileFromForm` / `populateProfileForm` rewritten against
+  it; migrate an existing saved `organizationProfile` to concept ids on load.
+- [ ] `popup.html`: replace the fixed field list with a container; `popup.js`
+  generates inputs from the active presets, grouped by id-namespace prefix.
+  Composite concepts render as their parts.
+- [ ] **Demo:** open the popup — the profile form is auto-generated and grouped.
+  Edit a value, Save, reopen: it persists. Scan `demos/spectrum-demo.html`:
+  still fills correctly from the generated store.
 
-**Acceptance criteria:** Built-in and user-defined fields use one matching pipeline, equivalent labels receive ranked candidates, and custom fields cannot produce automatic suggestions without explicit evidence and safe control compatibility.
+### B8 — Neutral naming + version alignment
+Files: repo-wide rename; `manifest.json`, `package.json`, `CHANGELOG.md`
+Tests: mechanical updates only
+Read: DESIGN.md §10
+- [ ] `CharityFieldSemantics` → `AutofillRegistry`, `CharityLocationData` →
+  `LocationData`, `CharityLabelNormalizer` → `LabelNormalizer`,
+  `dataset.charityAutofillerConfidence` → `dataset.autofillConfidence`. Rename
+  `fuzzy-field-matcher.js` → `label-matcher.js`. Manifest name → "Smart Form
+  Autofiller". One version string across `manifest.json` / `package.json` /
+  `CHANGELOG.md`.
 
-### Agile Step 6 — Verify, Tune, and Release
+### B9 ▶ — Personal preset proves generalization
+Files: `presets/personal.js`, `demos/personal-demo.html` (new); `popup.js` /
+`popup.html` preset toggle
+Tests: `tests/presets-personal.test.js` (new); `tests/generic-guard.test.js`
+(new — no domain literal in `field-matcher.js` / `label-matcher.js`); a matcher
+test running the personal fixture fields against `['personal']` only
+Read: DESIGN.md §3.2, §10
+- [ ] `presets/personal.js` (`person.full_name`, `person.email`, `person.phone`,
+  `person.address.*`, `person.dob`, …). Popup lets the user enable presets.
+- [ ] Build `demos/personal-demo.html`: an account-signup form (name, email,
+  phone, DOB, address, **password**).
+- [ ] **Demo:** in the popup enable **only** `personal`, fill the personal
+  profile, scan `demos/personal-demo.html`: name/email/phone/DOB/address fill on
+  a form that shares no vocabulary with charity; the password field stays dashed
+  red. Re-enable `charity`, scan `demos/spectrum-demo.html`: still works. Same
+  code, two domains.
 
-- [ ] Add unit tests for normalization, scoring, thresholds, conflicts, and controls.
-- [ ] Add integration tests for the complete fixture scan and suggestion flow.
-- [ ] Test deliberately similar incorrect labels and missing profile values.
-- [ ] Test the Renegade Lemonade request form when safe and permitted.
-- [ ] Run `npm.cmd test -- --runInBand --watch=false` locally.
-- [ ] Confirm the GitHub Actions CI run passes.
-- [ ] Update `CHANGELOG.md` with the current date and completed changes.
-- [ ] Run `graphify update .` after code or test changes.
-- [ ] Review the final diff before committing or pushing.
+**Phase B acceptance:** `field-matcher.js` / `label-matcher.js` hold zero domain
+strings; `['personal']`-only fills the personal demo; the charity demo is
+unchanged from Phase A.
 
-**Acceptance criteria:** Tests pass locally and in CI, the graph is current,
-and no automatic suggestion is made when evidence is ambiguous.
+---
 
-## Later Backlog
+## Phase C — Local embedding label matching
 
-- [ ] Event and campaign profiles.
-- [ ] Reusable answers for open-ended questions.
-- [ ] Document attachments, such as a W-9 or tax letter.
-- [ ] Optional AI suggestions for unclear questions.
-- [ ] Expand to all types of forms.
-- [ ] Allow AI to get 'smarter' based on what the user inputs, locally if possible.
+### C1 — esbuild + service-worker skeleton
+Files: `package.json` (`build` script), `esbuild.config.mjs`, `sw.js` (new),
+`manifest.json` (`background`), `.github/workflows/ci.yml` (build before test)
+Tests: none (infra); `npm run build` must emit `sw.bundle.js`, extension loads
+Read: DESIGN.md §9
+- [ ] esbuild bundles **only** the SW entry. Pure modules stay plain files.
+
+### C2 ▶ — Embedder module (local model, not in the matcher path yet)
+Files: `embedder.js` (SW-side), `sw.js`, `models/**` (Git LFS), `package.json`
+(transformers.js), `popup.js` (dev "warm model" button)
+Tests: `tests/embedder.test.js` gated behind `RUN_MODEL_TESTS=1` (skipped in CI)
+Read: DESIGN.md §9, the `claude-api` skill is not needed (local model)
+- [ ] Quantized `all-MiniLM-L6-v2` (int8 ONNX + SIMD WASM) under `models/`.
+  transformers.js local-only (`allowRemoteModels=false`, `numThreads=1`). `model/
+  warm` message; pre-warm on install.
+- [ ] **Demo:** click the dev "warm model" button in the popup → it reports load
+  time and the cosine of two hand-typed phrases. Proves fully-local inference in
+  the extension.
+
+### C3 — Build-time alias vectors
+Files: `scripts/embed-registry.js`, `registry-embeddings.json`, `package.json`
+(`embed:registry`)
+Tests: `tests/registry-embeddings.test.js` (new — every active alias has a
+vector, `modelId` matches, dim 384)
+Read: DESIGN.md §4
+- [ ] Normalize then embed every active-preset alias; emit per-alias int8
+  vectors (~60 KB).
+
+### C4 ▶ — Embedding tier in the cascade + fallback
+Files: `label-matcher.js`, `field-matcher.js`, `demos/synonyms-demo.html` (new)
+Tests: `tests/embedding-label-matcher.test.js` (stubbed embedder — mapping
+monotonic + bounded [0.60,0.89], gates still reject, degraded path delegates)
+Read: DESIGN.md §4, §6
+- [ ] `EmbeddingLabelMatcher.match`: embed the one novel label, cosine vs
+  precomputed vectors, reuse type/context/tie-break gates, map cosine →
+  `S_label`. `signals.labelMatch.cosine`. Model absent ⇒ `degraded:true`, token
+  path, popup notice; a scan never blocks on load.
+- [ ] Build `demos/synonyms-demo.html`: labels with no exact alias — "Federal
+  Tax Identification Number", "Legal entity name", "E-mail address", "Mobile
+  number", "Web site".
+- [ ] **Demo:** scan `demos/synonyms-demo.html` with the model warm — the
+  synonym labels match and fill (yellow-green). Toggle the model off in
+  settings, rescan — they drop to red / weak token matches. The semantic tier is
+  the visible difference.
+
+### C5 — Drop Fuse.js
+Files: `label-matcher.js`, `package.json`, `FUZZY-LIBRARY-EVALUATION.md`
+Tests: existing suites stay green
+Read: `FUZZY-LIBRARY-EVALUATION.md`
+- [ ] Once fixture recall ≥ token-overlap, remove `fuse.js`; keep
+  `_tokenOverlap` as fallback. Rewrite the evaluation doc to current state only.
+- [ ] **Demo:** re-run every `demos/*.html` scan — no regression.
+
+**Risk:** package size / Store review, SW cold-start, low-end WASM perf —
+mitigated by int8 + single-thread SIMD + build-time precompute + non-blocking
+fallback. If package size is rejected: ship a curated ~200-entry synonym map as
+data instead of the model.
+
+---
+
+## Phase D — Capture how the user fills forms
+
+### D1 ▶ — Content script + messaging skeleton
+Files: `manifest.json` (`optional_host_permissions`, `alarms`, CSP), `content.js`
+(new), `sw.js`, `popup.js`
+Tests: `tests/message-router.test.js` (new — SW `onMessage` router with a
+hand-rolled `chrome` shim)
+Read: DESIGN.md §7.1
+- [ ] Per-origin programmatic injection gated on a user allowlist (from
+  `activeTab`). Port content↔SW round-trip.
+- [ ] **Demo:** allowlist the demo origin; open `demos/personal-demo.html`; the
+  popup shows "capture active on this origin" and the SW logs a round-trip.
+
+### D2 — Field-commit capture + denylist
+Files: `content.js`, `capture-denylist.js` (new)
+Tests: `tests/capture-denylist.test.js` (new — password/cc/ssn label+attr tables)
+Read: DESIGN.md §7.1
+- [ ] `blur` (changed value) + `submit` (capture phase, no `preventDefault`) +
+  `beforeunload` flush → `capture/field-committed`. Denylist filter applied
+  before send.
+
+### D3 — Learning store + SW writer
+Files: `learning-store.js` (new), `sw.js`
+Tests: `tests/learning-store.test.js` (new — pure `applyCapture` /
+`applyFeedback` reducers, key-derivation determinism)
+Read: DESIGN.md §7.2
+- [ ] Schema per §7.2 (salted-hash key, no origin in key). SW is the sole
+  `storage.local` writer (write queue). `learn/query|dump|clear|export`.
+
+### D4 ▶ — Privacy panel + retention sweep
+Files: `popup.js`, `popup.html`, `popup.css`, `sw.js` (alarms), `PRIVACY.md`
+(new)
+Tests: reducer coverage for the retention sweep in `tests/learning-store.test.js`
+Read: DESIGN.md §7.4
+- [ ] First-run opt-in prompt. "Learning data" panel: list / per-entry delete /
+  export JSON / clear all / global off. `alarms` sweep drops old low-count
+  entries.
+- [ ] **Demo:** opt in; hand-fill `demos/personal-demo.html` twice; open the
+  panel — one entry, count 2, labels only (no password). Export JSON, delete the
+  entry, clear all.
+
+---
+
+## Phase E — Learning integration, custom fields, diagnostics
+
+### E1 ▶ — learnedEntries in the cascade
+Files: `field-matcher.js`, `popup.js`
+Tests: `tests/learning-integration.test.js` (new)
+Read: DESIGN.md §7.3
+- [ ] `new FieldMatcher(profileStore, activeRegistry, learnedEntries)`; popup
+  fetches via `learn/query` first. Order: registry match → learned match → merge
+  (profile wins; disagreement → profile value `×0.85`, learned alt in
+  `signals.rejected`; hash-only learned ⇒ review flag, no autofill).
+- [ ] Build `demos/application-demo.html`: a grant/job application with standard
+  fields plus non-vocabulary labels ("Grant program name", "Reference contact").
+- [ ] **Demo:** hand-fill "Grant program name" on `demos/application-demo.html`
+  twice across scans; third scan suggests it (yellow), sourced from history.
+
+### E2 — Provenance strength function
+Files: `provenance-strength.js` (new), `field-matcher.js`
+Tests: `tests/provenance-strength.test.js` (new — `R` monotonic in count &
+acceptRate, decays with age, bounded [0.40,0.90])
+Read: DESIGN.md §6
+- [ ] `R(count, ageDays, acceptRate)` wired into `S_prov` for learned values.
+  Learned-only never reaches `high`.
+
+### E3 — Conflict UX
+Files: `popup.js`, `field-matcher.js`
+Tests: extend `tests/learning-integration.test.js`
+Read: DESIGN.md §7.3
+- [ ] Never auto-switch. Repeated override of a profile-backed suggestion →
+  popup nudge "update your profile?". Competing learned values within 15% → cap
+  at `review`, list both.
+
+### E4 ▶ — Custom concept promotion
+Files: `custom-concepts.js` (new), `concept-registry.js`, `popup.js`
+Tests: `tests/custom-concept-promotion.test.js`,
+`tests/custom-concept-schema.test.js` (new)
+Read: DESIGN.md §8
+- [ ] `observed → candidate → active` state machine (candidate at count ≥3 +
+  dominant value + safe control; active on confirm or count ≥8 & acceptRate
+  ≥0.8). Capped at `review` until ≥2 aliases + one control type + no recent
+  rejections. Schema-validated `customConceptStore` merged into the active
+  registry as ordinary `FieldConcept`s. Generic labels ("Name", "Date") never
+  promoted.
+- [ ] **Demo:** hand-fill "Reference contact" on `demos/application-demo.html`
+  across ~8 scans with the same value; it promotes to a saved concept, appears
+  in the generated profile UI, and thereafter autofills (yellow-capped until it
+  has aliases).
+
+### E5 ▶ — Diagnostics surface
+Files: `popup.js`, `popup.html`, `popup.css`
+Tests: none new (`signals` already populated); manual
+Read: DESIGN.md §6
+- [ ] Each result row expands to show `signals`: candidate scores, matched
+  signal, rejected candidates, and why it was filled / sent to review / left
+  blank.
+- [ ] **Demo:** scan any `demos/*.html`, expand a yellow row — the score
+  breakdown and the runner-up concepts are visible.
+
+---
+
+## Phase F — Optional LLM assist (opt-in)
+
+### F1 ▶ — Provider seam + settings
+Files: `llm-assist.js` (new, SW-side), `sw.js`, `popup.js`, `popup.html`
+Tests: `tests/llm-assist.test.js` (new — stubbed provider; off by default;
+output feeds the confidence model as a low-ceiling provenance)
+Read: the `claude-api` skill (model ids, Messages API, key handling)
+- [ ] Off by default. User supplies an API key in settings. Only fields no tier
+  resolved are sent. Form structure / profile data never leave the machine
+  unless enabled. Result enters the cascade as a distinct provenance capped
+  below `high`.
+- [ ] **Demo:** opt in, add a key, scan `demos/application-demo.html` — the
+  open-ended "Why do you want this grant?" textarea gets a proposed draft
+  (orange, review); everything else still comes from the local tiers.
+
+---
+
+## Ongoing — matcher hardening
+
+Fold into whichever step touches the area; do not batch.
+
+- [ ] Type-compatibility for `textarea` / `select` concepts (mission statement,
+  event description) — verify in B5.
+- [ ] Failing-then-passing tests for known misses: `nonprofit` vs `non-profit`,
+  EIN / tax-id variants, multiline variants, event name/date/description — add
+  in B2 and C4.
+- [ ] Re-tune thresholds and ambiguity checks after Phase C, once embedding
+  recall is known.
+- [ ] Re-run every `demos/*.html` after each phase; confirm no new false
+  positives.
+
+## Release gate
+
+- [ ] Unit coverage for normalization, scoring, thresholds, conflicts, controls.
+- [ ] One integration test per demo fixture covering scan → suggestion → fill;
+  green through every phase.
+- [ ] Test deliberately similar wrong labels and missing profile values.
+- [ ] Try the Renegade Lemonade request form (`realforms.md`) when safe and
+  permitted; record the result.
+- [ ] `npm test -- --runInBand --watch=false` green locally and in CI.
+- [ ] `graphify update .` after each structural change; dated `CHANGELOG.md`
+  entry; box ticked here.
+
+## Other backlog
+
+- [ ] Event / campaign concepts as their own preset.
+- [ ] Document attachments (W-9, tax-exempt letter, résumé).

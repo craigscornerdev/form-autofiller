@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectrum Demo — Community Grant Request</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 20px; background: #f5f5f5; color: #222; }
+    form { background: #fff; padding: 28px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    h1 { margin: 0 0 24px; font-size: 22px; }
+    section { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid #e2e2e2; }
+    section:last-of-type { border-bottom: none; }
+    h2 { font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0 0 16px; }
+    .row { margin-bottom: 16px; }
+    label { display: block; font-weight: bold; margin-bottom: 4px; }
+    input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+    textarea { min-height: 84px; resize: vertical; }
+    .note { font-size: 12px; color: #777; margin-top: 3px; }
+    button { background: #0066cc; color: #fff; border: 0; border-radius: 4px; padding: 10px 20px; font-size: 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Community Grant Request</h1>
+
+  <!--
+    Watch this form with the default sample profile (Paws & Whiskers Cat Shelter).
+    Expected bands after Phase A:
+      green  (exact match, filled)  - organization name, EIN / tax id, mission,
+                                      street address, city, postal code,
+                                      contact name, contact phone
+      yellow (review, filled)       - organization type (select pick),
+                                      email address for contact (fuzzy),
+                                      mailing address (composed from parts)
+      dashed red (left blank)       - favourite colour, how did you hear about us
+      untouched                     - website (already has a value)
+    Step A3 owns this file: tune the label wording so each band is populated
+    once the real alias list is in hand.
+  -->
+
+  <form id="grant-request">
+    <section>
+      <h2>Organization</h2>
+
+      <div class="row">
+        <label for="f-org-name">Organization Name</label>
+        <input type="text" id="f-org-name" name="organization_name" placeholder="Full legal name">
+      </div>
+
+      <div class="row">
+        <label for="f-org-type">Organization Type</label>
+        <select id="f-org-type" name="organization_type">
+          <option value="">-- select --</option>
+          <option value="nonprofit">Non-Profit</option>
+          <option value="charity">Registered Charity</option>
+          <option value="community">Community Organization</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="f-ein">EIN / Tax ID</label>
+        <input type="text" id="f-ein" name="tax_id" placeholder="XX-XXXXXXX">
+      </div>
+
+      <div class="row">
+        <label for="f-mission">Mission Statement</label>
+        <textarea id="f-mission" name="mission_statement" placeholder="Your mission"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <h2>Address</h2>
+
+      <div class="row">
+        <label for="f-street">Street Address</label>
+        <input type="text" id="f-street" name="street_address" placeholder="Street">
+      </div>
+
+      <div class="row">
+        <label for="f-city">City</label>
+        <input type="text" id="f-city" name="city" placeholder="City">
+      </div>
+
+      <div class="row">
+        <label for="f-postal">Postal Code</label>
+        <input type="text" id="f-postal" name="postal_code" placeholder="ZIP / postal code">
+      </div>
+
+      <div class="row">
+        <label for="f-mailing">Mailing Address</label>
+        <textarea id="f-mailing" name="mailing_address" placeholder="Full mailing address"></textarea>
+        <div class="note">One field — the extension composes it from the address parts.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Primary Contact</h2>
+
+      <div class="row">
+        <label for="f-contact-name">Contact Name</label>
+        <input type="text" id="f-contact-name" name="contact_name" placeholder="Full name">
+      </div>
+
+      <div class="row">
+        <label for="f-contact-email">Email Address for Contact</label>
+        <input type="email" id="f-contact-email" name="contact_email" placeholder="name@example.org">
+        <div class="note">Reworded label — should land in the review band, not exact.</div>
+      </div>
+
+      <div class="row">
+        <label for="f-contact-phone">Contact Phone</label>
+        <input type="tel" id="f-contact-phone" name="contact_phone" placeholder="(555) 000-0000">
+      </div>
+
+      <div class="row">
+        <label for="f-website">Website</label>
+        <input type="text" id="f-website" name="website" value="https://oldsite.example">
+        <div class="note">Already filled — the extension must leave it alone.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Anything Else</h2>
+
+      <div class="row">
+        <label for="f-colour">Favourite Colour</label>
+        <input type="text" id="f-colour" name="favourite_colour" placeholder="No data for this — stays blank">
+      </div>
+
+      <div class="row">
+        <label for="f-hear">How did you hear about us?</label>
+        <input type="text" id="f-hear" name="referral_source" placeholder="No data for this — stays blank">
+      </div>
+    </section>
+
+    <button type="submit">Submit request</button>
+  </form>
+
+  <script>
+    document.getElementById('grant-request').addEventListener('submit', function (e) {
+      e.preventDefault();
+      console.log('Submission prevented — demo fixture.');
+    });
+  </script>
+</body>
+</html>
