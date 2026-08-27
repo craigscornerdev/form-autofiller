@@ -15,10 +15,30 @@ describe('FieldMatcher', () => {
     const context = { console };
     vm.createContext(context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
 
     const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
     expect(matcher.getSuggestion({ label: 'Email' }).value).toBe('alice@example.org');
+  });
+
+  test('falls back to a review-confidence fuzzy match when no exact alias exists', () => {
+    const context = { console };
+    vm.createContext(context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
+
+    const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
+    const suggestion = matcher.getSuggestion({ label: 'Email Address for Contact', type: 'text' });
+
+    expect(suggestion).toEqual({
+      source: 'Organization contact email',
+      value: 'alice@example.org',
+      confidence: 'review',
+      scoreCategory: 'review',
+      reason: 'Possible match for Organization contact email — please review.'
+    });
   });
 
   test('normalize lowercases and trims punctuation', () => {

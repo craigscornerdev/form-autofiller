@@ -1,31 +1,31 @@
 {
   "field-matcher.js": {
-    "mtime": 1787354406.448246,
-    "ast_hash": "5f8405ae3966ee1bda635a1da1dae201",
+    "mtime": 1787863205.6446216,
+    "ast_hash": "b4fe353893904bada7773cbd1854fe2e",
     "semantic_hash": ""
   },
   "manifest.json": {
-    "mtime": 1787279278.4812994,
-    "ast_hash": "a40f84ca9253c3aa969b8a7b1bd3e0d0",
+    "mtime": 1787779530.3507414,
+    "ast_hash": "0d22322a551c9a8e3f93c5520fee64ee",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787342616.289151,
-    "ast_hash": "bf765086f100b59c0ab781f68c5a54b5",
+    "mtime": 1787779832.2680118,
+    "ast_hash": "f621d084c66bdad18485d2b771e1be13",
     "semantic_hash": ""
   },
   "popup.js": {
-    "mtime": 1787352093.4902909,
-    "ast_hash": "964b7ce0e5a6939cefe62b71cddba652",
+    "mtime": 1787781117.0201194,
+    "ast_hash": "0b1d700323c3a53ce4197c0b2711c1bb",
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787352147.5887952,
-    "ast_hash": "17100c5882dc907318109684c20ed1bd",
+    "mtime": 1787863170.8412142,
+    "ast_hash": "6ad02e5560ef0cca82295c63d7ca36ca",
     "semantic_hash": ""
   },
   ".agent.md": {
-    "mtime": 1787347601.094678,
+    "mtime": 1787783898.2285326,
     "ast_hash": "ffd3170a511522447ad931858f2ef22c",
     "semantic_hash": ""
   },
@@ -35,23 +35,23 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787351610.4926593,
-    "ast_hash": "72f8777a64d136dc0c8d3a1a862ff9af",
+    "mtime": 1787863244.9418077,
+    "ast_hash": "63e975ff26df91fc741946d11dcbdd7c",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1787344416.7829356,
-    "ast_hash": "66f8789036b96f0f7c9b0bdf510a50ab",
+    "mtime": 1787781223.5446217,
+    "ast_hash": "4d58c3d4c37a384095b50cf34c9980db",
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787354406.448246,
-    "ast_hash": "d33bf799e9382625b9727ad5d41d70e0",
+    "mtime": 1787781535.9905498,
+    "ast_hash": "d17a643ef2332a1aea51716533d5d2d6",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787352093.4957986,
-    "ast_hash": "8891406ea55d6711d5c14ed830e8dae1",
+    "mtime": 1787863084.7631528,
+    "ast_hash": "271adcc63561eaa4264cf18401ae3046",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -60,13 +60,13 @@
     "semantic_hash": ""
   },
   "field-semantics.js": {
-    "mtime": 1787354723.9999855,
-    "ast_hash": "e22d2a074fd495b6c2130e6a51818b11",
+    "mtime": 1787780791.1511464,
+    "ast_hash": "a6bde47387d146c5b627286873a92561",
     "semantic_hash": ""
   },
   "fuzzy-field-matcher.js": {
-    "mtime": 1787350546.0999072,
-    "ast_hash": "9d66914ec37a2ffd6bf045ce8d12da7f",
+    "mtime": 1787863200.2309918,
+    "ast_hash": "1f3772efdf5809a38acfbd0c879be522",
     "semantic_hash": ""
   },
   "label-normalizer.js": {
@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "profile-data-structure.js": {
-    "mtime": 1787351818.7611117,
-    "ast_hash": "d5426d4f19211b456d4061714c403d82",
+    "mtime": 1787780781.9963226,
+    "ast_hash": "bf7354eda56ae02caec02635c7bd377b",
     "semantic_hash": ""
   },
   "tests/field-semantics.test.js": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "tests/fuzzy-field-matcher.test.js": {
-    "mtime": 1787350546.1009011,
-    "ast_hash": "576bed91333f5e17aa14532b5022e0e0",
+    "mtime": 1787779860.7537568,
+    "ast_hash": "47ac5cd484c9ec39885c540b35043d6d",
     "semantic_hash": ""
   },
   "tests/label-normalizer.test.js": {
@@ -95,8 +95,28 @@
     "semantic_hash": ""
   },
   "charity-form-fixture.html": {
-    "mtime": 1787348881.7081096,
-    "ast_hash": "bd8c97219c1fe1e6eae97f1a440612e5",
+    "mtime": 1787780574.6447594,
+    "ast_hash": "579c0e78e8b90140c6537ac7deeb5078",
+    "semantic_hash": ""
+  },
+  "location-data.js": {
+    "mtime": 1787781117.0256393,
+    "ast_hash": "88f5d8d386dcfb6e7b9402bc40877557",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1787784180.771638,
+    "ast_hash": "b50061eb7d121d681a592fd9015d3bdc",
+    "semantic_hash": ""
+  },
+  "FUZZY-LIBRARY-EVALUATION.md": {
+    "mtime": 1787779885.9361248,
+    "ast_hash": "7ccff02b91f662d8b2f45abe2a47419b",
+    "semantic_hash": ""
+  },
+  "realforms.md": {
+    "mtime": 1787784672.748775,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
     "semantic_hash": ""
   }
 }

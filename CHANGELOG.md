@@ -3,6 +3,14 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.9.0 — 2026-08-27 — Wire fuzzy matching into the live suggestion path
+
+- `FieldMatcher.getMatchingRule` now falls back to `FuzzyFieldMatcher` when no exact alias matches, instead of the class sitting unused outside its own tests.
+- Retuned the token-overlap weight (0.8 → 1.0) and REVIEW threshold (0.70 → 0.60) so a realistic near-miss label can surface as a review-confidence suggestion; the non-exact ceiling (0.855) still stays below HIGH, so only true exact aliases auto-fill.
+- Fixed two top-level identifier collisions (`semantics`, `FieldSemantics`, `FuzzyFieldMatcher`) between `fuzzy-field-matcher.js` and `field-matcher.js`/`field-semantics.js` that would have thrown a `SyntaxError` once both scripts shared the popup's global scope.
+- Added `fuzzy-field-matcher.js` to `popup.html`'s script list.
+- Added a regression test proving a non-exact label returns a `review`-confidence suggestion via the fuzzy fallback.
+
 ## 0.8.0 — 2026-08-21 — Safe control matching and step 5 completion
 
 - **Step 5:** Added safe control checks before suggesting values for text, email, tel, textarea, and select controls.

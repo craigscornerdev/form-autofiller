@@ -2,16 +2,20 @@ const semantics = typeof module !== 'undefined' && module.exports
   ? require('./field-semantics')
   : globalThis.CharityFieldSemantics;
 const fieldRegistry = semantics.FieldRegistry;
+const FuzzyFieldMatcherClass = typeof module !== 'undefined' && module.exports
+  ? require('./fuzzy-field-matcher')
+  : globalThis.FuzzyFieldMatcher;
 
 class FieldMatcher {
   constructor(profile = {}) {
     this.profile = profile;
     this.rules = fieldRegistry.map((rule) => ({ ...rule }));
+    this.fuzzyMatcher = new FuzzyFieldMatcherClass();
   }
 
   getSuggestion(field = {}) {
     const label = field.label || "";
-    const rule = this.getMatchingRule(label, field.autocomplete);
+    const rule = this.getMatchingRule(label, field.autocomplete, field.type);
 
     if (!rule) {
       return null;
@@ -35,17 +39,17 @@ class FieldMatcher {
       return null;
     }
 
-    const scoreCategory = "high";
+    const scoreCategory = rule._fuzzyConfidence || "high";
     return {
       source: rule.source,
       value,
-      confidence: "high",
+      confidence: scoreCategory,
       scoreCategory,
       reason: this.getReason(field, rule, scoreCategory)
     };
   }
 
-  getMatchingRule(label, autocomplete = "") {
+  getMatchingRule(label, autocomplete = "", fieldType = "") {
     const normalizedLabel = this.normalize(label);
 
     const autocompleteFieldMap = {
@@ -68,7 +72,28 @@ class FieldMatcher {
       return null;
     }
 
-    return this.rules.find((rule) => rule.aliases.includes(normalizedLabel)) || null;
+    const exactRule = this.rules.find((rule) => rule.aliases.includes(normalizedLabel));
+    if (exactRule) {
+      return exactRule;
+    }
+
+    return this.getFuzzyMatchingRule(normalizedLabel, fieldType);
+  }
+
+  getFuzzyMatchingRule(normalizedLabel, fieldType) {
+    const fieldContext = { fieldType: fieldType || "text", context: "unknown" };
+    const result = this.fuzzyMatcher.findBestMatch(normalizedLabel, fieldContext);
+
+    if (!result.matchedField || result.confidence === "no-match") {
+      return null;
+    }
+
+    const rule = this.rules.find((candidate) => candidate.fieldName === result.matchedField);
+    if (!rule) {
+      return null;
+    }
+
+    return { ...rule, _fuzzyConfidence: result.confidence };
   }
 
   getProfileValue(profileField, rule = null) {
@@ -224,6 +249,12 @@ class FieldMatcher {
 
     if (rule.profileField === "organizationAddress" || rule.profileField === "organizationAddress.street" || rule.profileField === "organizationAddress.city" || rule.profileField === "organizationAddress.state" || rule.profileField === "organizationAddress.postalCode" || rule.profileField === "organizationAddress.country") {
       return `combined address data matched for ${rule.source}.`;
+    }
+
+    if (rule._fuzzyConfidence) {
+      return rule._fuzzyConfidence === "high"
+        ? `High-confidence fuzzy match for ${rule.source}.`
+        : `Possible match for ${rule.source} — please review.`;
     }
 
     return `${scoreCategory === "high" ? "Exact alias match" : "Safe match"} for ${rule.source}.`;

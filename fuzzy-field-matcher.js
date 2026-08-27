@@ -9,10 +9,10 @@
  * - Field type compatibility checking
  */
 
-const semantics = typeof module !== 'undefined' && module.exports
+const fuzzySemantics = typeof module !== 'undefined' && module.exports
   ? require('./field-semantics')
   : globalThis.CharityFieldSemantics;
-const { FieldSemantics } = semantics;
+const { FieldSemantics: FuzzyFieldSemantics } = fuzzySemantics;
 const Fuse = typeof module !== 'undefined' && module.exports
   ? require('fuse.js')
   : globalThis.Fuse;
@@ -21,15 +21,17 @@ class FuzzyFieldMatcher {
   constructor() {
     this.CONFIDENCE_THRESHOLDS = {
       HIGH: 0.90,        // >= 0.90: High confidence, auto-fill
-      REVIEW: 0.70,      // 0.70-0.89: Medium confidence, review needed
-      NO_MATCH: 0.0      // < 0.70: No match
+      REVIEW: 0.60,      // 0.60-0.89: Medium confidence, review needed
+      NO_MATCH: 0.0      // < 0.60: No match
     };
 
     // Scoring is now multiplicative/hierarchical, not additive
-    // This prevents accidental high scores from combining unrelated factors
+    // This prevents accidental high scores from combining unrelated factors.
+    // Ceiling for a non-exact match is tokenOverlap * contextMatch * typeCompatibility
+    // = 1.0 * 0.9 * 0.95 = 0.855, always below HIGH so only true exact aliases auto-fill.
     this.SCORING_WEIGHTS = {
       exactAlias: 1.0,           // Exact match to an alias (base score)
-      tokenOverlap: 0.8,         // Token-based similarity multiplier (max)
+      tokenOverlap: 1.0,         // Token-based similarity multiplier (max)
       contextMatch: 0.9,         // Context match multiplier
       contextMismatch: 0.7,      // Context mismatch penalty
       typeCompatibility: 0.95    // Type compatibility bonus (small)
@@ -44,7 +46,7 @@ class FuzzyFieldMatcher {
       url: ['url', 'text']
     };
 
-    this.fieldEntries = Object.entries(FieldSemantics).flatMap(([fieldName, fieldDef]) => (
+    this.fieldEntries = Object.entries(FuzzyFieldSemantics).flatMap(([fieldName, fieldDef]) => (
       fieldDef.aliases || []
     ).map((alias) => ({ fieldName, alias })));
     this.fuzzyIndex = typeof Fuse === 'function'
@@ -68,7 +70,7 @@ class FuzzyFieldMatcher {
 
     // Fuse only retrieves likely aliases; our scorer still owns all safety decisions.
     this._retrieveFieldNames(normalizedLabel).forEach((fieldName) => {
-      const fieldDef = FieldSemantics[fieldName];
+      const fieldDef = FuzzyFieldSemantics[fieldName];
       const score = this._scoreMatch(normalizedLabel, fieldContext, fieldName, fieldDef);
       
       if (score > 0) {
@@ -100,7 +102,7 @@ class FuzzyFieldMatcher {
 
   _retrieveFieldNames(normalizedLabel) {
     if (!this.fuzzyIndex) {
-      return Object.keys(FieldSemantics);
+      return Object.keys(FuzzyFieldSemantics);
     }
 
     const fieldNames = [];
@@ -172,7 +174,7 @@ class FuzzyFieldMatcher {
       return 0;  // Not similar enough
     }
 
-    score = maxAliasScore * this.SCORING_WEIGHTS.tokenOverlap;  // Max 0.8
+    score = maxAliasScore * this.SCORING_WEIGHTS.tokenOverlap;  // Max 1.0
 
     // Apply context multiplier
     if (fieldContext.context === fieldDef.context) {
