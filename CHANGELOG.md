@@ -3,6 +3,14 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.11.0 — 2026-08-27 — Numeric confidence through the matcher
+
+- `FieldMatcher.getSuggestion` now returns a numeric `confidence` (0..1) and a `band` (`blank` | `review` | `high`) instead of a category string. `confidence = clamp01(S_label × S_prov)` via `confidence-gradient.js`.
+- Each `getMatchingRule` branch attaches a per-call `_labelMatch { strategy, strength, matchedAlias, normalizedLabel }` and `_rejected` (runner-up candidates) to a clone of the registry rule — `this.rules` is never mutated. `S_label` is `1.0` for the autocomplete and exact-alias branches and the raw tier score for the fuzzy branch.
+- Added `valueProvenance(field, rule)`: `derived` (`0.85`) for select and composed-address values, `profile-field` (`1.0`) for direct scalars — so composed and select-mapped values can never reach the green band.
+- `getSuggestion` returns `signals: { labelMatch, provenance, rejected }` for diagnostics. `getReason` is driven off `_labelMatch.strategy`; wording is unchanged.
+- Added `tests/confidence-model.test.js`; updated `tests/field-matcher.test.js` to the numeric shape and to load `confidence-gradient.js` in the browser-context loader.
+
 ## 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers
 
 - Added `confidence-gradient.js`: a pure module mapping a 0..1 confidence to `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`, `hueFor` (0→120 across floor→1.0), `colorFor` (`{band, hue, dashed, outline, background, text}`; sub-floor is a fixed dark red with a dashed outline), and `describe`. Every function takes an explicit `thresholds` argument defaulting to `DEFAULT_THRESHOLDS`.

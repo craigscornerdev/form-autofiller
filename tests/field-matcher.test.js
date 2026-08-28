@@ -15,6 +15,7 @@ describe('FieldMatcher', () => {
     const context = { console };
     vm.createContext(context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'confidence-gradient.js'), 'utf8'), context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
 
@@ -26,6 +27,7 @@ describe('FieldMatcher', () => {
     const context = { console };
     vm.createContext(context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'confidence-gradient.js'), 'utf8'), context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
 
@@ -35,9 +37,25 @@ describe('FieldMatcher', () => {
     expect(suggestion).toEqual({
       source: 'Organization contact email',
       value: 'alice@example.org',
-      confidence: 'review',
-      scoreCategory: 'review',
-      reason: 'Possible match for Organization contact email — please review.'
+      confidence: expect.closeTo(0.64125, 5),
+      band: 'review',
+      reason: 'Possible match for Organization contact email — please review.',
+      signals: {
+        labelMatch: {
+          strategy: 'fuzzy',
+          strength: expect.closeTo(0.64125, 5),
+          matchedAlias: null,
+          normalizedLabel: 'email address for contact'
+        },
+        provenance: { kind: 'profile-field', factor: 1, detail: 'scalar' },
+        rejected: [
+          {
+            conceptId: 'eventOrganizerEmail',
+            score: expect.closeTo(0.342, 5),
+            reason: 'Low confidence match: "Event organizer email" (score: 34%)'
+          }
+        ]
+      }
     });
   });
 
@@ -82,9 +100,19 @@ describe('FieldMatcher', () => {
     expect(suggestion).toEqual({
       source: 'Email',
       value: 'alice@example.org',
-      confidence: 'high',
-      scoreCategory: 'high',
-      reason: 'Exact alias match for Email.'
+      confidence: 1,
+      band: 'high',
+      reason: 'Exact alias match for Email.',
+      signals: {
+        labelMatch: {
+          strategy: 'exact-alias',
+          strength: 1,
+          matchedAlias: 'email',
+          normalizedLabel: 'email'
+        },
+        provenance: { kind: 'profile-field', factor: 1, detail: 'scalar' },
+        rejected: []
+      }
     });
   });
 

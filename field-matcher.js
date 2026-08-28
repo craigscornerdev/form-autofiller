@@ -5,6 +5,9 @@ const fieldRegistry = semantics.FieldRegistry;
 const FuzzyFieldMatcherClass = typeof module !== 'undefined' && module.exports
   ? require('./fuzzy-field-matcher')
   : globalThis.FuzzyFieldMatcher;
+const Gradient = typeof module !== 'undefined' && module.exports
+  ? require('./confidence-gradient')
+  : globalThis.ConfidenceGradient;
 
 class FieldMatcher {
   constructor(profile = {}) {
@@ -39,13 +42,24 @@ class FieldMatcher {
       return null;
     }
 
-    const scoreCategory = rule._fuzzyConfidence || "high";
+    const labelMatch = rule._labelMatch;
+    const provenance = this.valueProvenance(field, rule);
+    const sLabel = labelMatch.strength;
+    const sProv = provenance.factor;
+    const confidence = Gradient.clamp01(sLabel * sProv);
+    const band = Gradient.bandFor(confidence);
+
     return {
       source: rule.source,
       value,
-      confidence: scoreCategory,
-      scoreCategory,
-      reason: this.getReason(field, rule, scoreCategory)
+      confidence,
+      band,
+      reason: this.getReason(field, rule),
+      signals: {
+        labelMatch,
+        provenance,
+        rejected: rule._rejected || []
+      }
     };
   }
 
@@ -64,7 +78,11 @@ class FieldMatcher {
       const semanticRule = this.rules.find((rule) => rule.fieldName === semanticFieldName);
 
       if (semanticRule) {
-        return semanticRule;
+        return {
+          ...semanticRule,
+          _labelMatch: { strategy: "autocomplete", strength: 1, matchedAlias: autocomplete, normalizedLabel },
+          _rejected: []
+        };
       }
     }
 
@@ -74,7 +92,11 @@ class FieldMatcher {
 
     const exactRule = this.rules.find((rule) => rule.aliases.includes(normalizedLabel));
     if (exactRule) {
-      return exactRule;
+      return {
+        ...exactRule,
+        _labelMatch: { strategy: "exact-alias", strength: 1, matchedAlias: normalizedLabel, normalizedLabel },
+        _rejected: []
+      };
     }
 
     return this.getFuzzyMatchingRule(normalizedLabel, fieldType);
@@ -93,7 +115,19 @@ class FieldMatcher {
       return null;
     }
 
-    return { ...rule, _fuzzyConfidence: result.confidence };
+    const rejected = (result.allCandidates || [])
+      .filter((candidate) => candidate.fieldName !== result.matchedField)
+      .map((candidate) => ({
+        conceptId: candidate.fieldName,
+        score: candidate.score,
+        reason: candidate.reason
+      }));
+
+    return {
+      ...rule,
+      _labelMatch: { strategy: "fuzzy", strength: result.score, matchedAlias: null, normalizedLabel },
+      _rejected: rejected
+    };
   }
 
   getProfileValue(profileField, rule = null) {
@@ -242,7 +276,7 @@ class FieldMatcher {
     return intersection / union;
   }
 
-  getReason(field, rule, scoreCategory) {
+  getReason(field, rule) {
     if (field.tagName === "SELECT" || field.type === "select") {
       return `select option matched for ${rule.source}.`;
     }
@@ -251,13 +285,26 @@ class FieldMatcher {
       return `combined address data matched for ${rule.source}.`;
     }
 
-    if (rule._fuzzyConfidence) {
-      return rule._fuzzyConfidence === "high"
+    const labelMatch = rule._labelMatch || {};
+    if (labelMatch.strategy === "fuzzy") {
+      return labelMatch.strength >= 0.9
         ? `High-confidence fuzzy match for ${rule.source}.`
         : `Possible match for ${rule.source} — please review.`;
     }
 
-    return `${scoreCategory === "high" ? "Exact alias match" : "Safe match"} for ${rule.source}.`;
+    return `Exact alias match for ${rule.source}.`;
+  }
+
+  valueProvenance(field, rule) {
+    if (field.tagName === "SELECT" || field.type === "select") {
+      return { kind: "derived", factor: 0.85, detail: "select-option" };
+    }
+
+    if (rule.profileField === "organizationAddress") {
+      return { kind: "derived", factor: 0.85, detail: "composed" };
+    }
+
+    return { kind: "profile-field", factor: 1, detail: "scalar" };
   }
 
   isNeverAutoFillRule(profileField) {

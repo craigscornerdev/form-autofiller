@@ -10,10 +10,6 @@ section, make the change, add/update the one named test, `npm test` until green,
 locally. Steps within a phase are ordered. Steps marked ▶ end with a runnable
 demo the user can watch.
 
-**Before the first step:** confirm `npm test` is green on a clean tree, then run
-`graphify update .` once — the committed graph predates recent commits, so step 2
-of the workflow needs a fresh baseline.
-
 ## Vision
 
 A domain-agnostic smart autofiller. The user enters each piece of data once; the
@@ -34,42 +30,6 @@ default preset, not a code path.
 ---
 
 ## Phase A — Confidence spectrum
-
-### A1 — Gradient + fill-policy helpers
-Files: `confidence-gradient.js`, `fill-policy.js` (new, pure, dual export)
-Tests: `tests/confidence-gradient.test.js`, `tests/fill-policy.test.js` (new)
-Read: DESIGN.md §6
-- [x] `confidence-gradient.js`: `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`,
-  `hueFor` (0→120 across floor→1.0), `colorFor` (→ `{band, hue, outline,
-  background, text, dashed}`; sub-floor = fixed dark red + `dashed:true`),
-  `describe`.
-- [x] `fill-policy.js`: `fillDecision(suggestion, thresholds)` → `'fill'` unless
-  no suggestion or `band === 'blank'`.
-
-### A2 — Numeric score through the matcher
-Files: `field-matcher.js` (add the dual-import for `confidence-gradient.js`)
-Tests: `tests/field-matcher.test.js` (update the two full-shape `toEqual` blocks;
-in the `vm.runInContext` loader, load `confidence-gradient.js` **before**
-`field-matcher.js`), `tests/confidence-model.test.js` (new)
-Read: DESIGN.md §6; `fuzzy-field-matcher.js` (`findBestMatch` return shape, read-only)
-- [ ] Replace `_fuzzyConfidence` (string) with `_labelMatch {strategy, strength,
-  matchedAlias, normalizedLabel}` + `_rejected` (from `allCandidates`). Attach to
-  a per-call clone in all three `getMatchingRule` branches (autocomplete, exact
-  alias, fuzzy) — never mutate `this.rules` (`tests/field-semantics.test.js`
-  asserts `matcher.rules` deep-equals the registry).
-- [ ] `S_label`: `1.0` for the autocomplete and exact-alias branches;
-  `result.score` for the fuzzy branch — that score already includes the context
-  and type-compatibility factors, so use it directly, do not re-multiply.
-- [ ] Add pure `valueProvenance(field, rule)` mirroring the `resolveValue`
-  branches (select / address-object → `derived` 0.85; scalar → `profile-field`
-  1.0).
-- [ ] `getSuggestion`: compute `S_label`, `S_prov`, numeric `confidence`, `band`
-  (via `ConfidenceGradient.bandFor`); return `{source, value, confidence, band,
-  reason, signals:{labelMatch, provenance, rejected}}`. Remove `scoreCategory`.
-- [ ] `getReason`: drive off `_labelMatch.strategy`; keep wording.
-
-Note: after A2 the extension is `require`-clean (tests pass) but not loadable in
-Chrome until A3 adds the `<script>` tag — verify A2 + A3 together in-browser.
 
 ### A3 ▶ — Render the spectrum
 Files: `popup.js`, `popup.html`, `popup.css`; tune `demos/spectrum-demo.html`

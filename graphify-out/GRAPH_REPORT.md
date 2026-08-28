@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-27)
 
 ## Corpus Check
-- 28 files · ~21,369 words
+- 29 files · ~22,101 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 237 nodes · 267 edges · 22 communities (17 shown, 5 thin omitted)
+- 241 nodes · 273 edges · 22 communities (17 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fd0de8d3`
+- Built from commit: `5bccc0da`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,8 +37,8 @@
 - [[_COMMUNITY_Community 21|Community 21]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `FieldMatcher` - 15 edges
-2. `Changelog` - 13 edges
+1. `FieldMatcher` - 16 edges
+2. `Changelog` - 14 edges
 3. `Design — Smart Form Autofiller` - 12 edges
 4. `Form Autofiller — Backlog` - 12 edges
 5. `FuzzyFieldMatcher` - 11 edges
@@ -61,8 +61,8 @@ Cohesion: 0.10
 Nodes (22): addFillResults(), addSuggestions(), fieldList, getActiveTab(), getProfileFromForm(), getScanErrorMessage(), loadProfile(), populateProfileForm() (+14 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.14
-Nodes (13): 0.1.0 — 2026-08-21 — First extension shell, 0.1.1 — 2026-08-21 — Scan the open page, 0.2.0 — 2026-08-21 — Field details, 0.3.0 — 2026-08-21 — Sample charity profile, 0.4.0 — 2026-08-21 — First conservative match, 0.5.0 — 2026-08-21 — High-confidence fill and color review, 0.6.0 — 2026-08-21 — More exact high-confidence matches, 0.6.1 — 2026-08-21 — EIN number-field support (+5 more)
+Cohesion: 0.13
+Nodes (14): 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers, 0.1.0 — 2026-08-21 — First extension shell, 0.1.1 — 2026-08-21 — Scan the open page, 0.2.0 — 2026-08-21 — Field details, 0.3.0 — 2026-08-21 — Sample charity profile, 0.4.0 — 2026-08-21 — First conservative match, 0.5.0 — 2026-08-21 — High-confidence fill and color review, 0.6.0 — 2026-08-21 — More exact high-confidence matches (+6 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.33
@@ -91,8 +91,8 @@ Nodes (8): ContextSeparators, FieldRegistry, FieldSemantics, NeverAutoFillFields
 }
 
 ### Community 13 - "Community 13"
-Cohesion: 0.22
-Nodes (7): LocationCountries, LocationData, FieldMatcher, fs, { LocationData }, path, vm
+Cohesion: 0.17
+Nodes (9): LocationCountries, LocationData, ConfidenceGradient, FieldMatcher, FieldMatcher, fs, { LocationData }, path (+1 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.33
@@ -100,7 +100,7 @@ Nodes (5): Coding standards, Per-step workflow, Project Conventions, Tools, Wher
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
-Nodes (29): A1 — Gradient + fill-policy helpers, A2 — Numeric score through the matcher, A3 ▶ — Render the spectrum, C1 — esbuild + service-worker skeleton, C2 ▶ — Embedder module (local model, not in the matcher path yet), C3 — Build-time alias vectors, C4 ▶ — Embedding tier in the cascade + fallback, C5 — Drop Fuse.js (+21 more)
+Nodes (28): A2 — Numeric score through the matcher, A3 ▶ — Render the spectrum, C1 — esbuild + service-worker skeleton, C2 ▶ — Embedder module (local model, not in the matcher path yet), C3 — Build-time alias vectors, C4 ▶ — Embedding tier in the cascade + fallback, C5 — Drop Fuse.js, D1 ▶ — Content script + messaging skeleton (+20 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.09
@@ -130,24 +130,24 @@ Cohesion: 0.50
 Nodes (3): fillDecision(), FillPolicy, { fillDecision }
 
 ## Knowledge Gaps
-- **117 isolated node(s):** `ConfidenceGradient`, `semanticExports`, `FillPolicy`, `LocationCountries`, `manifest_version` (+112 more)
+- **119 isolated node(s):** `ConfidenceGradient`, `semanticExports`, `FillPolicy`, `LocationCountries`, `manifest_version` (+114 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Form Autofiller — Backlog` connect `Community 16` to `Community 18`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `FieldMatcher` connect `Community 4` to `Community 13`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **Why does `Form Autofiller — Backlog` connect `Community 16` to `Community 18`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Why does `Phase B — Generic concept model (remove the charity coupling)` connect `Community 18` to `Community 16`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `ConfidenceGradient`, `semanticExports`, `FillPolicy` to the rest of the system?**
-  _117 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _119 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09655172413793103 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 16` be split into smaller, more focused modules?**
-  _Cohesion score 0.06666666666666667 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

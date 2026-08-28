@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787863205.6446216,
-    "ast_hash": "b4fe353893904bada7773cbd1854fe2e",
+    "mtime": 1787878133.1187615,
+    "ast_hash": "e1d86fec0babb68a0e7bfb117a8370e8",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787863170.8412142,
-    "ast_hash": "6ad02e5560ef0cca82295c63d7ca36ca",
+    "mtime": 1787878156.2463195,
+    "ast_hash": "756707ce464e4abaf79b2893604d1812",
     "semantic_hash": ""
   },
   ".agent.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787863244.9418077,
-    "ast_hash": "63e975ff26df91fc741946d11dcbdd7c",
+    "mtime": 1787877358.6677213,
+    "ast_hash": "1c8169693f8ab1e5cfadb5cc2dd487bc",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787868033.9360015,
-    "ast_hash": "a496f53dfb7116fe908ccd27ec59cc32",
+    "mtime": 1787877761.7181485,
+    "ast_hash": "a604fa783665716365ac8749acedfaec",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -157,6 +157,11 @@
   "tests/fill-policy.test.js": {
     "mtime": 1787877337.7480166,
     "ast_hash": "5da17c63bcb931c413c5f9f426c8b704",
+    "semantic_hash": ""
+  },
+  "tests/confidence-model.test.js": {
+    "mtime": 1787878100.2910466,
+    "ast_hash": "cb65be7300befc118a54f2bd7cde6433",
     "semantic_hash": ""
   }
 }
