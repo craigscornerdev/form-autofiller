@@ -3,7 +3,24 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
-## 0.18.0 — 2026-08-28 — Composite joiners
+## 0.19.0 — 2026-08-28 — Matcher composes composites from the concept
+
+- `field-matcher.js` `resolveValue` routes any `rule.compose` concept through a
+  new `composeValue(rule)`: it reads each part concept's profile value and hands
+  the `{conceptId: value}` map to `value-compose`'s named joiner. `combineAddress`
+  and the `organizationAddress` profile-lookup fallback are gone — address
+  assembly carries no dedicated code.
+- `getReason` is a generic template keyed by `_labelMatch.strategy` and the
+  resolved value shape (`resolvedValueType`: `enum` for a `<select>`, `composite`
+  for a `compose` rule, else `scalar`): fuzzy wording unchanged; exact/autocomplete
+  openers gain `", matched to a select option."` / `", value composed from your
+  saved details."` suffixes. No domain wording.
+- `valueProvenance` keys the composed `S_prov` `0.85` off `rule.compose` (was the
+  `organizationAddress` field name); select stays `0.85`, scalar `1.0`.
+- `popup.html` loads `value-compose.js` ahead of `field-matcher.js`.
+- Tests: `tests/field-matcher.test.js` address cases assert the composite spec on
+  the rule and the composed reason/provenance; `tests/confidence-model.test.js`
+  composed-provenance case passes a `compose` rule.
 
 - `value-compose.js` (new, dual export): `compose({ parts, joiner }, partMap)`
   resolves each part id against a `{conceptId: value}` map, drops empty and

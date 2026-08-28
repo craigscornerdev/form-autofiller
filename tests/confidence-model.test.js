@@ -98,8 +98,11 @@ describe('confidence model', () => {
         .toEqual({ kind: 'derived', factor: 0.85, detail: 'select-option' });
     });
 
-    test('the address object resolves to a composed value', () => {
-      expect(fm.valueProvenance({ type: 'text' }, { profileField: 'organizationAddress' }))
+    test('a compose rule resolves to a composed value', () => {
+      const composedRule = {
+        compose: { parts: ['address.line1', 'address.city'], joiner: 'addressLine' }
+      };
+      expect(fm.valueProvenance({ type: 'text' }, composedRule))
         .toEqual({ kind: 'derived', factor: 0.85, detail: 'composed' });
     });
 

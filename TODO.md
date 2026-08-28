@@ -40,15 +40,6 @@ composition, the context signal, the profile store, and naming onto it, then
 proving the pipeline generalizes with a second preset. `charity` stays
 default-enabled throughout. DESIGN.md §3–§5.
 
-### B5b — Matcher resolves composites from the concept
-Files: `field-matcher.js`, `popup.html` (script order)
-Tests: update the address cases in `tests/field-matcher.test.js` and the
-composed-provenance case in `tests/confidence-model.test.js`
-Read: DESIGN.md §5.2, `value-compose.js`
-- [ ] `resolveValue` composes through `concept.compose` + `value-compose`;
-  `combineAddress` is gone. `getReason` → generic templates keyed by
-  `strategy` + `valueType`. Composed values keep `S_prov` `0.85`.
-
 ### B6a — Scan captures the section heading
 Files: `popup.js` (`scanPageFields`), `field-matcher.js`
 Tests: `tests/field-matcher.test.js` (descriptor passthrough)

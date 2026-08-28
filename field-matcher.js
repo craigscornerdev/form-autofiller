@@ -13,6 +13,9 @@ const Gradient = typeof module !== 'undefined' && module.exports
 const LabelNormalizerClass = typeof module !== 'undefined' && module.exports
   ? require('./label-normalizer')
   : globalThis.CharityLabelNormalizer;
+const ValueComposeModule = typeof module !== 'undefined' && module.exports
+  ? require('./value-compose')
+  : globalThis.ValueCompose;
 
 class FieldMatcher {
   constructor(profile = {}) {
@@ -181,10 +184,6 @@ class FieldMatcher {
       }
     }
 
-    if (profileField === "organizationAddress") {
-      return this.profile.organizationAddress || {};
-    }
-
     return undefined;
   }
 
@@ -230,11 +229,28 @@ class FieldMatcher {
       return profileValue;
     }
 
-    if (rule.profileField === "organizationAddress" && profileValue && typeof profileValue === "object") {
-      return this.combineAddress(profileValue);
+    if (rule.compose) {
+      return this.composeValue(rule);
     }
 
     return profileValue;
+  }
+
+  // A composite concept's value is assembled from its part concepts: read each
+  // part's profile value, then hand the map to the concept's named joiner.
+  composeValue(rule) {
+    const partMap = {};
+    (rule.compose.parts || []).forEach((partId) => {
+      const partRule = this.rules.find((candidate) => candidate.conceptId === partId);
+      const partValue = partRule
+        ? this.getProfileValue(partRule.profileField, partRule)
+        : this.getProfileValue(partId);
+      if (partValue !== undefined && partValue !== null) {
+        partMap[partId] = partValue;
+      }
+    });
+
+    return ValueComposeModule.compose(rule.compose, partMap);
   }
 
   pickSelectOption(field, rule, profileValue) {
@@ -268,34 +284,6 @@ class FieldMatcher {
     return bestScore >= 0.2 ? bestOption : null;
   }
 
-  combineAddress(address) {
-    if (!address || typeof address !== "object") {
-      return "";
-    }
-
-    const city = address.city ? String(address.city).trim() : "";
-    const state = address.state ? String(address.state).trim() : "";
-    const postalCode = address.postalCode ? String(address.postalCode).trim() : "";
-    const street = address.street ? String(address.street).trim() : "";
-
-    const cityStatePostalParts = [];
-    if (city) {
-      cityStatePostalParts.push(city);
-    }
-
-    const statePostal = [state, postalCode].filter((part) => part).join(" ");
-    if (statePostal) {
-      cityStatePostalParts.push(statePostal);
-    }
-
-    const cityStatePostal = cityStatePostalParts.join(", ");
-    const combined = [street, cityStatePostal].filter((part) => part).join(", ");
-
-    return combined || [street, city, state, postalCode]
-      .filter((part) => part)
-      .join(", ");
-  }
-
   scoreSelectOption(labelText, optionText) {
     if (!labelText || !optionText) {
       return 0;
@@ -309,35 +297,55 @@ class FieldMatcher {
     return intersection / union;
   }
 
+  // Generic reason templates keyed by how the label matched (`strategy`) and the
+  // shape of the resolved value (`valueType`). No domain wording.
   getReason(field, rule) {
-    if (field.tagName === "SELECT" || field.type === "select") {
-      return `select option matched for ${rule.source}.`;
-    }
-
-    if (rule.profileField === "organizationAddress" || rule.profileField === "organizationAddress.street" || rule.profileField === "organizationAddress.city" || rule.profileField === "organizationAddress.state" || rule.profileField === "organizationAddress.postalCode" || rule.profileField === "organizationAddress.country") {
-      return `combined address data matched for ${rule.source}.`;
-    }
-
     const labelMatch = rule._labelMatch || {};
+
     if (labelMatch.strategy === "fuzzy") {
       return labelMatch.strength >= 0.9
         ? `High-confidence fuzzy match for ${rule.source}.`
         : `Possible match for ${rule.source} — please review.`;
     }
 
-    return `Exact alias match for ${rule.source}.`;
+    const opener = labelMatch.strategy === "autocomplete"
+      ? `Autocomplete token match for ${rule.source}`
+      : `Exact alias match for ${rule.source}`;
+
+    const valueType = this.resolvedValueType(field, rule);
+    if (valueType === "enum") {
+      return `${opener}, matched to a select option.`;
+    }
+    if (valueType === "composite") {
+      return `${opener}, value composed from your saved details.`;
+    }
+
+    return `${opener}.`;
   }
 
   valueProvenance(field, rule) {
-    if (field.tagName === "SELECT" || field.type === "select") {
+    if (this.resolvedValueType(field, rule) === "enum") {
       return { kind: "derived", factor: 0.85, detail: "select-option" };
     }
 
-    if (rule.profileField === "organizationAddress") {
+    if (rule.compose) {
       return { kind: "derived", factor: 0.85, detail: "composed" };
     }
 
     return { kind: "profile-field", factor: 1, detail: "scalar" };
+  }
+
+  // The value shape actually produced: a `<select>` control resolves to a picked
+  // option (`enum`), a `compose` rule to a joined composite, anything else is a
+  // direct `scalar` profile value.
+  resolvedValueType(field, rule) {
+    if (field.tagName === "SELECT" || field.type === "select") {
+      return "enum";
+    }
+    if (rule.compose) {
+      return "composite";
+    }
+    return "scalar";
   }
 
 }

@@ -118,11 +118,12 @@ describe('FieldMatcher', () => {
     expect(fm.labelNormalizer.normalize('State / Province')).toBe('state province');
   });
 
-  test('getMatchingRule can combine split address data for a single address field', () => {
+  test('getMatchingRule threads the composite concept spec onto the rule', () => {
     const fm = new FieldMatcher({});
     const rule = fm.getMatchingRule('Mailing Address');
     expect(rule).not.toBeNull();
-    expect(rule.profileField).toBe('organizationAddress');
+    expect(rule.compose).toMatchObject({ joiner: 'addressLine' });
+    expect(rule.compose.parts.length).toBeGreaterThanOrEqual(2);
   });
 
   test('getMatchingRule finds alias', () => {
@@ -203,7 +204,7 @@ describe('FieldMatcher', () => {
     expect(suggestion).toBeNull();
   });
 
-  test('getSuggestion combines split address data for a single address field', () => {
+  test('getSuggestion composes a single address field through the concept joiner', () => {
     const profile = {
       organizationAddress: {
         street: '123 Maple Lane',
@@ -218,7 +219,8 @@ describe('FieldMatcher', () => {
 
     expect(suggestion).not.toBeNull();
     expect(suggestion.value).toBe('123 Maple Lane, Riverdale, New York 10471');
-    expect(suggestion.reason).toContain('address');
+    expect(suggestion.reason).toContain('composed');
+    expect(suggestion.signals.provenance).toEqual({ kind: 'derived', factor: 0.85, detail: 'composed' });
   });
 
   test('getSuggestion uses split city data when city is matched directly', () => {

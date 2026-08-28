@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787917682.4155037,
-    "ast_hash": "d0e15f7fec1f62fa15d694687b43f122",
+    "mtime": 1787923364.425878,
+    "ast_hash": "d69a08045c7e5a3221cc4177dd320a69",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787917720.286494,
-    "ast_hash": "1fb9183b31f64c173aee60125e37a354",
+    "mtime": 1787923347.8492727,
+    "ast_hash": "b730ee7f48ec74a98903e4cc531ff8c2",
     "semantic_hash": ""
   },
   ".agent.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787922549.194237,
-    "ast_hash": "e40e9ff96cd0ffd5a9afb48005747508",
+    "mtime": 1787923390.0416512,
+    "ast_hash": "32fee042e9f6166661d5adce485a7fa0",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787922561.4952424,
-    "ast_hash": "fb0d832a17a9cf9d12be5ce17bf23fbe",
+    "mtime": 1787923396.2665894,
+    "ast_hash": "e53a67b7a97cd94c5645d402da1aeb1e",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787917639.9944153,
-    "ast_hash": "29d1a4d1b3ac87a6a5afdc09af75011a",
+    "mtime": 1787923322.9907749,
+    "ast_hash": "0f578793d7f2df198db75b011e55b398",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "tests/confidence-model.test.js": {
-    "mtime": 1787878100.2910466,
-    "ast_hash": "cb65be7300befc118a54f2bd7cde6433",
+    "mtime": 1787923329.7231479,
+    "ast_hash": "ca848f540be03cfaf73cb614147d7f30",
     "semantic_hash": ""
   },
   "concept-registry.js": {

@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-28)
 
 ## Corpus Check
-- 33 files · ~27,138 words
+- 33 files · ~27,333 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 287 nodes · 333 edges · 24 communities (21 shown, 3 thin omitted)
+- 287 nodes · 335 edges · 24 communities (21 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9ecfb117`
+- Built from commit: `a98bbeab`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -39,12 +39,12 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Changelog` - 21 edges
-2. `FieldMatcher` - 15 edges
+1. `Changelog` - 22 edges
+2. `FieldMatcher` - 16 edges
 3. `Design — Smart Form Autofiller` - 12 edges
 4. `FuzzyFieldMatcher` - 11 edges
 5. `Form Autofiller — Backlog` - 11 edges
-6. `Phase B — Generic concept model (remove the charity coupling)` - 11 edges
+6. `Phase B — Generic concept model (remove the charity coupling)` - 9 edges
 7. `Phase D — Capture how the user fills forms` - 9 edges
 8. `scanCurrentPage()` - 8 edges
 9. `Phase C — Local embedding label matching` - 8 edges
@@ -64,7 +64,7 @@ Nodes (24): addFillResults(), addSuggestions(), fieldList, getActiveTab(), getPr
 
 ### Community 1 - "Community 1"
 Cohesion: 0.09
-Nodes (21): 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers, 0.11.0 — 2026-08-27 — Numeric confidence through the matcher, 0.12.0 — 2026-08-27 — Render the confidence spectrum, 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest, 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader, 0.15.0 — 2026-08-28 — One canonical label normalizer, 0.16.0 — 2026-08-28 — Matcher runs on the concept registry, 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight (+13 more)
+Nodes (22): 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers, 0.11.0 — 2026-08-27 — Numeric confidence through the matcher, 0.12.0 — 2026-08-27 — Render the confidence spectrum, 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest, 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader, 0.15.0 — 2026-08-28 — One canonical label normalizer, 0.16.0 — 2026-08-28 — Matcher runs on the concept registry, 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight (+14 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.33
@@ -103,8 +103,8 @@ Cohesion: 0.33
 Nodes (5): Coding standards, Per-step workflow, Project Conventions, Tools, Where things live
 
 ### Community 16 - "Community 16"
-Cohesion: 0.07
-Nodes (28): B5a — Composite joiners, B5b — Matcher resolves composites from the concept, B6a — Scan captures the section heading, B6b ▶ — Heading drives the context multiplier, B7a — Profile store keyed by concept id, B7b ▶ — Generated profile UI, B8a — Neutral global names, B8b — Matcher filename + one version string (+20 more)
+Cohesion: 0.08
+Nodes (25): C1 — esbuild + service-worker skeleton, C2a — Vendor the model, C2b ▶ — Embedder module (local model, not in the matcher path yet), C3 — Build-time alias vectors, C4a — Embedding scorer, C4b ▶ — Embedding tier in the cascade + fallback, C5 — Drop Fuse.js, E1a — learnedEntries in the cascade (+17 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.09
@@ -131,28 +131,28 @@ Cohesion: 0.29
 Nodes (6): charityConcepts, EVENT_HINTS, EVENT_ORGANIZER_HINTS, ORG_ADDRESS_HINTS, ORG_CONTACT_HINTS, ORG_HINTS
 
 ### Community 23 - "Community 23"
-Cohesion: 0.25
-Nodes (8): E1a — learnedEntries in the cascade, E1b ▶ — Popup feeds the matcher from history, E2 — Provenance strength function, E3 — Conflict UX, E4a — Promotion state machine, E4b ▶ — Promoted concepts in the registry + popup, E5 ▶ — Diagnostics surface, Phase E — Learning integration, custom fields, diagnostics
+Cohesion: 0.22
+Nodes (9): B6a — Scan captures the section heading, B6b ▶ — Heading drives the context multiplier, B7a — Profile store keyed by concept id, B7b ▶ — Generated profile UI, B8a — Neutral global names, B8b — Matcher filename + one version string, B9a — Personal preset + the generic guard, B9b ▶ — Preset toggle proves generalization (+1 more)
 
 ## Knowledge Gaps
-- **153 isolated node(s):** `VALUE_TYPES`, `FILL_POLICIES`, `ConceptRegistry`, `ConfidenceGradient`, `FillPolicy` (+148 more)
+- **152 isolated node(s):** `VALUE_TYPES`, `FILL_POLICIES`, `ConceptRegistry`, `ConfidenceGradient`, `FillPolicy` (+147 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Form Autofiller — Backlog` connect `Community 16` to `Community 11`, `Community 23`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Why does `FieldMatcher` connect `Community 4` to `Community 13`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **Why does `Form Autofiller — Backlog` connect `Community 16` to `Community 11`, `Community 23`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `VALUE_TYPES`, `FILL_POLICIES`, `ConceptRegistry` to the rest of the system?**
-  _153 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _152 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.08522727272727272 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
 - **Should `Community 13` be split into smaller, more focused modules?**
   _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
 - **Should `Community 16` be split into smaller, more focused modules?**
-  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
