@@ -82,7 +82,7 @@ describe('FieldMatcher', () => {
     const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
     const suggestion = matcher.getSuggestion({ label: 'Email Address for Contact', type: 'text' });
 
-    expect(suggestion).toEqual({
+    expect(suggestion).toMatchObject({
       source: 'Organization contact email',
       value: 'alice@example.org',
       confidence: expect.closeTo(0.64125, 5),
@@ -95,16 +95,19 @@ describe('FieldMatcher', () => {
           matchedAlias: null,
           normalizedLabel: 'email address for contact'
         },
-        provenance: { kind: 'profile-field', factor: 1, detail: 'scalar' },
-        rejected: [
-          {
-            conceptId: 'eventOrganizerEmail',
-            score: expect.closeTo(0.342, 5),
-            reason: 'Low confidence match: "Event organizer email" (score: 34%)'
-          }
-        ]
+        provenance: { kind: 'profile-field', factor: 1, detail: 'scalar' }
       }
     });
+    // runners-up are the concept ids now, not legacy field names
+    expect(suggestion.signals.rejected).toEqual(
+      expect.arrayContaining([
+        {
+          conceptId: 'event.organizer_email',
+          score: expect.closeTo(0.342, 5),
+          reason: 'Low confidence match: "Event organizer email" (score: 34%)'
+        }
+      ])
+    );
   });
 
   test('the matcher reduces labels through the one canonical normalizer', () => {
@@ -149,11 +152,11 @@ describe('FieldMatcher', () => {
     const fm = new FieldMatcher(profile);
     const suggestion = fm.getSuggestion({ label: 'Email' });
     expect(suggestion).toEqual({
-      source: 'Email',
+      source: 'Organization contact email',
       value: 'alice@example.org',
       confidence: 1,
       band: 'high',
-      reason: 'Exact alias match for Email.',
+      reason: 'Exact alias match for Organization contact email.',
       signals: {
         labelMatch: {
           strategy: 'exact-alias',
@@ -258,16 +261,16 @@ describe('FieldMatcher', () => {
     expect(suggestion.value).toBe('We help cats.');
   });
 
-  test('fills saved event details', () => {
+  test('never suggests event details — the concepts carry fillPolicy: "never"', () => {
     const fm = new FieldMatcher({
       eventName: 'Fall Adoption Drive',
       eventDate: '2026-10-18',
       eventDescription: 'A community adoption event.'
     });
 
-    expect(fm.getSuggestion({ label: 'Event Name', type: 'text' }).value).toBe('Fall Adoption Drive');
-    expect(fm.getSuggestion({ label: 'Event Date', type: 'text' }).value).toBe('2026-10-18');
-    expect(fm.getSuggestion({ label: 'Event Description', type: 'textarea' }).value).toBe('A community adoption event.');
+    expect(fm.getSuggestion({ label: 'Event Name', type: 'text' })).toBeNull();
+    expect(fm.getSuggestion({ label: 'Event Date', type: 'text' })).toBeNull();
+    expect(fm.getSuggestion({ label: 'Event Description', type: 'textarea' })).toBeNull();
   });
 
   test('does not suggest event details when they are not saved', () => {

@@ -9,10 +9,9 @@
  * - Field type compatibility checking
  */
 
-const fuzzySemantics = typeof module !== 'undefined' && module.exports
-  ? require('./field-semantics')
-  : globalThis.CharityFieldSemantics;
-const { FieldSemantics: FuzzyFieldSemantics } = fuzzySemantics;
+const FuzzyConceptRegistry = typeof module !== 'undefined' && module.exports
+  ? require('./concept-registry')
+  : globalThis.ConceptRegistry;
 const Fuse = typeof module !== 'undefined' && module.exports
   ? require('fuse.js')
   : globalThis.Fuse;
@@ -53,10 +52,12 @@ class FuzzyFieldMatcher {
     // normalized form labels are reduced to before matching.
     this.labelNormalizer = new FuzzyLabelNormalizerClass();
     this.fieldDefs = {};
-    Object.entries(FuzzyFieldSemantics).forEach(([fieldName, fieldDef]) => {
-      this.fieldDefs[fieldName] = {
-        ...fieldDef,
-        aliases: (fieldDef.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
+    FuzzyConceptRegistry.load(['charity']).forEach((concept) => {
+      this.fieldDefs[concept.id] = {
+        source: concept.label,
+        fieldType: concept.controlTypes[0],
+        neverAutoFill: concept.fillPolicy === 'never',
+        aliases: (concept.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
       };
     });
 

@@ -3,6 +3,15 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.16.0 — 2026-08-28 — Matcher runs on the concept registry
+
+- `field-matcher.js` and `fuzzy-field-matcher.js` build their rules from `concept-registry.load(['charity'])` — the unioned `base` + `charity` `FieldConcept[]` — instead of a hand-built field registry. `field-semantics.js` and `profile-data-structure.js` are gone; `popup.html` loads `concept-registry.js` + `presets/base.js` + `presets/charity.js` ahead of the matchers.
+- Label → concept: the autocomplete tier matches any `concept.autocompleteTokens` entry (not a fixed four-token map); the exact-alias and autocomplete tiers resolve an alias/token collision to the concept defined later (charity refines base), the same "last wins" rule the registry union uses.
+- `getSuggestion` gates on the concept: `fillPolicy: "never"` or `sensitive: true` yields no suggestion, so the `event.name` / `event.date` / `event.description` concepts never autofill. `FieldMatcher.isNeverAutoFillRule` is removed.
+- `presets/charity.js` gains `org.address.full` (a `composite` concept answering to "address" / "mailing address" / "street address", composed from the address parts) and a `profileBindings` map — the transitional concept-id → saved-profile-location bridge the matcher reads until the profile store is keyed by concept id.
+- Scanning `demos/spectrum-demo.html` with the sample profile is unchanged from Phase A: eight fields solid green, organization type / reworded contact email / composed mailing address in the review band, favourite colour / referral source dashed-red blank, the pre-filled website untouched.
+- Tests: `tests/fuzzy-field-matcher.test.js` reworked to concept ids and the `context: "unknown"` call shape; `tests/presets-charity.test.js` pins the vocabulary contract directly (no `field-semantics` dependency); `tests/field-matcher.test.js` updated for concept-id runners-up and the event-field gate; `tests/field-semantics.test.js` removed.
+
 ## 0.15.0 — 2026-08-28 — One canonical label normalizer
 
 - `label-normalizer.js` now carries a dual-export footer (`module.exports` + `globalThis.CharityLabelNormalizer`) and `popup.html` loads it ahead of the matchers, so the same normalizer runs in the extension and in Node tests.

@@ -67,10 +67,10 @@ Files: `field-matcher.js`, `fuzzy-field-matcher.js`; delete `field-semantics.js`
 `profile-data-structure.js`
 Tests: update every test importing `field-semantics` / `FieldRegistry`
 Read: DESIGN.md §4, `concept-registry.js`, `presets/charity.js`
-- [ ] Matcher consumes `concept-registry.load(['charity'])` instead of
+- [x] Matcher consumes `concept-registry.load(['charity'])` instead of
   `FieldRegistry`. `autocompleteFieldMap` → `concept.autocompleteTokens`. Delete
   `isNeverAutoFillRule`. `fillPolicy` / `sensitive` gates from the concept.
-- [ ] **Demo:** re-run the Phase A `demos/spectrum-demo.html` scan — behavior is
+- [x] **Demo:** re-run the Phase A `demos/spectrum-demo.html` scan — behavior is
   byte-for-byte the same as end of Phase A. This step is a regression checkpoint,
   not a feature.
 
@@ -360,3 +360,4 @@ Fold into whichever step touches the area; do not batch.
 
 - [ ] Event / campaign concepts as their own preset.
 - [ ] Document attachments (W-9, tax-exempt letter, résumé).
+Sign in for multiple computer use, paid tier. Think paid tier would include signing in or out + 

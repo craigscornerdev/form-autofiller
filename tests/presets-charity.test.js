@@ -1,39 +1,113 @@
 /**
- * Tests for B2: the charity vocabulary ported to a preset (DESIGN.md §3.1).
+ * Tests for the charity preset (DESIGN.md §3.1).
  *
- * `presets/charity.js` must carry every field the current `FieldSemantics`
- * registry describes — same aliases, same select-option mappings, and every
- * `neverAutoFill` field expressed as `fillPolicy: "never"`. It declares
- * `extends: "base"` and is not consumed by the matcher yet.
+ * `presets/charity.js` is the charity/nonprofit vocabulary the matcher runs on.
+ * These pin the vocabulary contract: the labels and aliases every ported concept
+ * must keep answering to, the select-option mappings, and the `fillPolicy: "never"`
+ * concepts. It declares `extends: "base"`.
  */
 
 const charityConcepts = require('../presets/charity');
-const { FieldSemantics } = require('../field-semantics');
 const { load, validateConcept } = require('../concept-registry');
 
-/** The current-registry field → ported concept id. Every semantics key appears. */
-const CONCEPT_ID_FOR = {
-  organizationName: 'org.legal_name',
-  organizationType: 'org.type',
-  ein: 'org.ein',
-  yearFounded: 'org.year_founded',
-  missionStatement: 'org.mission',
-  organizationStreet: 'org.address.line1',
-  organizationCity: 'org.address.city',
-  organizationState: 'org.address.region',
-  organizationPostalCode: 'org.address.postal_code',
-  organizationCountry: 'org.address.country',
-  organizationContactName: 'org.contact.full_name',
-  organizationContactTitle: 'org.contact.title',
-  organizationContactEmail: 'org.contact.email',
-  organizationContactPhone: 'org.contact.phone',
-  organizationWebsite: 'org.website',
-  eventName: 'event.name',
-  eventOrganizerName: 'event.organizer_name',
-  eventOrganizerEmail: 'event.organizer_email',
-  eventOrganizerPhone: 'event.organizer_phone',
-  eventDate: 'event.date',
-  eventDescription: 'event.description'
+/**
+ * The vocabulary each concept must carry. Labels shown in the profile UI;
+ * `aliases` are the wordings a form label may use; `fillPolicy` gates autofill.
+ */
+const VOCABULARY = {
+  'org.legal_name': {
+    label: 'Organization name',
+    aliases: ['organization name', 'name of organization', 'charity name', 'nonprofit name', 'non profit name', 'organization legal name']
+  },
+  'org.type': {
+    label: 'Organization type',
+    aliases: ['organization type', 'type of organization', 'charity type', 'nonprofit type'],
+    enumValues: {
+      'non-profit': ['nonprofit', 'non-profit', 'npo'],
+      charity: ['charity', 'registered charity'],
+      community: ['community', 'community organization'],
+      faith: ['faith-based', 'faith based', 'religious']
+    }
+  },
+  'org.ein': {
+    label: 'EIN / Tax ID',
+    aliases: ['ein', 'ein number', 'ein tax id', 'employer identification number', 'tax id', 'tax id number', 'federal tax id']
+  },
+  'org.year_founded': {
+    label: 'Year founded',
+    aliases: ['year founded', 'founded', 'year established', 'established']
+  },
+  'org.mission': {
+    label: 'Mission statement',
+    aliases: ['mission statement', 'mission', 'organization mission', 'our mission']
+  },
+  'org.address.line1': {
+    label: 'Organization street address',
+    aliases: ['street address', 'street', 'address line', 'address line 1', 'organization address', 'organization street']
+  },
+  'org.address.city': {
+    label: 'Organization city',
+    aliases: ['city', 'organization city']
+  },
+  'org.address.region': {
+    label: 'Organization state / province',
+    aliases: ['state', 'state/province', 'state province', 'state or province', 'province', 'organization state']
+  },
+  'org.address.postal_code': {
+    label: 'Organization postal code',
+    aliases: ['postal code', 'zip code', 'zip', 'postcode', 'organization postal code']
+  },
+  'org.address.country': {
+    label: 'Organization country',
+    aliases: ['country', 'organization country', 'country of operation']
+  },
+  'org.contact.full_name': {
+    label: 'Organization contact name',
+    aliases: ['primary contact name', 'contact name', 'organization contact name', 'contact person', 'primary contact']
+  },
+  'org.contact.title': {
+    label: 'Organization contact title',
+    aliases: ['contact title', 'title', 'position', 'contact position', 'organization contact title']
+  },
+  'org.contact.email': {
+    label: 'Organization contact email',
+    aliases: ['contact email', 'email', 'email address', 'contact email address', 'organization email', 'organization contact email']
+  },
+  'org.contact.phone': {
+    label: 'Organization contact phone',
+    aliases: ['contact phone', 'phone', 'phone number', 'contact phone number', 'telephone', 'contact telephone', 'organization phone', 'organization contact phone']
+  },
+  'org.website': {
+    label: 'Organization website',
+    aliases: ['website', 'organization website', 'charity website', 'nonprofit website', 'web site', 'organization web site']
+  },
+  'event.name': {
+    label: 'Event name',
+    aliases: ['event name', 'name of event', 'campaign name', 'event or campaign name'],
+    fillPolicy: 'never'
+  },
+  'event.organizer_name': {
+    label: 'Event organizer name',
+    aliases: ['organizer name', 'event organizer name', 'event organizer', 'organizer', 'coordinator name', 'event coordinator']
+  },
+  'event.organizer_email': {
+    label: 'Event organizer email',
+    aliases: ['organizer email', 'event organizer email', 'organizer email address', 'coordinator email']
+  },
+  'event.organizer_phone': {
+    label: 'Event organizer phone',
+    aliases: ['organizer phone', 'event organizer phone', 'organizer phone number', 'coordinator phone']
+  },
+  'event.date': {
+    label: 'Event date',
+    aliases: ['event date', 'date', 'date of event'],
+    fillPolicy: 'never'
+  },
+  'event.description': {
+    label: 'Event description',
+    aliases: ['event description', 'description', 'event details', 'about the event'],
+    fillPolicy: 'never'
+  }
 };
 
 const byId = new Map(charityConcepts.map((c) => [c.id, c]));
@@ -62,47 +136,39 @@ describe('presets/charity.js — shape', () => {
   });
 });
 
-describe('presets/charity.js — parity with the current registry', () => {
-  test('every FieldSemantics field is ported to a concept', () => {
-    for (const key of Object.keys(FieldSemantics)) {
-      expect(CONCEPT_ID_FOR[key]).toBeDefined();
-      expect(byId.has(CONCEPT_ID_FOR[key])).toBe(true);
-    }
-    // no orphan mappings
-    expect(Object.keys(CONCEPT_ID_FOR).sort())
-      .toEqual(Object.keys(FieldSemantics).sort());
-  });
-
-  test('every original alias is preserved on the ported concept', () => {
-    for (const [key, id] of Object.entries(CONCEPT_ID_FOR)) {
-      const concept = byId.get(id);
-      expect(concept.aliases).toEqual(
-        expect.arrayContaining(FieldSemantics[key].aliases)
-      );
+describe('presets/charity.js — vocabulary contract', () => {
+  test('every contract concept is present in the preset', () => {
+    for (const id of Object.keys(VOCABULARY)) {
+      expect(byId.has(id)).toBe(true);
     }
   });
 
-  test('the source label carries over as the concept label', () => {
-    for (const [key, id] of Object.entries(CONCEPT_ID_FOR)) {
-      expect(byId.get(id).label).toBe(FieldSemantics[key].source);
+  test('every contract alias is carried on its concept', () => {
+    for (const [id, spec] of Object.entries(VOCABULARY)) {
+      expect(byId.get(id).aliases).toEqual(expect.arrayContaining(spec.aliases));
     }
   });
 
-  test('neverAutoFill → fillPolicy: "never"; the rest stay auto', () => {
-    for (const [key, id] of Object.entries(CONCEPT_ID_FOR)) {
-      const expected = FieldSemantics[key].neverAutoFill ? 'never' : 'auto';
-      expect(byId.get(id).fillPolicy).toBe(expected);
+  test('the profile-UI label is carried on its concept', () => {
+    for (const [id, spec] of Object.entries(VOCABULARY)) {
+      expect(byId.get(id).label).toBe(spec.label);
+    }
+  });
+
+  test('fillPolicy is "never" for the event concepts, "auto" otherwise', () => {
+    for (const [id, spec] of Object.entries(VOCABULARY)) {
+      expect(byId.get(id).fillPolicy).toBe(spec.fillPolicy || 'auto');
     }
     expect(byId.get('event.name').fillPolicy).toBe('never');
     expect(byId.get('event.date').fillPolicy).toBe('never');
     expect(byId.get('event.description').fillPolicy).toBe('never');
   });
 
-  test('select options carry over as enumValues, aliases intact', () => {
+  test('select options are expressed as enumValues, aliases intact', () => {
     const orgType = byId.get('org.type');
     expect(orgType.valueType).toBe('enum');
     expect(orgType.controlTypes).toEqual(['select']);
-    for (const [value, aliases] of Object.entries(FieldSemantics.organizationType.selectOptions)) {
+    for (const [value, aliases] of Object.entries(VOCABULARY['org.type'].enumValues)) {
       const entry = orgType.enumValues.find((e) => e.value === value);
       expect(entry).toBeDefined();
       expect(entry.aliases).toEqual(expect.arrayContaining(aliases));

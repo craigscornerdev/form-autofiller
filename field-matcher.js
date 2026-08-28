@@ -1,7 +1,9 @@
-const semantics = typeof module !== 'undefined' && module.exports
-  ? require('./field-semantics')
-  : globalThis.CharityFieldSemantics;
-const fieldRegistry = semantics.FieldRegistry;
+const ConceptRegistryModule = typeof module !== 'undefined' && module.exports
+  ? require('./concept-registry')
+  : globalThis.ConceptRegistry;
+const CharityPresetModule = typeof module !== 'undefined' && module.exports
+  ? require('./presets/charity')
+  : globalThis.AutofillPresetCharity;
 const FuzzyFieldMatcherClass = typeof module !== 'undefined' && module.exports
   ? require('./fuzzy-field-matcher')
   : globalThis.FuzzyFieldMatcher;
@@ -16,10 +18,28 @@ class FieldMatcher {
   constructor(profile = {}) {
     this.profile = profile;
     this.labelNormalizer = new LabelNormalizerClass();
-    this.rules = fieldRegistry.map((rule) => ({
-      ...rule,
-      aliases: (rule.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
-    }));
+
+    const activeRegistry = ConceptRegistryModule.load(['charity']);
+    const bindings = (CharityPresetModule && CharityPresetModule.profileBindings) || {};
+
+    this.rules = activeRegistry.map((concept) => {
+      const binding = bindings[concept.id] || {};
+      return {
+        conceptId: concept.id,
+        fieldName: concept.id,
+        source: concept.label,
+        aliases: (concept.aliases || []).map((alias) => this.labelNormalizer.normalize(alias)),
+        autocompleteTokens: concept.autocompleteTokens || [],
+        controlTypes: concept.controlTypes || [],
+        valueType: concept.valueType,
+        fillPolicy: concept.fillPolicy,
+        sensitive: concept.sensitive === true,
+        enumValues: concept.enumValues || null,
+        compose: concept.compose || null,
+        profileField: binding.profileField,
+        profilePath: binding.profilePath || null
+      };
+    });
     this.fuzzyMatcher = new FuzzyFieldMatcherClass();
   }
 
@@ -28,6 +48,10 @@ class FieldMatcher {
     const rule = this.getMatchingRule(label, field.autocomplete, field.type);
 
     if (!rule) {
+      return null;
+    }
+
+    if (rule.fillPolicy === "never" || rule.sensitive) {
       return null;
     }
 
@@ -73,20 +97,11 @@ class FieldMatcher {
   getMatchingRule(label, autocomplete = "", fieldType = "") {
     const normalizedLabel = this.labelNormalizer.normalize(label);
 
-    const autocompleteFieldMap = {
-      country: "organizationCountry",
-      "country-name": "organizationCountry",
-      "address-level1": "organizationState",
-      "address-level2": "organizationCity"
-    };
-
-    if (autocompleteFieldMap[autocomplete]) {
-      const semanticFieldName = autocompleteFieldMap[autocomplete];
-      const semanticRule = this.rules.find((rule) => rule.fieldName === semanticFieldName);
-
-      if (semanticRule) {
+    if (autocomplete) {
+      const autocompleteRule = this.findLastRule((rule) => rule.autocompleteTokens.includes(autocomplete));
+      if (autocompleteRule) {
         return {
-          ...semanticRule,
+          ...autocompleteRule,
           _labelMatch: { strategy: "autocomplete", strength: 1, matchedAlias: autocomplete, normalizedLabel },
           _rejected: []
         };
@@ -97,7 +112,7 @@ class FieldMatcher {
       return null;
     }
 
-    const exactRule = this.rules.find((rule) => rule.aliases.includes(normalizedLabel));
+    const exactRule = this.findLastRule((rule) => rule.aliases.includes(normalizedLabel));
     if (exactRule) {
       return {
         ...exactRule,
@@ -107,6 +122,17 @@ class FieldMatcher {
     }
 
     return this.getFuzzyMatchingRule(normalizedLabel, fieldType);
+  }
+
+  // Later presets refine earlier ones, so a concept defined later wins an
+  // alias / autocomplete-token collision (same convention as the registry union).
+  findLastRule(predicate) {
+    for (let i = this.rules.length - 1; i >= 0; i -= 1) {
+      if (predicate(this.rules[i])) {
+        return this.rules[i];
+      }
+    }
+    return null;
   }
 
   getFuzzyMatchingRule(normalizedLabel, fieldType) {
@@ -312,18 +338,6 @@ class FieldMatcher {
     }
 
     return { kind: "profile-field", factor: 1, detail: "scalar" };
-  }
-
-  isNeverAutoFillRule(profileField) {
-    return [
-      "eventName",
-      "eventDate",
-      "eventDescription",
-      "shippingDate",
-      "event.name",
-      "event.date",
-      "event.description"
-    ].includes(profileField);
   }
 
 }

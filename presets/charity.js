@@ -146,6 +146,25 @@ const charityConcepts = [
     fillPolicy: 'auto'
   },
   {
+    id: 'org.address.full',
+    label: 'Organization address',
+    aliases: [
+      'address', 'organization address', 'mailing address', 'street address',
+      'organization street address'
+    ],
+    groupHints: ORG_ADDRESS_HINTS,
+    valueType: 'composite',
+    controlTypes: ['text', 'textarea'],
+    fillPolicy: 'auto',
+    compose: {
+      parts: [
+        'org.address.line1', 'org.address.city',
+        'org.address.region', 'org.address.postal_code'
+      ],
+      joiner: 'addressLine'
+    }
+  },
+  {
     id: 'org.contact.full_name',
     label: 'Organization contact name',
     aliases: [
@@ -277,6 +296,52 @@ const charityConcepts = [
 ];
 
 charityConcepts.extends = 'base';
+
+/**
+ * Where each active concept reads its value from in the saved profile.
+ *
+ * A transitional bridge: the profile is still the nested `organization.*` /
+ * `organizationContact.*` / `organizationAddress.*` object, so the matcher needs
+ * a concept-id → profile-location map until the store is keyed by concept id.
+ * `profilePath` is the nested location; `profileField` is the flat fallback the
+ * matcher also accepts. Covers the `base` concepts too, since they are unioned
+ * in under `charity`.
+ */
+charityConcepts.profileBindings = {
+  'contact.full_name': { profilePath: 'organizationContact.name', profileField: 'organizationContactName' },
+  'contact.first_name': { profilePath: 'organizationContact.firstName', profileField: 'firstName' },
+  'contact.last_name': { profilePath: 'organizationContact.lastName', profileField: 'lastName' },
+  'contact.email': { profilePath: 'organizationContact.email', profileField: 'email' },
+  'contact.phone': { profilePath: 'organizationContact.phone', profileField: 'phone' },
+  'address.line1': { profilePath: 'organizationAddress.street', profileField: 'organizationAddress.street' },
+  'address.line2': { profilePath: 'organizationAddress.line2', profileField: 'organizationAddress.line2' },
+  'address.city': { profilePath: 'organizationAddress.city', profileField: 'organizationAddress.city' },
+  'address.region': { profilePath: 'organizationAddress.state', profileField: 'organizationAddress.state' },
+  'address.postal_code': { profilePath: 'organizationAddress.postalCode', profileField: 'organizationAddress.postalCode' },
+  'address.country': { profilePath: 'organizationAddress.country', profileField: 'organizationAddress.country' },
+  'org.legal_name': { profilePath: 'organization.name', profileField: 'organizationName' },
+  'org.type': { profilePath: 'organization.type', profileField: 'organizationType' },
+  'org.ein': { profilePath: 'organization.ein', profileField: 'ein' },
+  'org.year_founded': { profilePath: 'organization.yearFounded', profileField: 'yearFounded' },
+  'org.mission': { profilePath: 'organization.missionStatement', profileField: 'missionStatement' },
+  'org.address.line1': { profilePath: 'organizationAddress.street', profileField: 'organizationAddress.street' },
+  'org.address.city': { profilePath: 'organizationAddress.city', profileField: 'organizationAddress.city' },
+  'org.address.region': { profilePath: 'organizationAddress.state', profileField: 'organizationAddress.state' },
+  'org.address.postal_code': { profilePath: 'organizationAddress.postalCode', profileField: 'organizationAddress.postalCode' },
+  'org.address.country': { profilePath: 'organizationAddress.country', profileField: 'organizationAddress.country' },
+  'org.address.full': { profilePath: 'organizationAddress', profileField: 'organizationAddress' },
+  'org.contact.full_name': { profilePath: 'organizationContact.name', profileField: 'organizationContactName' },
+  'org.contact.title': { profilePath: 'organizationContact.title', profileField: 'position' },
+  'org.contact.email': { profilePath: 'organizationContact.email', profileField: 'email' },
+  'org.contact.phone': { profilePath: 'organizationContact.phone', profileField: 'phone' },
+  'org.website': { profilePath: 'organization.website', profileField: 'website' },
+  'event.organizer_name': { profilePath: 'eventOrganizer.name', profileField: 'eventOrganizerName' },
+  'event.organizer_email': { profilePath: 'eventOrganizer.email', profileField: 'eventOrganizerEmail' },
+  'event.organizer_phone': { profilePath: 'eventOrganizer.phone', profileField: 'eventOrganizerPhone' },
+  'event.name': { profilePath: null, profileField: 'eventName' },
+  'event.date': { profilePath: null, profileField: 'eventDate' },
+  'event.description': { profilePath: null, profileField: 'eventDescription' }
+};
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = charityConcepts;

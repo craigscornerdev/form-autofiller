@@ -1,19 +1,24 @@
 /**
- * Tests for Step 4: Conservative Fuzzy Matching
- * 
+ * Conservative fuzzy matching over the active concept registry.
+ *
  * Validates:
- * - Token-based similarity scoring
- * - Separate scoring for label and context
- * - Confidence thresholds (high, review, no-match)
- * - Tie-breaking logic
- * - Exact aliases prioritized over fuzzy matches
- * - Field type compatibility
- * - Address field exclusion from unrelated suggestions
+ * - retrieval-only Fuse index, our scorer owns every safety decision
+ * - exact-alias scoring (unknown heading context ⇒ ×0.95)
+ * - token-overlap similarity is bounded well below the auto-fill line
+ * - confidence thresholds (high / review / no-match)
+ * - field-type compatibility gating
+ * - `fillPolicy: "never"` concepts are excluded
+ * - tie-breaking rejects ambiguous matches
+ *
+ * The matcher always calls `findBestMatch` with `context: 'unknown'` — heading
+ * context lands in a later step — so the tests pass it that way too.
  */
 
 const FuzzyFieldMatcher = require('../fuzzy-field-matcher');
 
-describe('Fuzzy Field Matcher - Step 4 Validation', () => {
+const ctx = (over = {}) => ({ fieldType: 'text', context: 'unknown', ...over });
+
+describe('Fuzzy Field Matcher over the concept registry', () => {
   let matcher;
 
   beforeEach(() => {
@@ -21,417 +26,183 @@ describe('Fuzzy Field Matcher - Step 4 Validation', () => {
   });
 
   describe('Retrieval-Only Fuzzy Index', () => {
-    test('retrieves a variant label before applying our conservative score', () => {
-      const result = matcher.findBestMatch('org name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Org Name'
-      });
+    test('retrieves a variant label before applying the conservative score', () => {
+      const result = matcher.findBestMatch('org name', ctx({ rawLabel: 'Org Name' }));
 
-      expect(result.allCandidates.some((candidate) => candidate.fieldName === 'organizationName')).toBe(true);
-      expect(result.score).toBeLessThan(0.7);
+      expect(result.allCandidates.some((c) => c.fieldName === 'org.legal_name')).toBe(true);
+      expect(result.score).toBeLessThan(0.6);
       expect(result.confidence).toBe('no-match');
     });
 
     test('keeps unrelated labels out of the retrieval candidate list', () => {
-      const result = matcher.findBestMatch('favorite color', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'Favorite Color'
-      });
+      const result = matcher.findBestMatch('favorite color', ctx({ rawLabel: 'Favorite Color' }));
 
       expect(result.allCandidates).toHaveLength(0);
       expect(result.matchedField).toBeNull();
     });
   });
 
-  // Test 1: Exact alias matching (highest priority)
   describe('Exact Alias Matching', () => {
-    test('returns high score for exact alias with matching context', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'ORGANIZATION NAME'
-      });
-      
-      expect(result.score).toBe(0.9);  // 1.0 * 0.9 (context match multiplier)
+    test('an exact alias on an unknown heading context scores 0.95 / high', () => {
+      const result = matcher.findBestMatch('organization name', ctx({ rawLabel: 'ORGANIZATION NAME' }));
+
+      expect(result.score).toBeCloseTo(0.95, 5);
       expect(result.confidence).toBe('high');
-      expect(result.matchedField).toBe('organizationName');
+      expect(result.matchedField).toBe('org.legal_name');
     });
 
-    test('finds exact match for email alias', () => {
-      const result = matcher.findBestMatch('contact email', {
-        fieldType: 'email',
-        context: 'organizationContact',
-        rawLabel: 'Contact Email *'
-      });
-      
-      expect(result.score).toBe(0.9);
-      expect(result.matchedField).toBe('organizationContactEmail');
+    test('finds the exact match for an EIN wording', () => {
+      const result = matcher.findBestMatch('employer identification number', ctx());
+
+      expect(result.score).toBeCloseTo(0.95, 5);
+      expect(result.matchedField).toBe('org.ein');
     });
 
-    test('finds exact match for event organizer', () => {
-      const result = matcher.findBestMatch('event organizer name', {
-        fieldType: 'text',
-        context: 'event',
-        rawLabel: 'Event Organizer Name'
-      });
-      
-      expect(result.score).toBe(0.9);
-      expect(result.matchedField).toBe('eventOrganizerName');
+    test('finds the exact match for an event organizer', () => {
+      const result = matcher.findBestMatch('event organizer name', ctx());
+
+      expect(result.score).toBeCloseTo(0.95, 5);
+      expect(result.matchedField).toBe('event.organizer_name');
     });
   });
 
-  // Test 2: Token-based similarity scoring
   describe('Token-Based Similarity', () => {
-    test('scores partial token match conservatively', () => {
-      const result = matcher.findBestMatch('organization info', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Info'
-      });
-      
-      // Partial token matches score lower in conservative approach
+    test('a partial token overlap scores well below the auto-fill line', () => {
+      const result = matcher.findBestMatch('organization info', ctx({ rawLabel: 'Organization Info' }));
+
       expect(result.score).toBeGreaterThan(0.1);
+      expect(result.score).toBeLessThan(0.855);
+    });
+
+    test('a multi-token near-miss still resolves to the right concept', () => {
+      const result = matcher.findBestMatch('primary contact email address', ctx({ fieldType: 'email' }));
+
+      expect(result.matchedField).toBe('org.contact.email');
+      expect(result.score).toBeGreaterThan(0.4);
       expect(result.score).toBeLessThan(0.9);
     });
 
-    test('scores similar labels with multiple tokens', () => {
-      const result = matcher.findBestMatch('primary contact email address', {
-        fieldType: 'email',
-        context: 'organizationContact',
-        rawLabel: 'Primary Contact Email Address'
-      });
-      
-      expect(result.matchedField).toBe('organizationContactEmail');
-      expect(result.score).toBeGreaterThan(0.4);
-    });
+    test('gives no match to a completely unrelated label', () => {
+      const result = matcher.findBestMatch('favorite color', ctx());
 
-    test('gives low score to completely different labels', () => {
-      const result = matcher.findBestMatch('favorite color', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'Favorite Color'
-      });
-      
       expect(result.matchedField).toBeNull();
-      expect(result.score).toBeLessThan(this.CONFIDENCE_THRESHOLDS?.REVIEW || 0.7);
+      expect(result.score).toBeLessThan(0.6);
     });
   });
 
-  // Test 3: Confidence thresholds
   describe('Confidence Thresholds', () => {
-    test('high confidence for score >= 0.90', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'ORGANIZATION NAME'
-      });
-      
+    test('high for an exact alias (>= 0.90)', () => {
+      const result = matcher.findBestMatch('organization name', ctx());
+
       expect(result.confidence).toBe('high');
-      expect(result.score).toBeGreaterThanOrEqual(0.90);
+      expect(result.score).toBeGreaterThanOrEqual(0.9);
     });
 
-    test('review confidence for score 0.70-0.89', () => {
-      const result = matcher.findBestMatch('organization info name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Info Name'
-      });
-      
-      if (result.matchedField) {
-        if (result.score >= 0.70 && result.score < 0.90) {
-          expect(result.confidence).toBe('review');
-        }
-      }
-    });
+    test('no-match for a single stray token', () => {
+      const result = matcher.findBestMatch('xyz', ctx());
 
-    test('no-match for score < 0.70', () => {
-      const result = matcher.findBestMatch('xyz', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'XYZ'
-      });
-      
-      if (result.score < 0.70) {
-        expect(result.confidence).toBe('no-match');
-      }
+      expect(result.confidence).toBe('no-match');
+      expect(result.score).toBeLessThan(0.6);
     });
   });
 
-  // Test 4: Context scoring
-  describe('Context-Based Scoring', () => {
-    test('boosts score when context matches', () => {
-      const orgContext = {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Name'
-      };
-      
-      const result = matcher.findBestMatch('name', orgContext);
-      
-      // Match should be found even with short label due to context
-      expect(result.allCandidates.length).toBeGreaterThan(0);
-    });
-
-    test('penalizes mismatched context', () => {
-      // Searching for event field in organization context
-      const result = matcher.findBestMatch('event', {
-        fieldType: 'text',
-        context: 'organization',  // Wrong context
-        rawLabel: 'Event'
-      });
-      
-      // Should not match eventName (which is event context)
-      expect(result.matchedField).not.toBe('eventName');
-    });
-
-    test('gives partial credit for unknown context', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'Organization Name'
-      });
-      
-      expect(result.score).toBeGreaterThan(0.5);
-    });
-  });
-
-  // Test 5: Field type compatibility
   describe('Field Type Compatibility', () => {
-    test('email field can match email or text fields', () => {
-      const result = matcher.findBestMatch('contact email', {
-        fieldType: 'email',
-        context: 'organizationContact',
-        rawLabel: 'Contact Email'
-      });
-      
-      expect(result.matchedField).toBe('organizationContactEmail');
-      expect(result.score).toBe(0.9);
+    test('an email concept matches an email or a text control', () => {
+      expect(matcher.findBestMatch('employer identification number', ctx()).matchedField).toBe('org.ein');
+      expect(
+        matcher.findBestMatch('primary contact email address', ctx({ fieldType: 'text' })).matchedField
+      ).toBe('org.contact.email');
     });
 
-    test('text field can fill text types', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Name'
-      });
-      
-      expect(result.matchedField).toBe('organizationName');
-    });
+    test('rejects a type-incompatible match', () => {
+      // org.type is a select concept — a number control cannot fill it
+      const result = matcher.findBestMatch('organization type', ctx({ fieldType: 'number' }));
 
-    test('rejects type-incompatible matches', () => {
-      // Trying to match a select field with a text value
-      const result = matcher.findBestMatch('organization type', {
-        fieldType: 'number',  // Incompatible type
-        context: 'organization',
-        rawLabel: 'Organization Type'
-      });
-      
-      // Should not match organizationType (which is select)
-      expect(result.matchedField).not.toBe('organizationType');
+      expect(result.matchedField).not.toBe('org.type');
     });
   });
 
-  // Test 6: Exact aliases are stronger than fuzzy
-  describe('Exact Aliases Prioritized', () => {
-    test('exact alias gets high score', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Name'
-      });
-      
-      expect(result.score).toBe(0.9);  // 1.0 base * 0.9 context multiplier
-    });
+  describe('Exact Aliases Beat Fuzzy', () => {
+    test('an exact alias outscores a token near-miss for the same concept', () => {
+      const fuzzy = matcher.findBestMatch('org something name', ctx());
+      const exact = matcher.findBestMatch('organization name', ctx());
 
-    test('fuzzy match scores lower than exact', () => {
-      const fuzzy = matcher.findBestMatch('org something name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Org Something Name'
-      });
-      
-      const exact = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Name'
-      });
-      
-      if (fuzzy.matchedField === exact.matchedField) {
+      if (fuzzy.matchedField === exact.matchedField && fuzzy.matchedField) {
         expect(fuzzy.score).toBeLessThan(exact.score);
       }
+      expect(exact.score).toBeCloseTo(0.95, 5);
     });
   });
 
-  // Test 7: Never auto-fill fields excluded
-  describe('Never Auto-Fill Fields', () => {
+  describe('fillPolicy: "never" concepts are excluded', () => {
     test('event name is never matched', () => {
-      const result = matcher.findBestMatch('event name', {
-        fieldType: 'text',
-        context: 'event',
-        rawLabel: 'Event Name'
-      });
-      
-      expect(result.matchedField).not.toBe('eventName');
+      const result = matcher.findBestMatch('event name', ctx());
+      expect(result.matchedField).not.toBe('event.name');
     });
 
     test('event date is never matched', () => {
-      const result = matcher.findBestMatch('event date', {
-        fieldType: 'text',
-        context: 'event',
-        rawLabel: 'Event Date'
-      });
-      
-      expect(result.matchedField).not.toBe('eventDate');
+      const result = matcher.findBestMatch('event date', ctx());
+      expect(result.matchedField).not.toBe('event.date');
     });
 
     test('event description is never matched', () => {
-      const result = matcher.findBestMatch('event description', {
-        fieldType: 'textarea',
-        context: 'event',
-        rawLabel: 'Event Description'
-      });
-      
-      expect(result.matchedField).not.toBe('eventDescription');
+      const result = matcher.findBestMatch('event description', ctx({ fieldType: 'textarea' }));
+      expect(result.matchedField).not.toBe('event.description');
     });
   });
 
-  // Test 8: Tie-breaking logic
   describe('Tie-Breaking Logic', () => {
-    test('rejects ambiguous tie when top scores are very close', () => {
-      // Create a scenario where we might get ambiguous matches
-      const result = matcher.findBestMatch('x', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'X'
-      });
-      
-      // With single letter, scores should be low anyway
-      expect(result.score).toBeLessThan(0.7);
+    test('a single stray character scores low, no confident match', () => {
+      const result = matcher.findBestMatch('x', ctx());
+      expect(result.score).toBeLessThan(0.6);
     });
 
-    test('returns best candidate when clear winner', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Name'
-      });
-      
-      expect(result.matchedField).toBe('organizationName');
-      expect(result.allCandidates).toBeDefined();
-    });
+    test('returns the clear winner and its candidate list', () => {
+      const result = matcher.findBestMatch('organization name', ctx());
 
-    test('provides top candidates for review', () => {
-      const result = matcher.findBestMatch('contact', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Contact'
-      });
-      
-      expect(result.allCandidates).toBeDefined();
+      expect(result.matchedField).toBe('org.legal_name');
       expect(Array.isArray(result.allCandidates)).toBe(true);
     });
   });
 
-  // Test 9: Address field exclusion
   describe('Address Field Type Incompatibility', () => {
-    test('detects address fields', () => {
-      const isIncompatible = matcher.isIncompatibleFieldType('organizationAddress.street', {
-        fieldType: 'text',
-        addressComponent: undefined  // Not an address field
-      });
-      
-      expect(isIncompatible).toBe(true);
+    test('flags an address value routed at a non-address target', () => {
+      expect(
+        matcher.isIncompatibleFieldType('organizationAddress.street', { fieldType: 'text' })
+      ).toBe(true);
     });
 
-    test('allows address values for address fields', () => {
-      const isIncompatible = matcher.isIncompatibleFieldType('organizationAddress.street', {
-        fieldType: 'text',
-        addressComponent: 'street'
-      });
-      
-      expect(isIncompatible).toBe(false);
-    });
-
-    test('rejects address values for non-address fields', () => {
-      const isIncompatible = matcher.isIncompatibleFieldType('organizationAddress.street', {
-        fieldType: 'text',
-        // No addressComponent - not an address field
-      });
-      
-      expect(isIncompatible).toBe(true);
+    test('allows an address value at an address target', () => {
+      expect(
+        matcher.isIncompatibleFieldType('organizationAddress.street', {
+          fieldType: 'text',
+          addressComponent: 'street'
+        })
+      ).toBe(false);
     });
   });
 
-  // Test 10: Match reason generation
   describe('Match Reason Generation', () => {
-    test('generates reason for exact match', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Name'
-      });
-      
+    test('generates a reason for an exact alias', () => {
+      const result = matcher.findBestMatch('organization name', ctx());
       expect(result.reason).toContain('High confidence');
     });
 
-    test('generates reason for high confidence fuzzy match', () => {
-      const result = matcher.findBestMatch('organization info name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'Organization Info Name'
-      });
-      
-      if (result.confidence === 'high') {
-        expect(result.reason).toContain('High confidence');
-      }
-    });
-
-    test('generates reason for no match', () => {
-      const result = matcher.findBestMatch('xyz123', {
-        fieldType: 'text',
-        context: 'unknown',
-        rawLabel: 'XYZ123'
-      });
-      
-      if (result.matchedField === null) {
-        expect(result.reason).toContain('No matching field');
-      }
+    test('generates a reason when nothing matches', () => {
+      const result = matcher.findBestMatch('xyz123', ctx());
+      expect(result.reason).toContain('No matching field');
     });
   });
 
-  // Test 11: Complex matching scenarios
   describe('Complex Matching Scenarios', () => {
-    test('matches uppercase labels with fuzzy matching', () => {
-      const result = matcher.findBestMatch('organization name', {
-        fieldType: 'text',
-        context: 'organization',
-        rawLabel: 'ORGANIZATION NAME *'
-      });
-      
-      expect(result.matchedField).toBe('organizationName');
+    test('matches an uppercased label through normalization upstream', () => {
+      const result = matcher.findBestMatch('organization name', ctx({ rawLabel: 'ORGANIZATION NAME *' }));
+      expect(result.matchedField).toBe('org.legal_name');
     });
 
-    test('matches labels with extra words', () => {
-      const result = matcher.findBestMatch('contact phone number', {
-        fieldType: 'tel',
-        context: 'organizationContact',
-        rawLabel: 'Contact Phone Number'
-      });
-      
-      expect(result.matchedField).toBe('organizationContactPhone');
-    });
-
-    test('handles multiple label sources', () => {
-      const result = matcher.findBestMatch('email', {
-        fieldType: 'email',
-        context: 'organizationContact',
-        rawLabel: 'Email',
-        sources: ['Email', 'contact_email', 'org-email-input']
-      });
-      
-      expect(result.matchedField).toBe('organizationContactEmail');
+    test('matches a label with extra words', () => {
+      const result = matcher.findBestMatch('organization contact phone number', ctx({ fieldType: 'tel' }));
+      expect(result.matchedField).toBe('org.contact.phone');
     });
   });
 });

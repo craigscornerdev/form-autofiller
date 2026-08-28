@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787916262.0620492,
-    "ast_hash": "2f27a00fdb52a7748020df8b4dcc9e2e",
+    "mtime": 1787917682.4155037,
+    "ast_hash": "d0e15f7fec1f62fa15d694687b43f122",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787916390.375798,
-    "ast_hash": "199d3f61cf6cf8ec88c079e7ec983906",
+    "mtime": 1787917720.286494,
+    "ast_hash": "1fb9183b31f64c173aee60125e37a354",
     "semantic_hash": ""
   },
   ".agent.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787915764.4030569,
-    "ast_hash": "63780a1bef77f6c4b6e1e1f31d3461f7",
+    "mtime": 1787916430.4114878,
+    "ast_hash": "68259eaf02777bc588575c18d20131b8",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787915768.424439,
-    "ast_hash": "a1908900a94ce7fef98f95f9a7619d24",
+    "mtime": 1787917831.2034206,
+    "ast_hash": "50eb1d0c067a440bcd4437dbac521eea",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787916292.123848,
-    "ast_hash": "07294563dda1f10967153cbcb6e0fd6d",
+    "mtime": 1787917639.9944153,
+    "ast_hash": "29d1a4d1b3ac87a6a5afdc09af75011a",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -59,14 +59,9 @@
     "ast_hash": "efa8ab070fe6c47edb066b3e3e6b434e",
     "semantic_hash": ""
   },
-  "field-semantics.js": {
-    "mtime": 1787780791.1511464,
-    "ast_hash": "a6bde47387d146c5b627286873a92561",
-    "semantic_hash": ""
-  },
   "fuzzy-field-matcher.js": {
-    "mtime": 1787916398.641995,
-    "ast_hash": "f640a645cd2c166cd5ebc679049b30b5",
+    "mtime": 1787917690.2798777,
+    "ast_hash": "0eb7ed4871c3209cfd300a37998b0661",
     "semantic_hash": ""
   },
   "label-normalizer.js": {
@@ -74,19 +69,9 @@
     "ast_hash": "94563cb02f8a0c2eef5b7cb67c02cdd8",
     "semantic_hash": ""
   },
-  "profile-data-structure.js": {
-    "mtime": 1787780781.9963226,
-    "ast_hash": "bf7354eda56ae02caec02635c7bd377b",
-    "semantic_hash": ""
-  },
-  "tests/field-semantics.test.js": {
-    "mtime": 1787354723.9999855,
-    "ast_hash": "69947aba301b4b06dc6c714d2cdd9c0a",
-    "semantic_hash": ""
-  },
   "tests/fuzzy-field-matcher.test.js": {
-    "mtime": 1787779860.7537568,
-    "ast_hash": "47ac5cd484c9ec39885c540b35043d6d",
+    "mtime": 1787917873.5341847,
+    "ast_hash": "4d38b6ffa43e651387fbe75058697667",
     "semantic_hash": ""
   },
   "tests/label-normalizer.test.js": {
@@ -180,13 +165,13 @@
     "semantic_hash": ""
   },
   "presets/charity.js": {
-    "mtime": 1787915711.468847,
-    "ast_hash": "27bfde6c414ae887ef9e33ffee2cea00",
+    "mtime": 1787917589.3076866,
+    "ast_hash": "46175ab17729da9d878e263eceaada02",
     "semantic_hash": ""
   },
   "tests/presets-charity.test.js": {
-    "mtime": 1787915739.6741164,
-    "ast_hash": "b48577a35e2dae9e6d829b8af71fdeed",
+    "mtime": 1787917825.7590272,
+    "ast_hash": "702e04700b091262d663cbafd28b0230",
     "semantic_hash": ""
   }
 }
