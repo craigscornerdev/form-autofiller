@@ -390,4 +390,5 @@ Fold into whichever step touches the area; do not batch.
 - [ ] Document attachments (W-9, tax-exempt letter, résumé).
 - Cross sync across the users own cloud? Via google drive appDataFolder. Interesting, not sure if we want that but does put everything in googles hands. Just make it the paid tier I guess. Bundle that plus some AI credits they can purchase. Make the first couple free, get them hooked. 
 - The niche we want to fill is a smart auto fill that doesn't send all your data to AI unless you really want it to.
-- Already filled field logic? what is happening there? 
+- Already filled field logic? what is happening there?
+- Let AI work in the background, completing the mundane steps
