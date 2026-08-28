@@ -210,11 +210,13 @@ from it. The injected function does no math: the popup attaches
 
 ```js
 DEFAULT_THRESHOLDS = { floor: 0.60, high: 0.90 }
+DEBUG_COLOR        = 'hsl(282 60% 45%)'
 clamp01(x)        = Math.min(1, Math.max(0, x))
 bandFor(c, t)     = c >= t.high ? 'high' : c >= t.floor ? 'review' : 'blank'
 hueFor(c, t)      = c < t.floor ? 0 : 120 * clamp01((c - t.floor) / (1 - t.floor))
 describe(c, t)    = c >= t.high ? 'High confidence'
                  : c >= t.floor ? 'Review' : 'Left blank'
+debugLabel(c, t)  = `${c.toFixed(2)} · ${bandFor(c, t)} · hue ${Math.round(hueFor(c, t))}`
 
 colorFor(c, t) => {
   const blank = c < t.floor, h = hueFor(c, t);
@@ -222,15 +224,26 @@ colorFor(c, t) => {
     band:       bandFor(c, t),
     hue:        h,
     dashed:     blank,
-    outline:    blank ? 'hsl(0 74% 45%)' : `hsl(${h} 70% 40%)`,
-    background: blank ? 'hsl(0 86% 96%)' : `hsl(${h} 80% 94%)`,
-    text:       blank ? 'hsl(0 74% 30%)' : `hsl(${h} 70% 25%)`
+    outline:    blank ? 'hsl(0 74% 45%)'        : `hsl(${h} 70% 40%)`,
+    background: blank ? 'hsl(0 86% 55% / 0.10)' : `hsl(${h} 80% 55% / 0.10)`,
+    text:       blank ? 'hsl(0 74% 30%)'        : `hsl(${h} 70% 25%)`,
+    debug:      { color: DEBUG_COLOR, label: debugLabel(c, t) }
   };
 }
 ```
 
-All five exports (`DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`, `hueFor`,
-`colorFor`, `describe`) take an explicit `thresholds` arg defaulting to
+`outline` is the line drawn on the field's edge, on both surfaces. On the page
+the highlight recolors the field's **own** border — `border-color` plus
+`border-style`, the width untouched so nothing reflows — and falls back to a
+`1px` outline at offset `0` for a field that has no border of its own.
+`background` is translucent, so the field's own fill still reads through it.
+
+`debug` is the diagnostic overlay: `label` is the number the color was computed
+from, painted in `DEBUG_COLOR` under the field's right edge, clear of the page's
+own helper text. Purple is reserved for debug output and never carries
+confidence meaning — every visual debug signal added later uses it too.
+
+Every export takes an explicit `thresholds` arg defaulting to
 `DEFAULT_THRESHOLDS`, so later phases can pass a tuned floor.
 
 **Suggestion shape** (`conceptId` lands in Phase B4 with the concept registry;
