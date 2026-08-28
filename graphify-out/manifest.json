@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "popup.js": {
-    "mtime": 1787879537.4097805,
-    "ast_hash": "2cc3294013202f58ca7edd5619494d38",
+    "mtime": 1787922505.2345173,
+    "ast_hash": "d58375ebb29b19947ac96de42ce0db30",
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787916430.4114878,
-    "ast_hash": "68259eaf02777bc588575c18d20131b8",
+    "mtime": 1787917923.5379517,
+    "ast_hash": "f86e98d8cd34f0adf5a2bcf6c2dbc1f1",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787917831.2034206,
-    "ast_hash": "50eb1d0c067a440bcd4437dbac521eea",
+    "mtime": 1787921260.1877177,
+    "ast_hash": "5a91fa1deacc25ba04fdb40990735fd6",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -105,18 +105,18 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1787881169.8387449,
-    "ast_hash": "5960bac19ff6dcc876732478127090ca",
+    "mtime": 1787921319.7657385,
+    "ast_hash": "7884f46f7293b02a64dd377a3900ecb9",
     "semantic_hash": ""
   },
   "DESIGN.md": {
-    "mtime": 1787868064.6182287,
-    "ast_hash": "9d2c517e48ec7955c1657460e996b90a",
+    "mtime": 1787921104.2568872,
+    "ast_hash": "89ec5c232a8418dc8df912104eda207d",
     "semantic_hash": ""
   },
   "demos/README.md": {
-    "mtime": 1787878761.6345668,
-    "ast_hash": "1601872a475b99c7b4cdd83399156ba2",
+    "mtime": 1787921286.9823425,
+    "ast_hash": "85b67445b37ade9e6063acbce0cf11b8",
     "semantic_hash": ""
   },
   "demos/spectrum-demo.html": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "confidence-gradient.js": {
-    "mtime": 1787877304.595018,
-    "ast_hash": "1008b4cffcea52fa3dfe70c0a7dc0f31",
+    "mtime": 1787922494.4041846,
+    "ast_hash": "fdfea95d3388a9a8854cc26e529e4b80",
     "semantic_hash": ""
   },
   "fill-policy.js": {
@@ -135,8 +135,8 @@
     "semantic_hash": ""
   },
   "tests/confidence-gradient.test.js": {
-    "mtime": 1787877329.8496192,
-    "ast_hash": "db985410435ae45b5a97d6907b10d1c8",
+    "mtime": 1787922528.1657023,
+    "ast_hash": "00c59b158467407102427b098c64d9bc",
     "semantic_hash": ""
   },
   "tests/fill-policy.test.js": {

@@ -6,9 +6,11 @@
 
 const {
   DEFAULT_THRESHOLDS,
+  DEBUG_COLOR,
   clamp01,
   bandFor,
   hueFor,
+  debugLabel,
   colorFor,
   describe: describeConfidence
 } = require('../confidence-gradient');
@@ -17,6 +19,12 @@ describe('confidence-gradient', () => {
   describe('DEFAULT_THRESHOLDS', () => {
     test('floor 0.60, high 0.90', () => {
       expect(DEFAULT_THRESHOLDS).toEqual({ floor: 0.6, high: 0.9 });
+    });
+  });
+
+  describe('DEBUG_COLOR', () => {
+    test('is the reserved debug purple', () => {
+      expect(DEBUG_COLOR).toBe('hsl(282 60% 45%)');
     });
   });
 
@@ -80,26 +88,40 @@ describe('confidence-gradient', () => {
     });
   });
 
+  describe('debugLabel', () => {
+    test('formats "score · band · hue N"', () => {
+      expect(debugLabel(0.81)).toBe('0.81 · review · hue 63');
+      expect(debugLabel(1)).toBe('1.00 · high · hue 120');
+      expect(debugLabel(0.4)).toBe('0.40 · blank · hue 0');
+    });
+
+    test('honours a custom threshold set', () => {
+      expect(debugLabel(0.8, { floor: 0.8, high: 0.95 })).toBe('0.80 · review · hue 0');
+    });
+  });
+
   describe('colorFor', () => {
-    test('sub-floor: fixed dark red, dashed', () => {
+    test('sub-floor: fixed dark red, dashed, translucent fill, purple debug', () => {
       expect(colorFor(0.4)).toEqual({
         band: 'blank',
         hue: 0,
         dashed: true,
         outline: 'hsl(0 74% 45%)',
-        background: 'hsl(0 86% 96%)',
-        text: 'hsl(0 74% 30%)'
+        background: 'hsl(0 86% 55% / 0.10)',
+        text: 'hsl(0 74% 30%)',
+        debug: { color: 'hsl(282 60% 45%)', label: '0.40 · blank · hue 0' }
       });
     });
 
-    test('exact match: solid green', () => {
+    test('exact match: solid green, translucent fill, purple debug', () => {
       expect(colorFor(1)).toEqual({
         band: 'high',
         hue: 120,
         dashed: false,
         outline: 'hsl(120 70% 40%)',
-        background: 'hsl(120 80% 94%)',
-        text: 'hsl(120 70% 25%)'
+        background: 'hsl(120 80% 55% / 0.10)',
+        text: 'hsl(120 70% 25%)',
+        debug: { color: 'hsl(282 60% 45%)', label: '1.00 · high · hue 120' }
       });
     });
 
@@ -109,8 +131,9 @@ describe('confidence-gradient', () => {
       expect(c.dashed).toBe(false);
       expect(c.hue).toBeCloseTo(60);
       expect(c.outline).toBe(`hsl(${c.hue} 70% 40%)`);
-      expect(c.background).toBe(`hsl(${c.hue} 80% 94%)`);
+      expect(c.background).toBe(`hsl(${c.hue} 80% 55% / 0.10)`);
       expect(c.text).toBe(`hsl(${c.hue} 70% 25%)`);
+      expect(c.debug).toEqual({ color: 'hsl(282 60% 45%)', label: '0.80 · review · hue 60' });
     });
   });
 

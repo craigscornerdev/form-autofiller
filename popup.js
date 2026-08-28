@@ -497,8 +497,46 @@ function fillSuggestedValues(matches, blankDisplay) {
 
   function paintField(field, display) {
     field.dataset.charityAutofillerConfidence = display.band;
-    field.style.setProperty("outline", `3px ${display.dashed ? "dashed" : "solid"} ${display.outline}`, "important");
-    field.style.setProperty("outline-offset", "2px", "important");
+
+    const style = display.dashed ? "dashed" : "solid";
+    const borderWidth = parseFloat(window.getComputedStyle(field).borderTopWidth) || 0;
+
+    if (borderWidth > 0) {
+      field.style.setProperty("border-color", display.outline, "important");
+      field.style.setProperty("border-style", style, "important");
+    } else {
+      field.style.setProperty("outline", `1px ${style} ${display.outline}`, "important");
+      field.style.setProperty("outline-offset", "0", "important");
+    }
+
     field.style.setProperty("background-color", display.background, "important");
+    paintDebugReadout(field, display.debug);
+  }
+
+  function paintDebugReadout(field, debug) {
+    if (!debug) {
+      return;
+    }
+
+    const doc = field.ownerDocument;
+    let readout = field.dataset.autofillDebugId && doc.getElementById(field.dataset.autofillDebugId);
+
+    if (!readout) {
+      const id = `autofill-debug-${Math.random().toString(36).slice(2)}`;
+      field.dataset.autofillDebugId = id;
+      readout = doc.createElement("div");
+      readout.id = id;
+      doc.body.appendChild(readout);
+    }
+
+    const rect = field.getBoundingClientRect();
+    readout.textContent = debug.label;
+    readout.style.cssText = "position:absolute;margin:0;padding:0 2px;"
+      + "font:10px/1.4 ui-monospace,Menlo,Consolas,monospace;white-space:nowrap;"
+      + "background:transparent;pointer-events:none;z-index:2147483647;";
+    readout.style.setProperty("color", debug.color, "important");
+    readout.style.setProperty("left", `${rect.right + window.scrollX}px`, "important");
+    readout.style.setProperty("top", `${rect.bottom + window.scrollY}px`, "important");
+    readout.style.setProperty("transform", "translateX(-100%)", "important");
   }
 }

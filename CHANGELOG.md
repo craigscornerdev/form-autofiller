@@ -3,6 +3,26 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight
+
+- `confidence-gradient.js` gains `DEBUG_COLOR` (`hsl(282 60% 45%)`, reserved for
+  debug output and never a band) and `debugLabel(confidence, thresholds)` →
+  `"0.81 · review · hue 63"`. `colorFor` now returns a translucent `background`
+  (`hsl(H S 55% / 0.10)`) and a `debug: { color, label }` key, so the injected
+  fill function still does no maths.
+- `paintField` recolours the field's **own** border (`border-color` +
+  `border-style`, width untouched so nothing reflows) and falls back to a `1px`
+  outline at offset `0` when the computed border width is `0`; the fill is the
+  translucent `background`. It paints the purple `debug.label` in an absolutely
+  positioned readout under the field's lower-right edge, in document
+  coordinates, one per field, reused across scans via
+  `field.dataset.autofillDebugId`.
+- `tests/confidence-gradient.test.js`: `DEBUG_COLOR` and `debugLabel` cases; the
+  `colorFor` cases updated for the translucent background and the `debug` key.
+- Demo: re-scan `demos/spectrum-demo.html` — every painted field carries a
+  purple `0.xx · band · hue N` at its lower right, borders are hairline-tinted in
+  band colour, and the `.note` helper lines stay readable underneath.
+
 ## 0.16.0 — 2026-08-28 — Matcher runs on the concept registry
 
 - `field-matcher.js` and `fuzzy-field-matcher.js` build their rules from `concept-registry.load(['charity'])` — the unioned `base` + `charity` `FieldConcept[]` — instead of a hand-built field registry. `field-semantics.js` and `profile-data-structure.js` are gone; `popup.html` loads `concept-registry.js` + `presets/base.js` + `presets/charity.js` ahead of the matchers.

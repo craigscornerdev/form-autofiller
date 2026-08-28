@@ -40,24 +40,6 @@ composition, the context signal, the profile store, and naming onto it, then
 proving the pipeline generalizes with a second preset. `charity` stays
 default-enabled throughout. DESIGN.md §3–§5.
 
-### B4a ▶ — Field debug readout + quieter highlight
-Files: `confidence-gradient.js`, `popup.js` (`paintField`)
-Tests: `tests/confidence-gradient.test.js` (update the `colorFor` cases; add
-`debugLabel` cases)
-Read: DESIGN.md §6
-- [ ] `confidence-gradient.js`: `DEBUG_COLOR` (fixed purple) and
-  `debugLabel(confidence, thresholds)` → `"0.81 · review · hue 63"`. `colorFor`
-  returns a translucent `background` and `debug: { color, label }`, so the
-  injected function still does no maths.
-- [ ] `paintField` tints the field's own border (`border-color` +
-  `border-style`, width untouched; `1px` outline at offset `0` when the computed
-  border width is `0`) and paints the purple readout under the field's right
-  edge — absolutely positioned in document coordinates so nothing reflows, one
-  per field, reused across scans via `field.dataset.autofillDebugId`.
-- [ ] **Demo:** re-scan `demos/spectrum-demo.html`. Every painted field carries
-  a purple `0.xx · band · hue N` at its lower right; borders are hairline-tinted
-  in band color; the `.note` helper lines stay readable underneath.
-
 ### B5a — Composite joiners
 Files: `value-compose.js` (new)
 Tests: `tests/value-compose.test.js` (new)
