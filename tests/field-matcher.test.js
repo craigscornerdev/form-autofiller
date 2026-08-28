@@ -4,6 +4,38 @@ const path = require('path');
 const vm = require('vm');
 const { LocationData } = require('../location-data');
 
+const repoRoot = path.join(__dirname, '..');
+
+// The scripts popup.html loads ahead of popup.js, in document order. Every
+// global the scan path (addSuggestions / scanCurrentPage) reads must be provided
+// by one of these, so the browser-context tests derive the list from popup.html
+// rather than restating it — a module referenced but not wired in fails here.
+function popupDependencyScripts() {
+  const html = fs.readFileSync(path.join(repoRoot, 'popup.html'), 'utf8');
+  const srcs = [];
+  const pattern = /<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi;
+  let match;
+
+  while ((match = pattern.exec(html))) {
+    if (match[1] !== 'popup.js' && !/^(https?:)?\/\//.test(match[1])) {
+      srcs.push(match[1]);
+    }
+  }
+
+  return srcs;
+}
+
+function loadBrowserContext() {
+  const context = { console };
+  vm.createContext(context);
+
+  for (const src of popupDependencyScripts()) {
+    vm.runInContext(fs.readFileSync(path.join(repoRoot, src), 'utf8'), context);
+  }
+
+  return context;
+}
+
 describe('FieldMatcher', () => {
   test('supports ISO country and subdivision values from the local database', () => {
     expect(LocationData.US.name).toBe('United States');
@@ -12,24 +44,40 @@ describe('FieldMatcher', () => {
   });
 
   test('loads in a browser-like context without CommonJS require', () => {
-    const context = { console };
-    vm.createContext(context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'confidence-gradient.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
+    const context = loadBrowserContext();
 
     const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
     expect(matcher.getSuggestion({ label: 'Email' }).value).toBe('alice@example.org');
   });
 
+  test('popup.html loads every script the scan path needs', () => {
+    const context = loadBrowserContext();
+
+    // scanCurrentPage(): const blankDisplay = ConfidenceGradient.colorFor(0)
+    expect(typeof context.ConfidenceGradient.colorFor).toBe('function');
+    expect(context.ConfidenceGradient.colorFor(0).dashed).toBe(true);
+
+    // addSuggestions(): suggestion.decision = FillPolicy.fillDecision(suggestion)
+    expect(context.FillPolicy.fillDecision({ band: 'blank' })).toBe('skip');
+
+    // popup.js init reads CharityLocationData before the first scan
+    expect(context.CharityLocationData.LocationCountries.length).toBeGreaterThan(0);
+
+    // addSuggestions(): new FieldMatcher(profile).getSuggestion(field), then
+    // suggestion.display = ConfidenceGradient.colorFor(suggestion.confidence)
+    const matcher = new context.FieldMatcher({ organizationContact: { email: 'a@b.org' } });
+    const suggestion = matcher.getSuggestion({ label: 'Email', type: 'email' });
+
+    expect(suggestion.value).toBe('a@b.org');
+    expect(Number.isFinite(suggestion.confidence)).toBe(true);
+    expect(suggestion.confidence).toBeGreaterThanOrEqual(0);
+    expect(suggestion.confidence).toBeLessThanOrEqual(1);
+    expect(['blank', 'review', 'high']).toContain(suggestion.band);
+    expect(typeof context.ConfidenceGradient.colorFor(suggestion.confidence).outline).toBe('string');
+  });
+
   test('falls back to a review-confidence fuzzy match when no exact alias exists', () => {
-    const context = { console };
-    vm.createContext(context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-semantics.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'confidence-gradient.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'fuzzy-field-matcher.js'), 'utf8'), context);
-    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'field-matcher.js'), 'utf8'), context);
+    const context = loadBrowserContext();
 
     const matcher = new context.FieldMatcher({ email: 'alice@example.org' });
     const suggestion = matcher.getSuggestion({ label: 'Email Address for Contact', type: 'text' });

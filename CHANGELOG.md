@@ -3,6 +3,13 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest
+
+- `fill-policy.js` no longer creates a module-level `ConfidenceGradient` binding — it resolves the gradient helper through a local `gradient()` accessor. As sibling classic scripts in `popup.html`, `fill-policy.js` and `confidence-gradient.js` had both declared `const ConfidenceGradient`, a global-scope collision that stopped `fill-policy.js` from defining `FillPolicy` and left `Scan Form` failing with the generic "This page cannot be scanned" message.
+- `popup.js` checks `FieldMatcher`, `ConfidenceGradient`, `FillPolicy`, and `CharityLocationData` on load; if any is absent it shows "Extension didn't load fully. Reload it…" and disables the scan button instead of surfacing a mid-scan `TypeError`.
+- `getScanErrorMessage` recognises the whole family of host-access failures (`cannot access contents…`, `missing host permission`, `request permission to access`) and points the user at **Allow access to file URLs**; `chrome://` / Web Store / other-extension pages still get "open a normal website".
+- `tests/field-matcher.test.js` derives its browser-context script list from `popup.html` and adds `popup.html loads every script the scan path needs`, so a module referenced by the scan path but missing (or mis-ordered) in `popup.html` now fails `npm test`.
+
 ## 0.12.0 — 2026-08-27 — Render the confidence spectrum
 
 - `popup.html` loads `confidence-gradient.js` and `fill-policy.js` ahead of `fuzzy-field-matcher.js` / `field-matcher.js`, so both surfaces read colours from the one helper.

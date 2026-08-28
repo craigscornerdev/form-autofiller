@@ -9,20 +9,24 @@
  * See DESIGN.md §6.
  */
 
-const ConfidenceGradient = typeof module !== 'undefined' && module.exports
-  ? require('./confidence-gradient')
-  : globalThis.ConfidenceGradient;
+// Resolved lazily so this module adds no top-level binding that could collide
+// with another script sharing the popup's global scope.
+function gradient() {
+  return typeof module !== 'undefined' && module.exports
+    ? require('./confidence-gradient')
+    : globalThis.ConfidenceGradient;
+}
 
 /**
  * @param {?{band?: string, confidence?: number}} suggestion
  * @param {{floor: number, high: number}} [thresholds]
  * @returns {'fill'|'skip'}
  */
-function fillDecision(suggestion, thresholds = ConfidenceGradient.DEFAULT_THRESHOLDS) {
+function fillDecision(suggestion, thresholds = gradient().DEFAULT_THRESHOLDS) {
   if (!suggestion) return 'skip';
 
   const band = typeof suggestion.confidence === 'number'
-    ? ConfidenceGradient.bandFor(suggestion.confidence, thresholds)
+    ? gradient().bandFor(suggestion.confidence, thresholds)
     : suggestion.band;
 
   return band === 'blank' ? 'skip' : 'fill';

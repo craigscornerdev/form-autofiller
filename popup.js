@@ -5,6 +5,9 @@ const fieldList = document.getElementById("field-list");
 const profileForm = document.getElementById("profile-form");
 const profileStatus = document.getElementById("profile-status");
 
+const REQUIRED_GLOBALS = ["FieldMatcher", "ConfidenceGradient", "FillPolicy", "CharityLocationData"];
+const missingGlobals = REQUIRED_GLOBALS.filter((name) => typeof globalThis[name] === "undefined");
+
 const sampleProfile = {
   organizationName: "Paws & Whiskers Cat Shelter",
   organizationType: "Charity",
@@ -30,11 +33,17 @@ const sampleProfile = {
   eventDescription: "A community adoption event featuring cat meet-and-greets, foster volunteer signups, and donation opportunities."
 };
 
-scanButton.addEventListener("click", scanCurrentPage);
-profileForm.addEventListener("submit", saveProfile);
-profileForm.elements.namedItem("organizationAddress.country").addEventListener("change", updateProfileSubdivisionOptions);
-populateProfileCountryOptions();
-loadProfile();
+if (missingGlobals.length) {
+  statusMessage.classList.add("error");
+  statusMessage.textContent = "Extension didn't load fully. Reload it at chrome://extensions and reopen this popup.";
+  scanButton.disabled = true;
+} else {
+  scanButton.addEventListener("click", scanCurrentPage);
+  profileForm.addEventListener("submit", saveProfile);
+  profileForm.elements.namedItem("organizationAddress.country").addEventListener("change", updateProfileSubdivisionOptions);
+  populateProfileCountryOptions();
+  loadProfile();
+}
 
 async function scanCurrentPage() {
   setScanningState();
@@ -128,8 +137,14 @@ function showError(error) {
 }
 
 function getScanErrorMessage(error) {
-  if (error?.message?.includes("Cannot access contents of the page")) {
-    return "This local page is blocked. Enable Allow access to file URLs for this extension, then scan again.";
+  const message = error?.message || "";
+
+  if (/cannot access (a |an )?chrome|extensions? gallery|cannot be scripted|chrome-extension:\/\//i.test(message)) {
+    return "This page cannot be scanned. Open a normal website and try again.";
+  }
+
+  if (/cannot access contents|missing host permission|request permission to access/i.test(message)) {
+    return "This page is blocked. Open the extension's Details page, enable Allow access to file URLs, then scan again.";
   }
 
   return "This page cannot be scanned. Open a normal website and try again.";
