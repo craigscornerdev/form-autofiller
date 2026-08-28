@@ -3,6 +3,20 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.20.0 — 2026-08-28 — Scan captures the section heading
+
+- `popup.js` `describeField` adds `groupLabel`: a new nested `getGroupLabel(field)`
+  scans every `<h1..6>` / `<legend>` on the page and returns the text of the last
+  one that precedes the field in document order (`compareDocumentPosition`),
+  empty string when none precedes it.
+- `field-matcher.js` threads the descriptor's `groupLabel` from `getSuggestion`
+  through `getMatchingRule` into `getFuzzyMatchingRule`, which puts it on the
+  fuzzy tier's `fieldContext` as `groupLabel` (default `""`). No scorer reads it
+  yet — a no-op on every band.
+- Tests: `tests/field-matcher.test.js` — the fuzzy `fieldContext` carries the
+  passed heading, defaults to `""` with no heading, and the band/score are
+  unchanged by a heading.
+
 ## 0.19.0 — 2026-08-28 — Matcher composes composites from the concept
 
 - `field-matcher.js` `resolveValue` routes any `rule.compose` concept through a

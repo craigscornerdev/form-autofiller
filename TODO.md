@@ -40,15 +40,6 @@ composition, the context signal, the profile store, and naming onto it, then
 proving the pipeline generalizes with a second preset. `charity` stays
 default-enabled throughout. DESIGN.md §3–§5.
 
-### B6a — Scan captures the section heading
-Files: `popup.js` (`scanPageFields`), `field-matcher.js`
-Tests: `tests/field-matcher.test.js` (descriptor passthrough)
-Read: DESIGN.md §3.2
-- [ ] `describeField` adds `groupLabel`: the nearest preceding `<h1..6>` /
-  `<legend>` text, found by a generic DOM walk; empty when there is none.
-  `field-matcher` threads it into the fuzzy tier's field context. Nothing scores
-  on it yet — this step is a no-op on every band.
-
 ### B6b ▶ — Heading drives the context multiplier
 Files: `fuzzy-field-matcher.js`, `label-normalizer.js`,
 `demos/sections-demo.html` (new)

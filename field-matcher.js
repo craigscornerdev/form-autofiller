@@ -48,7 +48,7 @@ class FieldMatcher {
 
   getSuggestion(field = {}) {
     const label = field.label || "";
-    const rule = this.getMatchingRule(label, field.autocomplete, field.type);
+    const rule = this.getMatchingRule(label, field.autocomplete, field.type, field.groupLabel);
 
     if (!rule) {
       return null;
@@ -97,7 +97,7 @@ class FieldMatcher {
     };
   }
 
-  getMatchingRule(label, autocomplete = "", fieldType = "") {
+  getMatchingRule(label, autocomplete = "", fieldType = "", groupLabel = "") {
     const normalizedLabel = this.labelNormalizer.normalize(label);
 
     if (autocomplete) {
@@ -124,7 +124,7 @@ class FieldMatcher {
       };
     }
 
-    return this.getFuzzyMatchingRule(normalizedLabel, fieldType);
+    return this.getFuzzyMatchingRule(normalizedLabel, fieldType, groupLabel);
   }
 
   // Later presets refine earlier ones, so a concept defined later wins an
@@ -138,8 +138,8 @@ class FieldMatcher {
     return null;
   }
 
-  getFuzzyMatchingRule(normalizedLabel, fieldType) {
-    const fieldContext = { fieldType: fieldType || "text", context: "unknown" };
+  getFuzzyMatchingRule(normalizedLabel, fieldType, groupLabel = "") {
+    const fieldContext = { fieldType: fieldType || "text", context: "unknown", groupLabel: groupLabel || "" };
     const result = this.fuzzyMatcher.findBestMatch(normalizedLabel, fieldContext);
 
     if (!result.matchedField || result.confidence === "no-match") {

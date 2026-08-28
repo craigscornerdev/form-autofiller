@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787923364.425878,
-    "ast_hash": "d69a08045c7e5a3221cc4177dd320a69",
+    "mtime": 1787923662.1134584,
+    "ast_hash": "ac02d8162032fff7192a38a96d22f31d",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -15,13 +15,13 @@
     "semantic_hash": ""
   },
   "popup.js": {
-    "mtime": 1787922505.2345173,
-    "ast_hash": "d58375ebb29b19947ac96de42ce0db30",
+    "mtime": 1787923671.9010196,
+    "ast_hash": "e4fa973e369a0ac7665fc8f429016266",
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787923347.8492727,
-    "ast_hash": "b730ee7f48ec74a98903e4cc531ff8c2",
+    "mtime": 1787923681.4459405,
+    "ast_hash": "319f12fbbc3fc196c7be6d7833bd0fca",
     "semantic_hash": ""
   },
   ".agent.md": {

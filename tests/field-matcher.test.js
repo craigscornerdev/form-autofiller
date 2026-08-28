@@ -315,6 +315,40 @@ describe('FieldMatcher', () => {
     expect(suggestion.value).toBe('US-NY');
   });
 
+  test('threads the scanned group heading into the fuzzy field context', () => {
+    const fm = new FieldMatcher({ email: 'alice@example.org' });
+    let capturedContext = null;
+    const realFindBestMatch = fm.fuzzyMatcher.findBestMatch.bind(fm.fuzzyMatcher);
+    fm.fuzzyMatcher.findBestMatch = (normalizedLabel, fieldContext) => {
+      capturedContext = fieldContext;
+      return realFindBestMatch(normalizedLabel, fieldContext);
+    };
+
+    const suggestion = fm.getSuggestion({
+      label: 'Email Address for Contact',
+      type: 'text',
+      groupLabel: 'Primary contact'
+    });
+
+    expect(capturedContext.groupLabel).toBe('Primary contact');
+    // nothing scores on the heading yet — same band and score as without it
+    expect(suggestion.band).toBe('review');
+    expect(suggestion.confidence).toBeCloseTo(0.64125, 5);
+  });
+
+  test('defaults the fuzzy group context to an empty string when the descriptor has no heading', () => {
+    const fm = new FieldMatcher({ email: 'alice@example.org' });
+    let capturedContext = null;
+    fm.fuzzyMatcher.findBestMatch = (normalizedLabel, fieldContext) => {
+      capturedContext = fieldContext;
+      return { matchedField: null, confidence: 'no-match', score: 0, allCandidates: [] };
+    };
+
+    fm.getSuggestion({ label: 'Some Unmatched Label', type: 'text' });
+
+    expect(capturedContext.groupLabel).toBe('');
+  });
+
   test('uses standard autocomplete semantics when a website label is ambiguous', () => {
     const fm = new FieldMatcher({ organizationAddress: { state: 'New York' } });
     const suggestion = fm.getSuggestion({

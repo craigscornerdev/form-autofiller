@@ -369,6 +369,7 @@ function scanPageFields() {
     return {
       index,
       label: getFieldLabel(field),
+      groupLabel: getGroupLabel(field),
       type: getFieldType(field),
       required: field.required,
       placeholder: field.placeholder || "",
@@ -399,6 +400,19 @@ function scanPageFields() {
       || cleanText(field.name)
       || cleanText(field.id)
       || "Unlabeled field";
+  }
+
+  // The section heading a field sits under: the last <h1..6> / <legend> that
+  // precedes it in document order, found by a generic scan of every heading on
+  // the page. Empty string when the field sits under none.
+  function getGroupLabel(field) {
+    let groupLabel = "";
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6, legend").forEach((heading) => {
+      if (heading.compareDocumentPosition(field) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        groupLabel = cleanText(heading.innerText) || "";
+      }
+    });
+    return groupLabel;
   }
 
   function getFieldType(field) {
