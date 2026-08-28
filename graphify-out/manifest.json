@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787917923.5379517,
-    "ast_hash": "f86e98d8cd34f0adf5a2bcf6c2dbc1f1",
+    "mtime": 1787922549.194237,
+    "ast_hash": "e40e9ff96cd0ffd5a9afb48005747508",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787921260.1877177,
-    "ast_hash": "5a91fa1deacc25ba04fdb40990735fd6",
+    "mtime": 1787922561.4952424,
+    "ast_hash": "fb0d832a17a9cf9d12be5ce17bf23fbe",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1787867506.121688,
-    "ast_hash": "3fa1eae9c06087ac257a098ae6b27459",
+    "mtime": 1787922852.779752,
+    "ast_hash": "a65c389199df546cfbe6db824b67159b",
     "semantic_hash": ""
   },
   "FUZZY-LIBRARY-EVALUATION.md": {
@@ -172,6 +172,16 @@
   "tests/presets-charity.test.js": {
     "mtime": 1787917825.7590272,
     "ast_hash": "702e04700b091262d663cbafd28b0230",
+    "semantic_hash": ""
+  },
+  "tests/value-compose.test.js": {
+    "mtime": 1787922968.603587,
+    "ast_hash": "008ed0f2bdcfc23df0094fe41c446c57",
+    "semantic_hash": ""
+  },
+  "value-compose.js": {
+    "mtime": 1787922947.8597288,
+    "ast_hash": "ee6cdf3c4fd9362748491229c58025bb",
     "semantic_hash": ""
   }
 }

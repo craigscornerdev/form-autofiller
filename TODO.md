@@ -40,14 +40,6 @@ composition, the context signal, the profile store, and naming onto it, then
 proving the pipeline generalizes with a second preset. `charity` stays
 default-enabled throughout. DESIGN.md §3–§5.
 
-### B5a — Composite joiners
-Files: `value-compose.js` (new)
-Tests: `tests/value-compose.test.js` (new)
-Read: DESIGN.md §5.2
-- [ ] `value-compose.js`: named joiners `addressLine`, `fullName`, `join:<sep>`,
-  applied to a `{conceptId: value}` part map. Empty and missing parts drop out
-  without leaving stray separators. Dual export; nothing consumes it yet.
-
 ### B5b — Matcher resolves composites from the concept
 Files: `field-matcher.js`, `popup.html` (script order)
 Tests: update the address cases in `tests/field-matcher.test.js` and the

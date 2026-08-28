@@ -22,7 +22,7 @@ Clear, compact language by default; expand only when asked.
 2. Query the graph (`graphify query` / `explain`) for that area before editing.
 3. Make the smallest change that satisfies the step — nothing from later steps.
 4. Add or update the test the step names; `npm test` until green.
-5. `graphify update .`, add a dated `CHANGELOG.md` entry, tick the box in
+5. `graphify update .`, add a dated `CHANGELOG.md` entry, remove item from
    `TODO.md`.
 6. Commit locally, concise message. No push or PR unless asked.
 

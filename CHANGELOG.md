@@ -3,6 +3,17 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.18.0 — 2026-08-28 — Composite joiners
+
+- `value-compose.js` (new, dual export): `compose({ parts, joiner }, partMap)`
+  resolves each part id against a `{conceptId: value}` map, drops empty and
+  missing parts, and joins the rest — `fullName` (single space), `addressLine`
+  (`", "` between segments, a postal-code part joining its preceding segment
+  with a space), and `join:<sep>` (the literal text after the colon). Dropped
+  parts never leave a stray separator. Nothing consumes it yet.
+- `tests/value-compose.test.js` (new): per-joiner cases plus dropped-part,
+  whitespace-trim, non-string coercion, and degenerate-input coverage.
+
 ## 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight
 
 - `confidence-gradient.js` gains `DEBUG_COLOR` (`hsl(282 60% 45%)`, reserved for
