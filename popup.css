@@ -29,30 +29,31 @@ h1 {
 
 .confidence-legend {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   font-size: 11px;
-  gap: 6px;
+  gap: 4px;
   margin: -8px 0 16px;
 }
 
-.confidence-legend span {
+.legend-bar {
+  background: linear-gradient(to right, hsl(0 70% 40%), hsl(60 70% 40%), hsl(120 70% 40%));
+  border-radius: 4px;
+  height: 8px;
+}
+
+.legend-scale {
+  color: #4b5563;
+  display: flex;
+  justify-content: space-between;
+}
+
+.legend-blank {
+  align-self: flex-start;
+  background: hsl(0 86% 96%);
+  border: 1px dashed hsl(0 74% 45%);
   border-radius: 3px;
-  padding: 3px 5px;
-}
-
-.high {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.medium {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.low {
-  background: #fee2e2;
-  color: #991b1b;
+  color: hsl(0 74% 30%);
+  padding: 2px 6px;
 }
 
 button {

@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "popup.js": {
-    "mtime": 1787781117.0201194,
-    "ast_hash": "0b1d700323c3a53ce4197c0b2711c1bb",
+    "mtime": 1787878741.204307,
+    "ast_hash": "6fed27062f834f098533557d5950b8eb",
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787877358.6677213,
-    "ast_hash": "1c8169693f8ab1e5cfadb5cc2dd487bc",
+    "mtime": 1787878178.5476472,
+    "ast_hash": "98e492dfe0a2f18f2b493e6d5e0c778f",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787877761.7181485,
-    "ast_hash": "a604fa783665716365ac8749acedfaec",
+    "mtime": 1787878206.1743488,
+    "ast_hash": "8ef559a4d6b9fb544048cc42b95e3302",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787863084.7631528,
-    "ast_hash": "271adcc63561eaa4264cf18401ae3046",
+    "mtime": 1787878677.576741,
+    "ast_hash": "f903916e5f6be1c2bd09440c94507c96",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -130,13 +130,13 @@
     "semantic_hash": ""
   },
   "demos/README.md": {
-    "mtime": 1787867111.4561222,
-    "ast_hash": "689efeec36eb6556a4abdc178e93cd11",
+    "mtime": 1787878761.6345668,
+    "ast_hash": "1601872a475b99c7b4cdd83399156ba2",
     "semantic_hash": ""
   },
   "demos/spectrum-demo.html": {
-    "mtime": 1787867172.4047737,
-    "ast_hash": "f752869f2ae8869206339b04aa81a79a",
+    "mtime": 1787878754.9689312,
+    "ast_hash": "2d89f891cae8074d3cc972aa541fba6c",
     "semantic_hash": ""
   },
   "confidence-gradient.js": {

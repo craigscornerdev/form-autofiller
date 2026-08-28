@@ -9,10 +9,12 @@ const sampleProfile = {
   organizationName: "Paws & Whiskers Cat Shelter",
   organizationType: "Charity",
   missionStatement: "We rescue and rehome neglected cats while promoting humane care, adoption, and community education.",
-  contactName: "Jamie Lee",
-  position: "Development Director",
-  email: "contact@pawsandwhiskers.example",
-  phone: "(555) 014-0202",
+  organizationContact: {
+    name: "Jamie Lee",
+    title: "Development Director",
+    email: "contact@pawsandwhiskers.example",
+    phone: "(555) 014-0202"
+  },
   organizationAddress: {
     street: "123 Maple Lane",
     city: "Riverdale",
@@ -38,6 +40,7 @@ async function scanCurrentPage() {
   setScanningState();
 
   try {
+    const blankDisplay = ConfidenceGradient.colorFor(0);
     const activeTab = await getActiveTab();
     const scanResults = await chrome.scripting.executeScript({
       target: { tabId: activeTab.id },
@@ -47,8 +50,8 @@ async function scanCurrentPage() {
     const countryFields = fields.filter(isCountryField);
     const countryFillResults = await chrome.scripting.executeScript({
       target: { tabId: activeTab.id },
-      func: applyHighConfidenceMatches,
-      args: [countryFields]
+      func: fillSuggestedValues,
+      args: [countryFields, blankDisplay]
     });
 
     if (countryFillResults[0]?.result?.some((result) => result.outcome === "filled")) {
@@ -63,8 +66,8 @@ async function scanCurrentPage() {
     const fieldsToFill = refreshedFields.filter((field) => !isCountryField(field));
     const fillResults = await chrome.scripting.executeScript({
       target: { tabId: activeTab.id },
-      func: applyHighConfidenceMatches,
-      args: [fieldsToFill]
+      func: fillSuggestedValues,
+      args: [fieldsToFill, blankDisplay]
     });
     const allFillResults = [
       ...(countryFillResults[0]?.result ?? []),
@@ -139,6 +142,7 @@ function renderFieldList(fields) {
     const listItem = document.createElement("li");
     const label = document.createElement("span");
     const details = document.createElement("span");
+    const untouched = field.fillResult?.outcome === "already-filled";
     const suggestion = field.suggestion;
 
     label.className = "field-label";
@@ -146,9 +150,20 @@ function renderFieldList(fields) {
     details.className = "field-details";
     details.textContent = buildFieldDetails(field);
 
+    const rowDisplay = untouched
+      ? null
+      : suggestion?.display || ConfidenceGradient.colorFor(0);
+    if (rowDisplay) {
+      listItem.style.borderLeftWidth = "4px";
+      listItem.style.borderLeftStyle = rowDisplay.dashed ? "dashed" : "solid";
+      listItem.style.borderLeftColor = rowDisplay.outline;
+    }
+
     listItem.append(label, details);
 
-    if (suggestion) {
+    if (untouched) {
+      listItem.append(createUntouchedElement());
+    } else if (suggestion) {
       listItem.append(createSuggestionElement(suggestion));
     } else {
       listItem.append(createNoMatchElement());
@@ -162,18 +177,29 @@ function renderFieldList(fields) {
 
 function createNoMatchElement() {
   const element = document.createElement("span");
-  element.className = "field-suggestion low";
-  element.textContent = "No high-confidence match — left unchanged";
+  const display = ConfidenceGradient.colorFor(0);
+
+  element.className = "field-suggestion";
+  element.style.color = display.text;
+  element.textContent = `${ConfidenceGradient.describe(0)} — no confident match`;
+  return element;
+}
+
+function createUntouchedElement() {
+  const element = document.createElement("span");
+  element.className = "field-suggestion";
+  element.textContent = "Already filled — left unchanged";
   return element;
 }
 
 function createSuggestionElement(suggestion) {
   const element = document.createElement("span");
-  const category = suggestion.scoreCategory || suggestion.confidence || "high";
-  const label = category === "high" ? "High confidence" : category === "review" ? "Review" : "Low confidence";
+  const display = suggestion.display || ConfidenceGradient.colorFor(suggestion.confidence);
+  const label = ConfidenceGradient.describe(suggestion.confidence);
   const reason = suggestion.reason ? ` • ${suggestion.reason}` : "";
 
-  element.className = `field-suggestion ${suggestion.confidence || category}`;
+  element.className = "field-suggestion";
+  element.style.color = display.text;
   element.textContent = `${label}: ${suggestion.source} — ${suggestion.value}${reason}`;
   return element;
 }
@@ -181,10 +207,16 @@ function createSuggestionElement(suggestion) {
 function addSuggestions(fields) {
   const matcher = new FieldMatcher(getProfileFromForm());
 
-  return fields.map((field) => ({
-    ...field,
-    suggestion: matcher.getSuggestion(field)
-  }));
+  return fields.map((field) => {
+    const suggestion = matcher.getSuggestion(field);
+
+    if (suggestion) {
+      suggestion.display = ConfidenceGradient.colorFor(suggestion.confidence);
+      suggestion.decision = FillPolicy.fillDecision(suggestion);
+    }
+
+    return { ...field, suggestion };
+  });
 }
 
 function addFillResults(fields, fillResults) {
@@ -371,7 +403,7 @@ function scanPageFields() {
   }
 }
 
-function applyHighConfidenceMatches(matches) {
+function fillSuggestedValues(matches, blankDisplay) {
   const ignoredInputTypes = ["button", "hidden", "image", "reset", "submit"];
   const fields = Array.from(document.querySelectorAll("input, select, textarea"))
     .filter((field) => isFillableField(field, ignoredInputTypes));
@@ -395,39 +427,33 @@ function applyHighConfidenceMatches(matches) {
       return { index: match.index, outcome: "not-found" };
     }
 
-    const confidence = match.suggestion?.confidence || "low";
-
-    if (!match.suggestion) {
-      highlightField(field, "low");
-      return { index: match.index, outcome: "no-match" };
-    }
+    const suggestion = match.suggestion;
 
     if (field.value) {
-      highlightField(field, confidence);
       return { index: match.index, outcome: "already-filled" };
     }
 
-    if (!isSafeFillTarget(field, match.suggestion)) {
-      highlightField(field, "low");
+    if (!suggestion || !suggestion.display || suggestion.display.band === "blank") {
+      paintField(field, (suggestion && suggestion.display) || blankDisplay);
+      return { index: match.index, outcome: "left-blank" };
+    }
+
+    if (!isSafeFillTarget(field, suggestion)) {
+      paintField(field, blankDisplay);
       return { index: match.index, outcome: "unsupported-control" };
     }
 
-    if (confidence !== "high") {
-      highlightField(field, confidence);
-      return { index: match.index, outcome: "review-required" };
-    }
-
-    const valueToFill = formatValueForField(field, match.suggestion);
+    const valueToFill = formatValueForField(field, suggestion);
     field.value = valueToFill;
     field.dispatchEvent(new Event("input", { bubbles: true }));
     field.dispatchEvent(new Event("change", { bubbles: true }));
 
     if (field.value !== valueToFill) {
-      highlightField(field, "medium");
+      paintField(field, blankDisplay);
       return { index: match.index, outcome: "not-accepted" };
     }
 
-    highlightField(field, confidence);
+    paintField(field, suggestion.display);
 
     return { index: match.index, outcome: "filled" };
   }
@@ -454,17 +480,10 @@ function applyHighConfidenceMatches(matches) {
       : suggestion.value;
   }
 
-  function highlightField(field, confidence) {
-    const colors = {
-      high: { outline: "#16a34a", background: "#dcfce7" },
-      medium: { outline: "#d97706", background: "#fef3c7" },
-      low: { outline: "#dc2626", background: "#fee2e2" }
-    };
-    const color = colors[confidence] || colors.low;
-
-    field.dataset.charityAutofillerConfidence = confidence;
-    field.style.setProperty("outline", `3px solid ${color.outline}`, "important");
+  function paintField(field, display) {
+    field.dataset.charityAutofillerConfidence = display.band;
+    field.style.setProperty("outline", `3px ${display.dashed ? "dashed" : "solid"} ${display.outline}`, "important");
     field.style.setProperty("outline-offset", "2px", "important");
-    field.style.setProperty("background-color", color.background, "important");
+    field.style.setProperty("background-color", display.background, "important");
   }
 }

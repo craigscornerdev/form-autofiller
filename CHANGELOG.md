@@ -3,6 +3,15 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.12.0 — 2026-08-27 — Render the confidence spectrum
+
+- `popup.html` loads `confidence-gradient.js` and `fill-policy.js` ahead of `fuzzy-field-matcher.js` / `field-matcher.js`, so both surfaces read colours from the one helper.
+- `addSuggestions` attaches `suggestion.display = ConfidenceGradient.colorFor(confidence)` and `suggestion.decision = FillPolicy.fillDecision(suggestion)` before injection.
+- The popup list is driven by the gradient: each row's left border and the suggestion text colour come from `suggestion.display`; the band label comes from `ConfidenceGradient.describe`. No `high|review|medium|low` class keying remains. A field the page already filled shows an "Already filled — left unchanged" row with no colour.
+- `applyHighConfidenceMatches` → `fillSuggestedValues(matches, blankDisplay)`. It writes a value whenever the suggestion's band is not `blank` (review-band values now fill in place); `blank` and no-match fields get a dashed-red outline and no value; an already-filled field is left completely untouched. The injected function does no scoring — it only applies the precomputed `display`. Every fill-safety invariant is unchanged.
+- `popup.css`: the legend is now a red→green gradient bar with a dashed-red "left blank" chip.
+- `demos/spectrum-demo.html`: the sample profile nests contact details under `organizationContact`, and the street label is "Street", so every band is populated — green (8 exact fields), review (organization type, reworded contact email, composed mailing address), dashed-red blank (favourite colour, referral source), and the pre-filled website left untouched.
+
 ## 0.11.0 — 2026-08-27 — Numeric confidence through the matcher
 
 - `FieldMatcher.getSuggestion` now returns a numeric `confidence` (0..1) and a `band` (`blank` | `review` | `high`) instead of a category string. `confidence = clamp01(S_label × S_prov)` via `confidence-gradient.js`.

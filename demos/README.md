@@ -38,11 +38,10 @@ first needs them.
 
 ## What to watch, per phase
 
-- **A — `spectrum-demo.html`:** exact fields solid green and filled; the reworded
-  labels ("Organisation phone line", "Email address for the primary contact")
-  orange–yellow and filled; "Mailing address" yellow-green and filled;
-  "Favourite colour" and "How did you hear about us?" dashed red and empty;
-  the pre-filled "Website" left untouched.
+- **A — `spectrum-demo.html`:** exact fields solid green and filled; "Organization
+  Type" and the reworded "Email Address for Contact" orange–yellow and filled;
+  "Mailing Address" yellow-green and filled; "Favourite Colour" and "How did you
+  hear about us?" dashed red and empty; the pre-filled "Website" left untouched.
 - **B4 — `spectrum-demo.html`:** identical to end of Phase A. Regression check
   for the registry swap, not a new feature.
 - **B6 — `sections-demo.html`:** "Name" under *Organization* fills with the org

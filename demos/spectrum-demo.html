@@ -24,17 +24,19 @@
 
   <!--
     Watch this form with the default sample profile (Paws & Whiskers Cat Shelter).
-    Expected bands after Phase A:
-      green  (exact match, filled)  - organization name, EIN / tax id, mission,
-                                      street address, city, postal code,
-                                      contact name, contact phone
-      yellow (review, filled)       - organization type (select pick),
-                                      email address for contact (fuzzy),
-                                      mailing address (composed from parts)
-      dashed red (left blank)       - favourite colour, how did you hear about us
-      untouched                     - website (already has a value)
-    Step A3 owns this file: tune the label wording so each band is populated
-    once the real alias list is in hand.
+    Expected bands:
+      green  (exact alias on a scalar profile value, filled)
+             - Organization Name, EIN / Tax ID, Mission Statement, Street, City,
+               Postal Code, Contact Name, Contact Phone
+      yellow (review - filled, the user checks it in place)
+             - Organization Type (select option match),
+               Email Address for Contact (looser label match),
+               Mailing Address (composed from the address parts)
+      dashed red (left blank - no confident match, nothing written)
+             - Favourite Colour, How did you hear about us?
+      untouched (already has a value) - Website
+    Each popup row's left border is the same colour as that field's on-page
+    outline; both come from confidence-gradient.js.
   -->
 
   <form id="grant-request">
@@ -71,7 +73,7 @@
       <h2>Address</h2>
 
       <div class="row">
-        <label for="f-street">Street Address</label>
+        <label for="f-street">Street</label>
         <input type="text" id="f-street" name="street_address" placeholder="Street">
       </div>
 

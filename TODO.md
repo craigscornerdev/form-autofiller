@@ -29,41 +29,6 @@ default preset, not a code path.
 
 ---
 
-## Phase A — Confidence spectrum
-
-### A3 ▶ — Render the spectrum
-Files: `popup.js`, `popup.html`, `popup.css`; tune `demos/spectrum-demo.html`
-Tests: none new (DOM); covered manually by the demo
-Read: `popup.js`, DESIGN.md §6, `demos/README.md`, `demos/spectrum-demo.html`
-- [ ] `popup.html`: load `confidence-gradient.js` and `fill-policy.js` before
-  `field-matcher.js` (put them ahead of `fuzzy-field-matcher.js`).
-- [ ] `addSuggestions`: attach `suggestion.display =
-  ConfidenceGradient.colorFor(confidence)` and `suggestion.decision` before
-  injection.
-- [ ] `createSuggestionElement` / `createNoMatchElement`: color + label from
-  `suggestion.display` / `describe`; stop keying on `high|review|medium|low`.
-- [ ] Rename `applyHighConfidenceMatches` → `fillSuggestedValues` (both `func:`
-  refs). Fill when `band !== 'blank'`; `blank` → paint dashed red, write
-  nothing. Injected fn does no math — applies `suggestion.display`. Keep every
-  safety invariant.
-- [ ] `popup.css`: gradient-bar legend + a dashed-red "Left blank" chip.
-- [ ] `demos/spectrum-demo.html` exists; once the real alias list is known,
-  adjust any label that lands in the wrong band so every band is populated.
-- [ ] **Demo:** load the extension unpacked, open `demos/spectrum-demo.html`,
-  click Scan. Expect (default sample profile): Organization Name, EIN / Tax ID,
-  Mission Statement, Street Address, City, Postal Code, Contact Name, Contact
-  Phone → solid green + filled; Organization Type (select pick), Email Address
-  for Contact (fuzzy), Mailing Address (composed) → yellow + filled; Favourite
-  Colour, How did you hear about us? → dashed red + empty; Website → untouched
-  (already has a value). Every popup-row left-border color matches that field's
-  on-page outline color.
-
-**Phase A acceptance:** one 0–1 score drives both surfaces from one helper;
-review-band values fill in place; sub-floor visibly blank; charity fixture shows
-no exact-match regression.
-
----
-
 ## Phase B — Generic concept model (remove the charity coupling)
 
 Build the neutral structure in parallel (B1–B3), swap onto it (B4), then refine.
