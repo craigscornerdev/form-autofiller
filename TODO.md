@@ -39,11 +39,11 @@ default preset, not a code path.
 Files: `confidence-gradient.js`, `fill-policy.js` (new, pure, dual export)
 Tests: `tests/confidence-gradient.test.js`, `tests/fill-policy.test.js` (new)
 Read: DESIGN.md §6
-- [ ] `confidence-gradient.js`: `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`,
+- [x] `confidence-gradient.js`: `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`,
   `hueFor` (0→120 across floor→1.0), `colorFor` (→ `{band, hue, outline,
   background, text, dashed}`; sub-floor = fixed dark red + `dashed:true`),
   `describe`.
-- [ ] `fill-policy.js`: `fillDecision(suggestion, thresholds)` → `'fill'` unless
+- [x] `fill-policy.js`: `fillDecision(suggestion, thresholds)` → `'fill'` unless
   no suggestion or `band === 'blank'`.
 
 ### A2 — Numeric score through the matcher

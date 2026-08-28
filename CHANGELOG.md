@@ -3,6 +3,13 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers
+
+- Added `confidence-gradient.js`: a pure module mapping a 0..1 confidence to `DEFAULT_THRESHOLDS`, `clamp01`, `bandFor`, `hueFor` (0→120 across floor→1.0), `colorFor` (`{band, hue, dashed, outline, background, text}`; sub-floor is a fixed dark red with a dashed outline), and `describe`. Every function takes an explicit `thresholds` argument defaulting to `DEFAULT_THRESHOLDS`.
+- Added `fill-policy.js`: pure `fillDecision(suggestion, thresholds)` returning `'fill'` unless there is no suggestion or the suggestion is in the blank band.
+- Both modules use the dual export (`module.exports` + `globalThis`) so Node tests `require()` them directly and the popup can load them as plain scripts.
+- Added `tests/confidence-gradient.test.js` and `tests/fill-policy.test.js` covering every band boundary, the sub-floor colour, and custom threshold sets. Nothing consumes the helpers yet; the matcher and popup wire in at A2 and A3.
+
 ## 0.9.0 — 2026-08-27 — Wire fuzzy matching into the live suggestion path
 
 - `FieldMatcher.getMatchingRule` now falls back to `FuzzyFieldMatcher` when no exact alias matches, instead of the class sitting unused outside its own tests.

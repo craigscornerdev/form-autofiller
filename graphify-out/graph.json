@@ -4,6 +4,86 @@
   "graph": {},
   "nodes": [
     {
+      "label": "confidence-gradient.js",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "confidence_gradient",
+      "community": 20,
+      "norm_label": "confidence-gradient.js"
+    },
+    {
+      "label": "DEFAULT_THRESHOLDS",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "confidence_gradient_default_thresholds",
+      "community": 20,
+      "norm_label": "default_thresholds"
+    },
+    {
+      "label": "clamp01()",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "confidence_gradient_clamp01",
+      "community": 20,
+      "norm_label": "clamp01()"
+    },
+    {
+      "label": "bandFor()",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "confidence_gradient_bandfor",
+      "community": 20,
+      "norm_label": "bandfor()"
+    },
+    {
+      "label": "hueFor()",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "confidence_gradient_huefor",
+      "community": 20,
+      "norm_label": "huefor()"
+    },
+    {
+      "label": "colorFor()",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "confidence_gradient_colorfor",
+      "community": 20,
+      "norm_label": "colorfor()"
+    },
+    {
+      "label": "describe()",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "confidence_gradient_describe",
+      "community": 20,
+      "norm_label": "describe()"
+    },
+    {
+      "label": "ConfidenceGradient",
+      "file_type": "code",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "confidence_gradient_confidencegradient",
+      "community": 20,
+      "norm_label": "confidencegradient"
+    },
+    {
       "label": "field-matcher.js",
       "file_type": "code",
       "source_file": "field-matcher.js",
@@ -272,6 +352,36 @@
       "id": "field_semantics_semanticexports",
       "community": 7,
       "norm_label": "semanticexports"
+    },
+    {
+      "label": "fill-policy.js",
+      "file_type": "code",
+      "source_file": "fill-policy.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "fill_policy",
+      "community": 21,
+      "norm_label": "fill-policy.js"
+    },
+    {
+      "label": "fillDecision()",
+      "file_type": "code",
+      "source_file": "fill-policy.js",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "fill_policy_filldecision",
+      "community": 21,
+      "norm_label": "filldecision()"
+    },
+    {
+      "label": "FillPolicy",
+      "file_type": "code",
+      "source_file": "fill-policy.js",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "fill_policy_fillpolicy",
+      "community": 21,
+      "norm_label": "fillpolicy"
     },
     {
       "label": "fuzzy-field-matcher.js",
@@ -1024,6 +1134,26 @@
       "norm_label": "profiledatastructure"
     },
     {
+      "label": "confidence-gradient.test.js",
+      "file_type": "code",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_confidence_gradient_test",
+      "community": 20,
+      "norm_label": "confidence-gradient.test.js"
+    },
+    {
+      "label": "{\n  DEFAULT_THRESHOLDS,\n  clamp01,\n  bandFor,\n  hueFor,\n  colorFor,\n  describe: describeConfidence\n}",
+      "file_type": "code",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "tests_confidence_gradient_test_default_thresholds_clamp01_bandfor_huefor_colorfor_describe_describeconfidence",
+      "community": 20,
+      "norm_label": "{\n  default_thresholds,\n  clamp01,\n  bandfor,\n  huefor,\n  colorfor,\n  describe: describeconfidence\n}"
+    },
+    {
       "label": "field-matcher.test.js",
       "file_type": "code",
       "source_file": "tests/field-matcher.test.js",
@@ -1114,6 +1244,26 @@
       "norm_label": "fieldmatcher"
     },
     {
+      "label": "fill-policy.test.js",
+      "file_type": "code",
+      "source_file": "tests/fill-policy.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_fill_policy_test",
+      "community": 21,
+      "norm_label": "fill-policy.test.js"
+    },
+    {
+      "label": "{ fillDecision }",
+      "file_type": "code",
+      "source_file": "tests/fill-policy.test.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "tests_fill_policy_test_filldecision",
+      "community": 21,
+      "norm_label": "{ filldecision }"
+    },
+    {
       "label": "fuzzy-field-matcher.test.js",
       "file_type": "code",
       "source_file": "tests/fuzzy-field-matcher.test.js",
@@ -1174,10 +1324,20 @@
       "norm_label": "copilot-instructions.md"
     },
     {
-      "label": "graphify",
+      "label": "Copilot instructions",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L1",
+      "_origin": "ast",
+      "id": "github_copilot_instructions_copilot_instructions",
+      "community": 9,
+      "norm_label": "copilot instructions"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "github_copilot_instructions_graphify",
       "community": 9,
@@ -1344,54 +1504,274 @@
       "norm_label": "project conventions"
     },
     {
-      "label": "Communication",
+      "label": "Where things live",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L3",
+      "source_location": "L5",
       "_origin": "ast",
-      "id": "claude_communication",
+      "id": "claude_where_things_live",
       "community": 14,
-      "norm_label": "communication"
+      "norm_label": "where things live"
+    },
+    {
+      "label": "Per-step workflow",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "claude_per_step_workflow",
+      "community": 14,
+      "norm_label": "per-step workflow"
     },
     {
       "label": "Coding standards",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L6",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "claude_coding_standards",
       "community": 14,
       "norm_label": "coding standards"
     },
     {
-      "label": "Workflow",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "claude_workflow",
-      "community": 14,
-      "norm_label": "workflow"
-    },
-    {
-      "label": "File ownership",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "claude_file_ownership",
-      "community": 14,
-      "norm_label": "file ownership"
-    },
-    {
       "label": "Tools",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L27",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "claude_tools",
       "community": 14,
       "norm_label": "tools"
+    },
+    {
+      "label": "DESIGN.md",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "design",
+      "community": 17,
+      "norm_label": "design.md"
+    },
+    {
+      "label": "Design \u2014 Smart Form Autofiller",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "design_design_smart_form_autofiller",
+      "community": 17,
+      "norm_label": "design \u2014 smart form autofiller"
+    },
+    {
+      "label": "1. Product vision",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "design_1_product_vision",
+      "community": 17,
+      "norm_label": "1. product vision"
+    },
+    {
+      "label": "2. Architecture at a glance",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "design_2_architecture_at_a_glance",
+      "community": 17,
+      "norm_label": "2. architecture at a glance"
+    },
+    {
+      "label": "3. Core data model",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "design_3_core_data_model",
+      "community": 17,
+      "norm_label": "3. core data model"
+    },
+    {
+      "label": "3.1 FieldConcept",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "design_3_1_fieldconcept",
+      "community": 17,
+      "norm_label": "3.1 fieldconcept"
+    },
+    {
+      "label": "3.2 Presets",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L67",
+      "_origin": "ast",
+      "id": "design_3_2_presets",
+      "community": 17,
+      "norm_label": "3.2 presets"
+    },
+    {
+      "label": "3.3 Profile store",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L94",
+      "_origin": "ast",
+      "id": "design_3_3_profile_store",
+      "community": 17,
+      "norm_label": "3.3 profile store"
+    },
+    {
+      "label": "3.4 Location data",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "design_3_4_location_data",
+      "community": 17,
+      "norm_label": "3.4 location data"
+    },
+    {
+      "label": "4. Label \u2192 concept matching (the cascade)",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L114",
+      "_origin": "ast",
+      "id": "design_4_label_concept_matching_the_cascade",
+      "community": 17,
+      "norm_label": "4. label \u2192 concept matching (the cascade)"
+    },
+    {
+      "label": "5. Value resolution",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "design_5_value_resolution",
+      "community": 17,
+      "norm_label": "5. value resolution"
+    },
+    {
+      "label": "5.1 Scalar",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L143",
+      "_origin": "ast",
+      "id": "design_5_1_scalar",
+      "community": 17,
+      "norm_label": "5.1 scalar"
+    },
+    {
+      "label": "5.2 Composite",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L149",
+      "_origin": "ast",
+      "id": "design_5_2_composite",
+      "community": 17,
+      "norm_label": "5.2 composite"
+    },
+    {
+      "label": "6. Confidence model",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L162",
+      "_origin": "ast",
+      "id": "design_6_confidence_model",
+      "community": 17,
+      "norm_label": "6. confidence model"
+    },
+    {
+      "label": "7. Learning subsystem",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L253",
+      "_origin": "ast",
+      "id": "design_7_learning_subsystem",
+      "community": 17,
+      "norm_label": "7. learning subsystem"
+    },
+    {
+      "label": "7.1 Capture (content script + service worker)",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L255",
+      "_origin": "ast",
+      "id": "design_7_1_capture_content_script_service_worker",
+      "community": 17,
+      "norm_label": "7.1 capture (content script + service worker)"
+    },
+    {
+      "label": "7.2 Store schema (`chrome.storage.local`, local only, never synced)",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L273",
+      "_origin": "ast",
+      "id": "design_7_2_store_schema_chrome_storage_local_local_only_never_synced",
+      "community": 17,
+      "norm_label": "7.2 store schema (`chrome.storage.local`, local only, never synced)"
+    },
+    {
+      "label": "7.3 Integration",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L297",
+      "_origin": "ast",
+      "id": "design_7_3_integration",
+      "community": 17,
+      "norm_label": "7.3 integration"
+    },
+    {
+      "label": "7.4 Privacy",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L311",
+      "_origin": "ast",
+      "id": "design_7_4_privacy",
+      "community": 17,
+      "norm_label": "7.4 privacy"
+    },
+    {
+      "label": "8. Custom fields",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L319",
+      "_origin": "ast",
+      "id": "design_8_custom_fields",
+      "community": 17,
+      "norm_label": "8. custom fields"
+    },
+    {
+      "label": "9. Module layout (target)",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L332",
+      "_origin": "ast",
+      "id": "design_9_module_layout_target",
+      "community": 17,
+      "norm_label": "9. module layout (target)"
+    },
+    {
+      "label": "10. Conventions for future agents",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L362",
+      "_origin": "ast",
+      "id": "design_10_conventions_for_future_agents",
+      "community": 17,
+      "norm_label": "10. conventions for future agents"
+    },
+    {
+      "label": "11. Roadmap",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L377",
+      "_origin": "ast",
+      "id": "design_11_roadmap",
+      "community": 17,
+      "norm_label": "11. roadmap"
     },
     {
       "label": "FUZZY-LIBRARY-EVALUATION.md",
@@ -1520,128 +1900,468 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "todo",
-      "community": 2,
+      "community": 16,
       "norm_label": "todo.md"
     },
     {
-      "label": "Charity Form Autofiller \u2014 Agile Backlog",
+      "label": "Form Autofiller \u2014 Backlog",
       "file_type": "document",
       "source_file": "TODO.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "todo_charity_form_autofiller_agile_backlog",
-      "community": 2,
-      "norm_label": "charity form autofiller \u2014 agile backlog"
+      "id": "todo_form_autofiller_backlog",
+      "community": 16,
+      "norm_label": "form autofiller \u2014 backlog"
     },
     {
-      "label": "Product Goal",
+      "label": "Vision",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L3",
+      "source_location": "L17",
       "_origin": "ast",
-      "id": "todo_product_goal",
-      "community": 2,
-      "norm_label": "product goal"
+      "id": "todo_vision",
+      "community": 16,
+      "norm_label": "vision"
     },
     {
-      "label": "Major Objective: Match Real-World Charity Forms",
+      "label": "Scoring model (target \u2014 DESIGN.md \u00a76)",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L8",
+      "source_location": "L26",
       "_origin": "ast",
-      "id": "todo_major_objective_match_real_world_charity_forms",
-      "community": 2,
-      "norm_label": "major objective: match real-world charity forms"
+      "id": "todo_scoring_model_target_design_md_6",
+      "community": 16,
+      "norm_label": "scoring model (target \u2014 design.md \u00a76)"
     },
     {
-      "label": "Agile Step 1 \u2014 Capture the Form as Test Data",
-      "file_type": "document",
-      "source_file": "TODO.md",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "todo_agile_step_1_capture_the_form_as_test_data",
-      "community": 2,
-      "norm_label": "agile step 1 \u2014 capture the form as test data"
-    },
-    {
-      "label": "Agile Step 2 \u2014 Define Field Semantics and Profile Data",
-      "file_type": "document",
-      "source_file": "TODO.md",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "todo_agile_step_2_define_field_semantics_and_profile_data",
-      "community": 2,
-      "norm_label": "agile step 2 \u2014 define field semantics and profile data"
-    },
-    {
-      "label": "Agile Step 3 \u2014 Normalize Labels and Field Context",
+      "label": "Phase A \u2014 Confidence spectrum",
       "file_type": "document",
       "source_file": "TODO.md",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "todo_agile_step_3_normalize_labels_and_field_context",
-      "community": 2,
-      "norm_label": "agile step 3 \u2014 normalize labels and field context"
+      "id": "todo_phase_a_confidence_spectrum",
+      "community": 16,
+      "norm_label": "phase a \u2014 confidence spectrum"
     },
     {
-      "label": "Agile Step 4 \u2014 Add Conservative Fuzzy Matching",
+      "label": "A1 \u2014 Gradient + fill-policy helpers",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L47",
+      "source_location": "L38",
       "_origin": "ast",
-      "id": "todo_agile_step_4_add_conservative_fuzzy_matching",
-      "community": 2,
-      "norm_label": "agile step 4 \u2014 add conservative fuzzy matching"
+      "id": "todo_a1_gradient_fill_policy_helpers",
+      "community": 16,
+      "norm_label": "a1 \u2014 gradient + fill-policy helpers"
     },
     {
-      "label": "Agile Step 5 \u2014 Match Values to Controls Safely",
+      "label": "A2 \u2014 Numeric score through the matcher",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L59",
+      "source_location": "L49",
       "_origin": "ast",
-      "id": "todo_agile_step_5_match_values_to_controls_safely",
-      "community": 2,
-      "norm_label": "agile step 5 \u2014 match values to controls safely"
+      "id": "todo_a2_numeric_score_through_the_matcher",
+      "community": 16,
+      "norm_label": "a2 \u2014 numeric score through the matcher"
     },
     {
-      "label": "Agile Step 5.1 \u2014 Improve Fuzzy Matching for Real-World Labels",
+      "label": "A3 \u25b6 \u2014 Render the spectrum",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L71",
+      "source_location": "L74",
       "_origin": "ast",
-      "id": "todo_agile_step_5_1_improve_fuzzy_matching_for_real_world_labels",
-      "community": 2,
-      "norm_label": "agile step 5.1 \u2014 improve fuzzy matching for real-world labels"
+      "id": "todo_a3_render_the_spectrum",
+      "community": 16,
+      "norm_label": "a3 \u25b6 \u2014 render the spectrum"
     },
     {
-      "label": "Agile Step 5.2 \u2014 Generalize Matching and Support Custom Fields",
+      "label": "Phase B \u2014 Generic concept model (remove the charity coupling)",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L84",
+      "source_location": "L107",
       "_origin": "ast",
-      "id": "todo_agile_step_5_2_generalize_matching_and_support_custom_fields",
-      "community": 2,
-      "norm_label": "agile step 5.2 \u2014 generalize matching and support custom fields"
+      "id": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "community": 18,
+      "norm_label": "phase b \u2014 generic concept model (remove the charity coupling)"
     },
     {
-      "label": "Agile Step 6 \u2014 Verify, Tune, and Release",
+      "label": "B1 \u2014 FieldConcept schema + registry loader",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L101",
+      "source_location": "L112",
       "_origin": "ast",
-      "id": "todo_agile_step_6_verify_tune_and_release",
-      "community": 2,
-      "norm_label": "agile step 6 \u2014 verify, tune, and release"
+      "id": "todo_b1_fieldconcept_schema_registry_loader",
+      "community": 18,
+      "norm_label": "b1 \u2014 fieldconcept schema + registry loader"
     },
     {
-      "label": "Later Backlog",
+      "label": "B2 \u2014 Port the charity vocabulary to a preset",
       "file_type": "document",
       "source_file": "TODO.md",
-      "source_location": "L116",
+      "source_location": "L122",
       "_origin": "ast",
-      "id": "todo_later_backlog",
-      "community": 2,
-      "norm_label": "later backlog"
+      "id": "todo_b2_port_the_charity_vocabulary_to_a_preset",
+      "community": 18,
+      "norm_label": "b2 \u2014 port the charity vocabulary to a preset"
+    },
+    {
+      "label": "B3 \u2014 One canonical normalizer",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L130",
+      "_origin": "ast",
+      "id": "todo_b3_one_canonical_normalizer",
+      "community": 18,
+      "norm_label": "b3 \u2014 one canonical normalizer"
+    },
+    {
+      "label": "B4 \u25b6 \u2014 Swap the matcher onto the registry",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L140",
+      "_origin": "ast",
+      "id": "todo_b4_swap_the_matcher_onto_the_registry",
+      "community": 18,
+      "norm_label": "b4 \u25b6 \u2014 swap the matcher onto the registry"
+    },
+    {
+      "label": "B5 \u2014 Generic value composition",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L152",
+      "_origin": "ast",
+      "id": "todo_b5_generic_value_composition",
+      "community": 18,
+      "norm_label": "b5 \u2014 generic value composition"
+    },
+    {
+      "label": "B6 \u25b6 \u2014 Generic context signal",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L161",
+      "_origin": "ast",
+      "id": "todo_b6_generic_context_signal",
+      "community": 18,
+      "norm_label": "b6 \u25b6 \u2014 generic context signal"
+    },
+    {
+      "label": "B7 \u25b6 \u2014 Generic profile store + generated profile UI",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L178",
+      "_origin": "ast",
+      "id": "todo_b7_generic_profile_store_generated_profile_ui",
+      "community": 18,
+      "norm_label": "b7 \u25b6 \u2014 generic profile store + generated profile ui"
+    },
+    {
+      "label": "B8 \u2014 Neutral naming + version alignment",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L193",
+      "_origin": "ast",
+      "id": "todo_b8_neutral_naming_version_alignment",
+      "community": 18,
+      "norm_label": "b8 \u2014 neutral naming + version alignment"
+    },
+    {
+      "label": "B9 \u25b6 \u2014 Personal preset proves generalization",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L204",
+      "_origin": "ast",
+      "id": "todo_b9_personal_preset_proves_generalization",
+      "community": 18,
+      "norm_label": "b9 \u25b6 \u2014 personal preset proves generalization"
+    },
+    {
+      "label": "Phase C \u2014 Local embedding label matching",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L227",
+      "_origin": "ast",
+      "id": "todo_phase_c_local_embedding_label_matching",
+      "community": 16,
+      "norm_label": "phase c \u2014 local embedding label matching"
+    },
+    {
+      "label": "C1 \u2014 esbuild + service-worker skeleton",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L229",
+      "_origin": "ast",
+      "id": "todo_c1_esbuild_service_worker_skeleton",
+      "community": 16,
+      "norm_label": "c1 \u2014 esbuild + service-worker skeleton"
+    },
+    {
+      "label": "C2 \u25b6 \u2014 Embedder module (local model, not in the matcher path yet)",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "todo_c2_embedder_module_local_model_not_in_the_matcher_path_yet",
+      "community": 16,
+      "norm_label": "c2 \u25b6 \u2014 embedder module (local model, not in the matcher path yet)"
+    },
+    {
+      "label": "C3 \u2014 Build-time alias vectors",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L248",
+      "_origin": "ast",
+      "id": "todo_c3_build_time_alias_vectors",
+      "community": 16,
+      "norm_label": "c3 \u2014 build-time alias vectors"
+    },
+    {
+      "label": "C4 \u25b6 \u2014 Embedding tier in the cascade + fallback",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L257",
+      "_origin": "ast",
+      "id": "todo_c4_embedding_tier_in_the_cascade_fallback",
+      "community": 16,
+      "norm_label": "c4 \u25b6 \u2014 embedding tier in the cascade + fallback"
+    },
+    {
+      "label": "C5 \u2014 Drop Fuse.js",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L274",
+      "_origin": "ast",
+      "id": "todo_c5_drop_fuse_js",
+      "community": 16,
+      "norm_label": "c5 \u2014 drop fuse.js"
+    },
+    {
+      "label": "Phase D \u2014 Capture how the user fills forms",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L289",
+      "_origin": "ast",
+      "id": "todo_phase_d_capture_how_the_user_fills_forms",
+      "community": 16,
+      "norm_label": "phase d \u2014 capture how the user fills forms"
+    },
+    {
+      "label": "D1 \u25b6 \u2014 Content script + messaging skeleton",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L291",
+      "_origin": "ast",
+      "id": "todo_d1_content_script_messaging_skeleton",
+      "community": 16,
+      "norm_label": "d1 \u25b6 \u2014 content script + messaging skeleton"
+    },
+    {
+      "label": "D2 \u2014 Field-commit capture + denylist",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L302",
+      "_origin": "ast",
+      "id": "todo_d2_field_commit_capture_denylist",
+      "community": 16,
+      "norm_label": "d2 \u2014 field-commit capture + denylist"
+    },
+    {
+      "label": "D3 \u2014 Learning store + SW writer",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L310",
+      "_origin": "ast",
+      "id": "todo_d3_learning_store_sw_writer",
+      "community": 16,
+      "norm_label": "d3 \u2014 learning store + sw writer"
+    },
+    {
+      "label": "D4 \u25b6 \u2014 Privacy panel + retention sweep",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L318",
+      "_origin": "ast",
+      "id": "todo_d4_privacy_panel_retention_sweep",
+      "community": 16,
+      "norm_label": "d4 \u25b6 \u2014 privacy panel + retention sweep"
+    },
+    {
+      "label": "Phase E \u2014 Learning integration, custom fields, diagnostics",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L332",
+      "_origin": "ast",
+      "id": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "community": 16,
+      "norm_label": "phase e \u2014 learning integration, custom fields, diagnostics"
+    },
+    {
+      "label": "E1 \u25b6 \u2014 learnedEntries in the cascade",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L334",
+      "_origin": "ast",
+      "id": "todo_e1_learnedentries_in_the_cascade",
+      "community": 16,
+      "norm_label": "e1 \u25b6 \u2014 learnedentries in the cascade"
+    },
+    {
+      "label": "E2 \u2014 Provenance strength function",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L347",
+      "_origin": "ast",
+      "id": "todo_e2_provenance_strength_function",
+      "community": 16,
+      "norm_label": "e2 \u2014 provenance strength function"
+    },
+    {
+      "label": "E3 \u2014 Conflict UX",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L355",
+      "_origin": "ast",
+      "id": "todo_e3_conflict_ux",
+      "community": 16,
+      "norm_label": "e3 \u2014 conflict ux"
+    },
+    {
+      "label": "E4 \u25b6 \u2014 Custom concept promotion",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L363",
+      "_origin": "ast",
+      "id": "todo_e4_custom_concept_promotion",
+      "community": 16,
+      "norm_label": "e4 \u25b6 \u2014 custom concept promotion"
+    },
+    {
+      "label": "E5 \u25b6 \u2014 Diagnostics surface",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L379",
+      "_origin": "ast",
+      "id": "todo_e5_diagnostics_surface",
+      "community": 16,
+      "norm_label": "e5 \u25b6 \u2014 diagnostics surface"
+    },
+    {
+      "label": "Phase F \u2014 Optional LLM assist (opt-in)",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L391",
+      "_origin": "ast",
+      "id": "todo_phase_f_optional_llm_assist_opt_in",
+      "community": 16,
+      "norm_label": "phase f \u2014 optional llm assist (opt-in)"
+    },
+    {
+      "label": "F1 \u25b6 \u2014 Provider seam + settings",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L393",
+      "_origin": "ast",
+      "id": "todo_f1_provider_seam_settings",
+      "community": 16,
+      "norm_label": "f1 \u25b6 \u2014 provider seam + settings"
+    },
+    {
+      "label": "Ongoing \u2014 matcher hardening",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L408",
+      "_origin": "ast",
+      "id": "todo_ongoing_matcher_hardening",
+      "community": 16,
+      "norm_label": "ongoing \u2014 matcher hardening"
+    },
+    {
+      "label": "Release gate",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L422",
+      "_origin": "ast",
+      "id": "todo_release_gate",
+      "community": 16,
+      "norm_label": "release gate"
+    },
+    {
+      "label": "Other backlog",
+      "file_type": "document",
+      "source_file": "TODO.md",
+      "source_location": "L434",
+      "_origin": "ast",
+      "id": "todo_other_backlog",
+      "community": 16,
+      "norm_label": "other backlog"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "demos_readme",
+      "community": 19,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Demos",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "demos_readme_demos",
+      "community": 19,
+      "norm_label": "demos"
+    },
+    {
+      "label": "One-time setup",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "demos_readme_one_time_setup",
+      "community": 19,
+      "norm_label": "one-time setup"
+    },
+    {
+      "label": "Running a demo",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "demos_readme_running_a_demo",
+      "community": 19,
+      "norm_label": "running a demo"
+    },
+    {
+      "label": "Demo files",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "demos_readme_demo_files",
+      "community": 19,
+      "norm_label": "demo files"
+    },
+    {
+      "label": "What to watch, per phase",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "demos_readme_what_to_watch_per_phase",
+      "community": 19,
+      "norm_label": "what to watch, per phase"
+    },
+    {
+      "label": "Live forms",
+      "file_type": "document",
+      "source_file": "demos/README.md",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "demos_readme_live_forms",
+      "community": 19,
+      "norm_label": "live forms"
     },
     {
       "label": "realforms.md",
@@ -1655,6 +2375,186 @@
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_bandfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_clamp01",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_colorfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_confidencegradient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_default_thresholds",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_describe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "confidence_gradient",
+      "target": "confidence_gradient_huefor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_default_thresholds",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "confidence_gradient_huefor",
+      "target": "confidence_gradient_clamp01",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_clamp01",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "confidence_gradient_colorfor",
+      "target": "confidence_gradient_bandfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_bandfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "confidence-gradient.js",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "confidence_gradient_colorfor",
+      "target": "confidence_gradient_huefor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_huefor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_colorfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "confidence_gradient_describe",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -2112,6 +3012,48 @@
       "weight": 1.0,
       "source": "tests_field_semantics_test",
       "target": "field_semantics_fieldregistry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fill-policy.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "fill_policy",
+      "target": "fill_policy_filldecision",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fill-policy.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "fill_policy",
+      "target": "fill_policy_fillpolicy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/fill-policy.test.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_fill_policy_test",
+      "target": "fill_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/fill-policy.test.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_fill_policy_test",
+      "target": "fill_policy_filldecision",
       "confidence_score": 1.0
     },
     {
@@ -3083,6 +4025,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/confidence-gradient.test.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_confidence_gradient_test",
+      "target": "tests_confidence_gradient_test_default_thresholds_clamp01_bandfor_huefor_colorfor_describe_describeconfidence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "tests/field-matcher.test.js",
       "source_location": "L1",
       "weight": 1.0,
@@ -3153,6 +4105,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/fill-policy.test.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_fill_policy_test",
+      "target": "tests_fill_policy_test_filldecision",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "tests/fuzzy-field-matcher.test.js",
       "source_location": "L14",
       "weight": 1.0,
@@ -3177,6 +4139,16 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "github_copilot_instructions",
+      "target": "github_copilot_instructions_copilot_instructions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "github_copilot_instructions_copilot_instructions",
       "target": "github_copilot_instructions_graphify",
       "confidence_score": 1.0
     },
@@ -3324,7 +4296,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L6",
+      "source_location": "L29",
       "weight": 1.0,
       "source": "claude_project_conventions",
       "target": "claude_coding_standards",
@@ -3334,27 +4306,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L3",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "claude_project_conventions",
-      "target": "claude_communication",
+      "target": "claude_per_step_workflow",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "claude_project_conventions",
-      "target": "claude_file_ownership",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
-      "source_location": "L27",
+      "source_location": "L40",
       "weight": 1.0,
       "source": "claude_project_conventions",
       "target": "claude_tools",
@@ -3364,10 +4326,230 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L14",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "claude_project_conventions",
-      "target": "claude_workflow",
+      "target": "claude_where_things_live",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "design",
+      "target": "design_design_smart_form_autofiller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L362",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_10_conventions_for_future_agents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L377",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_11_roadmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_1_product_vision",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_2_architecture_at_a_glance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_3_core_data_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_4_label_concept_matching_the_cascade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_5_value_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_6_confidence_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L253",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_7_learning_subsystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L319",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_8_custom_fields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L332",
+      "weight": 1.0,
+      "source": "design_design_smart_form_autofiller",
+      "target": "design_9_module_layout_target",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "design_3_core_data_model",
+      "target": "design_3_1_fieldconcept",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "design_3_core_data_model",
+      "target": "design_3_2_presets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "design_3_core_data_model",
+      "target": "design_3_3_profile_store",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "design_3_core_data_model",
+      "target": "design_3_4_location_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "design_5_value_resolution",
+      "target": "design_5_1_scalar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "design_5_value_resolution",
+      "target": "design_5_2_composite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L255",
+      "weight": 1.0,
+      "source": "design_7_learning_subsystem",
+      "target": "design_7_1_capture_content_script_service_worker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L273",
+      "weight": 1.0,
+      "source": "design_7_learning_subsystem",
+      "target": "design_7_2_store_schema_chrome_storage_local_local_only_never_synced",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L297",
+      "weight": 1.0,
+      "source": "design_7_learning_subsystem",
+      "target": "design_7_3_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L311",
+      "weight": 1.0,
+      "source": "design_7_learning_subsystem",
+      "target": "design_7_4_privacy",
       "confidence_score": 1.0
     },
     {
@@ -3378,16 +4560,6 @@
       "weight": 1.0,
       "source": "fuzzy_library_evaluation",
       "target": "fuzzy_library_evaluation_fuzzy_library_evaluation",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L88",
-      "weight": 1.0,
-      "source": "todo",
-      "target": "fuzzy_library_evaluation",
       "confidence_score": 1.0
     },
     {
@@ -3487,57 +4659,27 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "todo",
-      "target": "todo_charity_form_autofiller_agile_backlog",
+      "target": "todo_form_autofiller_backlog",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L116",
+      "source_location": "L408",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_agile_backlog",
-      "target": "todo_later_backlog",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_ongoing_matcher_hardening",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L8",
+      "source_location": "L434",
       "weight": 1.0,
-      "source": "todo_charity_form_autofiller_agile_backlog",
-      "target": "todo_major_objective_match_real_world_charity_forms",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "todo_charity_form_autofiller_agile_backlog",
-      "target": "todo_product_goal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_1_capture_the_form_as_test_data",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "TODO.md",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_2_define_field_semantics_and_profile_data",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_other_backlog",
       "confidence_score": 1.0
     },
     {
@@ -3546,61 +4688,421 @@
       "source_file": "TODO.md",
       "source_location": "L36",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_3_normalize_labels_and_field_context",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_a_confidence_spectrum",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L47",
+      "source_location": "L107",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_4_add_conservative_fuzzy_matching",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L71",
+      "source_location": "L227",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_5_1_improve_fuzzy_matching_for_real_world_labels",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_c_local_embedding_label_matching",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L84",
+      "source_location": "L289",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_5_2_generalize_matching_and_support_custom_fields",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_d_capture_how_the_user_fills_forms",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L59",
+      "source_location": "L332",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_5_match_values_to_controls_safely",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_e_learning_integration_custom_fields_diagnostics",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "TODO.md",
-      "source_location": "L101",
+      "source_location": "L391",
       "weight": 1.0,
-      "source": "todo_major_objective_match_real_world_charity_forms",
-      "target": "todo_agile_step_6_verify_tune_and_release",
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_phase_f_optional_llm_assist_opt_in",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L422",
+      "weight": 1.0,
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_release_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_scoring_model_target_design_md_6",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "todo_form_autofiller_backlog",
+      "target": "todo_vision",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "todo_phase_a_confidence_spectrum",
+      "target": "todo_a1_gradient_fill_policy_helpers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "todo_phase_a_confidence_spectrum",
+      "target": "todo_a2_numeric_score_through_the_matcher",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "todo_phase_a_confidence_spectrum",
+      "target": "todo_a3_render_the_spectrum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b1_fieldconcept_schema_registry_loader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L122",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b2_port_the_charity_vocabulary_to_a_preset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b3_one_canonical_normalizer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L140",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b4_swap_the_matcher_onto_the_registry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L152",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b5_generic_value_composition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b6_generic_context_signal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L178",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b7_generic_profile_store_generated_profile_ui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L193",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b8_neutral_naming_version_alignment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L204",
+      "weight": 1.0,
+      "source": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
+      "target": "todo_b9_personal_preset_proves_generalization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L229",
+      "weight": 1.0,
+      "source": "todo_phase_c_local_embedding_label_matching",
+      "target": "todo_c1_esbuild_service_worker_skeleton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "todo_phase_c_local_embedding_label_matching",
+      "target": "todo_c2_embedder_module_local_model_not_in_the_matcher_path_yet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L248",
+      "weight": 1.0,
+      "source": "todo_phase_c_local_embedding_label_matching",
+      "target": "todo_c3_build_time_alias_vectors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L257",
+      "weight": 1.0,
+      "source": "todo_phase_c_local_embedding_label_matching",
+      "target": "todo_c4_embedding_tier_in_the_cascade_fallback",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L274",
+      "weight": 1.0,
+      "source": "todo_phase_c_local_embedding_label_matching",
+      "target": "todo_c5_drop_fuse_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L291",
+      "weight": 1.0,
+      "source": "todo_phase_d_capture_how_the_user_fills_forms",
+      "target": "todo_d1_content_script_messaging_skeleton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L302",
+      "weight": 1.0,
+      "source": "todo_phase_d_capture_how_the_user_fills_forms",
+      "target": "todo_d2_field_commit_capture_denylist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L310",
+      "weight": 1.0,
+      "source": "todo_phase_d_capture_how_the_user_fills_forms",
+      "target": "todo_d3_learning_store_sw_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L318",
+      "weight": 1.0,
+      "source": "todo_phase_d_capture_how_the_user_fills_forms",
+      "target": "todo_d4_privacy_panel_retention_sweep",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L334",
+      "weight": 1.0,
+      "source": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "target": "todo_e1_learnedentries_in_the_cascade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L347",
+      "weight": 1.0,
+      "source": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "target": "todo_e2_provenance_strength_function",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L355",
+      "weight": 1.0,
+      "source": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "target": "todo_e3_conflict_ux",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L363",
+      "weight": 1.0,
+      "source": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "target": "todo_e4_custom_concept_promotion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L379",
+      "weight": 1.0,
+      "source": "todo_phase_e_learning_integration_custom_fields_diagnostics",
+      "target": "todo_e5_diagnostics_surface",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "TODO.md",
+      "source_location": "L393",
+      "weight": 1.0,
+      "source": "todo_phase_f_optional_llm_assist_opt_in",
+      "target": "todo_f1_provider_seam_settings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "demos_readme",
+      "target": "demos_readme_demos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "demos_readme_demos",
+      "target": "demos_readme_demo_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "demos_readme_demos",
+      "target": "demos_readme_live_forms",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "demos_readme_demos",
+      "target": "demos_readme_one_time_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "demos_readme_demos",
+      "target": "demos_readme_running_a_demo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "demos/README.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "demos_readme_demos",
+      "target": "demos_readme_what_to_watch_per_phase",
       "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c4ce5409ab4064277137ecc2b3b408e961c0be46"
+  "built_at_commit": "fd0de8d3b08990d391c869e6aebb00aaa86ba7de"
 }

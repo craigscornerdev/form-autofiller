@@ -25,13 +25,13 @@
     "semantic_hash": ""
   },
   ".agent.md": {
-    "mtime": 1787783898.2285326,
-    "ast_hash": "ffd3170a511522447ad931858f2ef22c",
+    "mtime": 1787869337.8353953,
+    "ast_hash": "0b1516a6c8126e5a510544374dd1f8fc",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
-    "mtime": 1787342252.4769661,
-    "ast_hash": "2b23503628bf2ec71d067a85ca8948ab",
+    "mtime": 1787869343.9853418,
+    "ast_hash": "d77ba071ef49025428ebb97e94c54464",
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787781535.9905498,
-    "ast_hash": "d17a643ef2332a1aea51716533d5d2d6",
+    "mtime": 1787868033.9360015,
+    "ast_hash": "a496f53dfb7116fe908ccd27ec59cc32",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -105,8 +105,8 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1787784180.771638,
-    "ast_hash": "b50061eb7d121d681a592fd9015d3bdc",
+    "mtime": 1787867506.121688,
+    "ast_hash": "3fa1eae9c06087ac257a098ae6b27459",
     "semantic_hash": ""
   },
   "FUZZY-LIBRARY-EVALUATION.md": {
@@ -115,8 +115,48 @@
     "semantic_hash": ""
   },
   "realforms.md": {
-    "mtime": 1787784672.748775,
-    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "mtime": 1787863407.6316354,
+    "ast_hash": "5280a1d64c60e7b56494b7f4ae9dda29",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1787877212.9020264,
+    "ast_hash": "01870fb3473e524109c9bed168b407cc",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1787868064.6182287,
+    "ast_hash": "9d2c517e48ec7955c1657460e996b90a",
+    "semantic_hash": ""
+  },
+  "demos/README.md": {
+    "mtime": 1787867111.4561222,
+    "ast_hash": "689efeec36eb6556a4abdc178e93cd11",
+    "semantic_hash": ""
+  },
+  "demos/spectrum-demo.html": {
+    "mtime": 1787867172.4047737,
+    "ast_hash": "f752869f2ae8869206339b04aa81a79a",
+    "semantic_hash": ""
+  },
+  "confidence-gradient.js": {
+    "mtime": 1787877304.595018,
+    "ast_hash": "1008b4cffcea52fa3dfe70c0a7dc0f31",
+    "semantic_hash": ""
+  },
+  "fill-policy.js": {
+    "mtime": 1787877311.7454176,
+    "ast_hash": "6bceb661e05edbf2e6fdf418b11efa52",
+    "semantic_hash": ""
+  },
+  "tests/confidence-gradient.test.js": {
+    "mtime": 1787877329.8496192,
+    "ast_hash": "db985410435ae45b5a97d6907b10d1c8",
+    "semantic_hash": ""
+  },
+  "tests/fill-policy.test.js": {
+    "mtime": 1787877337.7480166,
+    "ast_hash": "5da17c63bcb931c413c5f9f426c8b704",
     "semantic_hash": ""
   }
 }
