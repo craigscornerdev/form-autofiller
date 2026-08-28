@@ -49,7 +49,7 @@ Files: `presets/charity.js` (new)
 Tests: `tests/presets-charity.test.js` (new — parity with the current registry:
 every field present, aliases preserved, `neverAutoFill` → `fillPolicy`)
 Read: `field-semantics.js`, DESIGN.md §3.1
-- [ ] All current fields as `FieldConcept[]` in `presets/charity.js` (+ `extends:
+- [x] All current fields as `FieldConcept[]` in `presets/charity.js` (+ `extends:
   "base"`). Nothing consumes it yet; the old path is untouched.
 
 ### B3 — One canonical normalizer

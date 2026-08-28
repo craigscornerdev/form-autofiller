@@ -3,6 +3,13 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.14.0 — 2026-08-28 — Charity vocabulary as a preset
+
+- Added `presets/charity.js`: all 21 fields the current `FieldSemantics` registry describes, ported to domain-neutral `FieldConcept`s under the `org.*` and `event.*` namespaces. Every original alias is carried over, `organizationType`'s select-option map becomes `enumValues`, and the three `neverAutoFill` event fields (`event.name` / `event.date` / `event.description`) become `fillPolicy: "never"`. The array carries `extends: "base"`, so `concept-registry.load(['charity'])` unions the shared `contact.*` / `address.*` concepts underneath it. Dual export (`module.exports` + `globalThis.AutofillPresetCharity`). Nothing consumes it yet — the matcher still runs off `FieldRegistry`.
+- `org.ein` also answers to the fuller tax-id wordings (`federal tax identification number`, `tax identification number`, `federal employer identification number`, `fein`) so the semantic tier has anchors to match against later.
+- Added `tests/presets-charity.test.js`: field-for-field parity with `FieldSemantics` (every key ported, aliases preserved, labels and select options intact, `neverAutoFill` → `fillPolicy`), the `extends: "base"` union order, base/charity id-collision check, and the known label-miss cases (`nonprofit` vs `non-profit`, EIN / tax-id variants, multiline mission / event description).
+- `tests/concept-registry.test.js`: the unknown-preset case now names a preset that stays unknown, since `charity` resolves.
+
 ## 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader
 
 - Added `concept-registry.js`: the `FieldConcept` JSDoc typedef (domain-neutral shape from DESIGN.md §3.1) plus `load(enabledPresets, customConcepts)`, which resolves each enabled preset (by built-in name or inline), pulls `extends` dependencies depth-first (a shared base is collected once), validates every concept, and unions them by `id` into a single active registry — custom concepts appended last so they win an id collision while the original slot order is kept.

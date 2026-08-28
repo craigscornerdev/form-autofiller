@@ -1304,6 +1304,76 @@
       "norm_label": "baseconcepts"
     },
     {
+      "label": "charity.js",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "presets_charity",
+      "community": 22,
+      "norm_label": "charity.js"
+    },
+    {
+      "label": "ORG_HINTS",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "presets_charity_org_hints",
+      "community": 22,
+      "norm_label": "org_hints"
+    },
+    {
+      "label": "ORG_ADDRESS_HINTS",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "presets_charity_org_address_hints",
+      "community": 22,
+      "norm_label": "org_address_hints"
+    },
+    {
+      "label": "ORG_CONTACT_HINTS",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "presets_charity_org_contact_hints",
+      "community": 22,
+      "norm_label": "org_contact_hints"
+    },
+    {
+      "label": "EVENT_HINTS",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "presets_charity_event_hints",
+      "community": 22,
+      "norm_label": "event_hints"
+    },
+    {
+      "label": "EVENT_ORGANIZER_HINTS",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "presets_charity_event_organizer_hints",
+      "community": 22,
+      "norm_label": "event_organizer_hints"
+    },
+    {
+      "label": "charityConcepts",
+      "file_type": "code",
+      "source_file": "presets/charity.js",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "presets_charity_charityconcepts",
+      "community": 22,
+      "norm_label": "charityconcepts"
+    },
+    {
       "label": "profile-data-structure.js",
       "file_type": "code",
       "source_file": "profile-data-structure.js",
@@ -1594,6 +1664,66 @@
       "norm_label": "labelnormalizer"
     },
     {
+      "label": "presets-charity.test.js",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test",
+      "community": 7,
+      "norm_label": "presets-charity.test.js"
+    },
+    {
+      "label": "charityConcepts",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test_charityconcepts",
+      "community": 7,
+      "norm_label": "charityconcepts"
+    },
+    {
+      "label": "{ FieldSemantics }",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test_fieldsemantics",
+      "community": 7,
+      "norm_label": "{ fieldsemantics }"
+    },
+    {
+      "label": "{ load, validateConcept }",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test_load_validateconcept",
+      "community": 7,
+      "norm_label": "{ load, validateconcept }"
+    },
+    {
+      "label": "CONCEPT_ID_FOR",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test_concept_id_for",
+      "community": 7,
+      "norm_label": "concept_id_for"
+    },
+    {
+      "label": "byId",
+      "file_type": "code",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "tests_presets_charity_test_byid",
+      "community": 7,
+      "norm_label": "byid"
+    },
+    {
       "label": ".agent.md",
       "file_type": "document",
       "source_file": ".agent.md",
@@ -1654,10 +1784,20 @@
       "norm_label": "changelog"
     },
     {
-      "label": "0.12.1 \u2014 2026-08-27 \u2014 Keep the popup's script wiring honest",
+      "label": "0.13.0 \u2014 2026-08-28 \u2014 FieldConcept schema + registry loader",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
       "source_location": "L6",
+      "_origin": "ast",
+      "id": "changelog_0_13_0_2026_08_28_fieldconcept_schema_registry_loader",
+      "community": 1,
+      "norm_label": "0.13.0 \u2014 2026-08-28 \u2014 fieldconcept schema + registry loader"
+    },
+    {
+      "label": "0.12.1 \u2014 2026-08-27 \u2014 Keep the popup's script wiring honest",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "changelog_0_12_1_2026_08_27_keep_the_popup_s_script_wiring_honest",
       "community": 1,
@@ -1667,7 +1807,7 @@
       "label": "0.12.0 \u2014 2026-08-27 \u2014 Render the confidence spectrum",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L13",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "changelog_0_12_0_2026_08_27_render_the_confidence_spectrum",
       "community": 1,
@@ -1677,7 +1817,7 @@
       "label": "0.11.0 \u2014 2026-08-27 \u2014 Numeric confidence through the matcher",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L22",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "changelog_0_11_0_2026_08_27_numeric_confidence_through_the_matcher",
       "community": 1,
@@ -1687,7 +1827,7 @@
       "label": "0.10.0 \u2014 2026-08-27 \u2014 Gradient + fill-policy helpers",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L30",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "changelog_0_10_0_2026_08_27_gradient_fill_policy_helpers",
       "community": 1,
@@ -1697,7 +1837,7 @@
       "label": "0.9.0 \u2014 2026-08-27 \u2014 Wire fuzzy matching into the live suggestion path",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L37",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "changelog_0_9_0_2026_08_27_wire_fuzzy_matching_into_the_live_suggestion_path",
       "community": 1,
@@ -1707,7 +1847,7 @@
       "label": "0.8.0 \u2014 2026-08-21 \u2014 Safe control matching and step 5 completion",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L45",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "changelog_0_8_0_2026_08_21_safe_control_matching_and_step_5_completion",
       "community": 1,
@@ -1717,7 +1857,7 @@
       "label": "0.7.0 \u2014 2026-08-21 \u2014 Foundation for conservative fuzzy matching (Steps 1-4)",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L64",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "changelog_0_7_0_2026_08_21_foundation_for_conservative_fuzzy_matching_steps_1_4",
       "community": 1,
@@ -1727,7 +1867,7 @@
       "label": "0.6.2 \u2014 2026-08-21 \u2014 Project maintenance",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L75",
+      "source_location": "L82",
       "_origin": "ast",
       "id": "changelog_0_6_2_2026_08_21_project_maintenance",
       "community": 1,
@@ -1737,7 +1877,7 @@
       "label": "0.6.1 \u2014 2026-08-21 \u2014 EIN number-field support",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L86",
+      "source_location": "L93",
       "_origin": "ast",
       "id": "changelog_0_6_1_2026_08_21_ein_number_field_support",
       "community": 1,
@@ -1747,7 +1887,7 @@
       "label": "0.6.0 \u2014 2026-08-21 \u2014 More exact high-confidence matches",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L92",
+      "source_location": "L99",
       "_origin": "ast",
       "id": "changelog_0_6_0_2026_08_21_more_exact_high_confidence_matches",
       "community": 1,
@@ -1757,7 +1897,7 @@
       "label": "0.5.0 \u2014 2026-08-21 \u2014 High-confidence fill and color review",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L98",
+      "source_location": "L105",
       "_origin": "ast",
       "id": "changelog_0_5_0_2026_08_21_high_confidence_fill_and_color_review",
       "community": 1,
@@ -1767,7 +1907,7 @@
       "label": "0.4.0 \u2014 2026-08-21 \u2014 First conservative match",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L107",
+      "source_location": "L114",
       "_origin": "ast",
       "id": "changelog_0_4_0_2026_08_21_first_conservative_match",
       "community": 1,
@@ -1777,7 +1917,7 @@
       "label": "0.3.0 \u2014 2026-08-21 \u2014 Sample charity profile",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L113",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "changelog_0_3_0_2026_08_21_sample_charity_profile",
       "community": 1,
@@ -1787,7 +1927,7 @@
       "label": "0.2.0 \u2014 2026-08-21 \u2014 Field details",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L119",
+      "source_location": "L126",
       "_origin": "ast",
       "id": "changelog_0_2_0_2026_08_21_field_details",
       "community": 1,
@@ -1797,7 +1937,7 @@
       "label": "0.1.1 \u2014 2026-08-21 \u2014 Scan the open page",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L125",
+      "source_location": "L132",
       "_origin": "ast",
       "id": "changelog_0_1_1_2026_08_21_scan_the_open_page",
       "community": 1,
@@ -1807,7 +1947,7 @@
       "label": "0.1.0 \u2014 2026-08-21 \u2014 First extension shell",
       "file_type": "document",
       "source_file": "CHANGELOG.md",
-      "source_location": "L131",
+      "source_location": "L138",
       "_origin": "ast",
       "id": "changelog_0_1_0_2026_08_21_first_extension_shell",
       "community": 1,
@@ -2270,7 +2410,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "todo_phase_b_generic_concept_model_remove_the_charity_coupling",
-      "community": 22,
+      "community": 16,
       "norm_label": "phase b \u2014 generic concept model (remove the charity coupling)"
     },
     {
@@ -2280,7 +2420,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "todo_b1_fieldconcept_schema_registry_loader",
-      "community": 22,
+      "community": 16,
       "norm_label": "b1 \u2014 fieldconcept schema + registry loader"
     },
     {
@@ -2290,7 +2430,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "todo_b2_port_the_charity_vocabulary_to_a_preset",
-      "community": 22,
+      "community": 16,
       "norm_label": "b2 \u2014 port the charity vocabulary to a preset"
     },
     {
@@ -2300,7 +2440,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "todo_b3_one_canonical_normalizer",
-      "community": 22,
+      "community": 16,
       "norm_label": "b3 \u2014 one canonical normalizer"
     },
     {
@@ -2310,7 +2450,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "todo_b4_swap_the_matcher_onto_the_registry",
-      "community": 22,
+      "community": 16,
       "norm_label": "b4 \u25b6 \u2014 swap the matcher onto the registry"
     },
     {
@@ -2320,7 +2460,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "todo_b5_generic_value_composition",
-      "community": 22,
+      "community": 16,
       "norm_label": "b5 \u2014 generic value composition"
     },
     {
@@ -2330,7 +2470,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "todo_b6_generic_context_signal",
-      "community": 22,
+      "community": 16,
       "norm_label": "b6 \u25b6 \u2014 generic context signal"
     },
     {
@@ -2340,7 +2480,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "todo_b7_generic_profile_store_generated_profile_ui",
-      "community": 22,
+      "community": 16,
       "norm_label": "b7 \u25b6 \u2014 generic profile store + generated profile ui"
     },
     {
@@ -2350,7 +2490,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "todo_b8_neutral_naming_version_alignment",
-      "community": 22,
+      "community": 16,
       "norm_label": "b8 \u2014 neutral naming + version alignment"
     },
     {
@@ -2360,7 +2500,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "todo_b9_personal_preset_proves_generalization",
-      "community": 22,
+      "community": 16,
       "norm_label": "b9 \u25b6 \u2014 personal preset proves generalization"
     },
     {
@@ -2787,6 +2927,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "concept_registry",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -2853,6 +3004,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "concept_registry_validateconcept",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -2871,6 +3033,17 @@
       "source_location": "L9",
       "weight": 1.0,
       "source": "tests_concept_registry_test",
+      "target": "concept_registry_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
       "target": "concept_registry_load",
       "confidence_score": 1.0
     },
@@ -3502,6 +3675,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "field_semantics",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3509,6 +3693,17 @@
       "source_location": "L13",
       "weight": 1.0,
       "source": "tests_field_semantics_test",
+      "target": "field_semantics_fieldsemantics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
       "target": "field_semantics_fieldsemantics",
       "confidence_score": 1.0
     },
@@ -4629,6 +4824,77 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_charityconcepts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_event_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_event_organizer_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_org_address_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_org_contact_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "presets/charity.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "presets_charity",
+      "target": "presets_charity_org_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "presets_charity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "profile-data-structure.js",
       "source_location": "L8",
       "weight": 1.0,
@@ -4840,6 +5106,56 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "tests_presets_charity_test_byid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "tests_presets_charity_test_charityconcepts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "tests_presets_charity_test_concept_id_for",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "tests_presets_charity_test_fieldsemantics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/presets-charity.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_presets_charity_test",
+      "target": "tests_presets_charity_test_load_validateconcept",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -4871,7 +5187,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L30",
+      "source_location": "L37",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_10_0_2026_08_27_gradient_fill_policy_helpers",
@@ -4881,7 +5197,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L22",
+      "source_location": "L29",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_11_0_2026_08_27_numeric_confidence_through_the_matcher",
@@ -4891,7 +5207,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L13",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_12_0_2026_08_27_render_the_confidence_spectrum",
@@ -4901,7 +5217,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L6",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_12_1_2026_08_27_keep_the_popup_s_script_wiring_honest",
@@ -4911,7 +5227,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L131",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "changelog_changelog",
+      "target": "changelog_0_13_0_2026_08_28_fieldconcept_schema_registry_loader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L138",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_1_0_2026_08_21_first_extension_shell",
@@ -4921,7 +5247,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L125",
+      "source_location": "L132",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_1_1_2026_08_21_scan_the_open_page",
@@ -4931,7 +5257,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L119",
+      "source_location": "L126",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_2_0_2026_08_21_field_details",
@@ -4941,7 +5267,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L113",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_3_0_2026_08_21_sample_charity_profile",
@@ -4951,7 +5277,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L107",
+      "source_location": "L114",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_4_0_2026_08_21_first_conservative_match",
@@ -4961,7 +5287,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L98",
+      "source_location": "L105",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_5_0_2026_08_21_high_confidence_fill_and_color_review",
@@ -4971,7 +5297,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L92",
+      "source_location": "L99",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_6_0_2026_08_21_more_exact_high_confidence_matches",
@@ -4981,7 +5307,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L86",
+      "source_location": "L93",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_6_1_2026_08_21_ein_number_field_support",
@@ -4991,7 +5317,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L75",
+      "source_location": "L82",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_6_2_2026_08_21_project_maintenance",
@@ -5001,7 +5327,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L64",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_7_0_2026_08_21_foundation_for_conservative_fuzzy_matching_steps_1_4",
@@ -5011,7 +5337,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L45",
+      "source_location": "L52",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_8_0_2026_08_21_safe_control_matching_and_step_5_completion",
@@ -5021,7 +5347,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CHANGELOG.md",
-      "source_location": "L37",
+      "source_location": "L44",
       "weight": 1.0,
       "source": "changelog_changelog",
       "target": "changelog_0_9_0_2026_08_27_wire_fuzzy_matching_into_the_live_suggestion_path",
@@ -5809,5 +6135,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "38bc4b0cb987335a947f7fadc87f5ef94a58c462"
+  "built_at_commit": "c7bde6334df2aa21e6b0ec728ed78d8c7c98128e"
 }

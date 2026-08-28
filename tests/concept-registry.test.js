@@ -163,7 +163,7 @@ describe('concept-registry.load — rejects malformed input', () => {
   });
 
   test('unknown preset name', () => {
-    expect(() => load(['charity'])).toThrow(/unknown preset "charity"/);
+    expect(() => load(['nonexistent'])).toThrow(/unknown preset "nonexistent"/);
   });
 
   test('non-array arguments', () => {

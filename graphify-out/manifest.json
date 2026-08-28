@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787881162.516487,
-    "ast_hash": "2c5b0401b80c249aab2d21e07740ae1b",
+    "mtime": 1787915165.0423841,
+    "ast_hash": "b91d51d0a585ed2414aa486bf3cb97a4",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787878830.4227648,
-    "ast_hash": "b236454c6439ca60938fe56e6e90e7d3",
+    "mtime": 1787915167.3930888,
+    "ast_hash": "c749caf948f724ee2768f42f8a916a6c",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -175,8 +175,18 @@
     "semantic_hash": ""
   },
   "tests/concept-registry.test.js": {
-    "mtime": 1787915126.7850444,
-    "ast_hash": "a80aa6cee0334651d428160058a23125",
+    "mtime": 1787915743.9928057,
+    "ast_hash": "d5b21a06a6cfbf881f25f8452e86850b",
+    "semantic_hash": ""
+  },
+  "presets/charity.js": {
+    "mtime": 1787915711.468847,
+    "ast_hash": "27bfde6c414ae887ef9e33ffee2cea00",
+    "semantic_hash": ""
+  },
+  "tests/presets-charity.test.js": {
+    "mtime": 1787915739.6741164,
+    "ast_hash": "b48577a35e2dae9e6d829b8af71fdeed",
     "semantic_hash": ""
   }
 }
