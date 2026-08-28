@@ -57,7 +57,7 @@ Files: `label-normalizer.js`, `field-matcher.js`, `fuzzy-field-matcher.js`
 Tests: `tests/label-normalizer.test.js` (add cross-call-site parity cases);
 adjust `tests/field-matcher.test.js` normalize case
 Read: DESIGN.md §3.2, all three files
-- [ ] Dual-export footer on `label-normalizer.js`. Delete `FieldMatcher.normalize`
+- [x] Dual-export footer on `label-normalizer.js`. Delete `FieldMatcher.normalize`
   and the inline normalize in `fuzzy-field-matcher.js`; both delegate to it. Run
   every concept alias through it at load. Preserves `/` — verify no alias relies
   on `/`→space first.

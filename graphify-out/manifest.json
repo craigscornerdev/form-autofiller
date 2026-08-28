@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787878133.1187615,
-    "ast_hash": "e1d86fec0babb68a0e7bfb117a8370e8",
+    "mtime": 1787916262.0620492,
+    "ast_hash": "2f27a00fdb52a7748020df8b4dcc9e2e",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787879559.9494827,
-    "ast_hash": "4f87b7312f825d5b7f81b76d1d929ec6",
+    "mtime": 1787916390.375798,
+    "ast_hash": "199d3f61cf6cf8ec88c079e7ec983906",
     "semantic_hash": ""
   },
   ".agent.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787915165.0423841,
-    "ast_hash": "b91d51d0a585ed2414aa486bf3cb97a4",
+    "mtime": 1787915764.4030569,
+    "ast_hash": "63780a1bef77f6c4b6e1e1f31d3461f7",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787915167.3930888,
-    "ast_hash": "c749caf948f724ee2768f42f8a916a6c",
+    "mtime": 1787915768.424439,
+    "ast_hash": "a1908900a94ce7fef98f95f9a7619d24",
     "semantic_hash": ""
   },
   "popup.html": {
-    "mtime": 1787879723.4448967,
-    "ast_hash": "f903916e5f6be1c2bd09440c94507c96",
+    "mtime": 1787916292.123848,
+    "ast_hash": "07294563dda1f10967153cbcb6e0fd6d",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -65,13 +65,13 @@
     "semantic_hash": ""
   },
   "fuzzy-field-matcher.js": {
-    "mtime": 1787863200.2309918,
-    "ast_hash": "1f3772efdf5809a38acfbd0c879be522",
+    "mtime": 1787916398.641995,
+    "ast_hash": "f640a645cd2c166cd5ebc679049b30b5",
     "semantic_hash": ""
   },
   "label-normalizer.js": {
-    "mtime": 1787349847.936019,
-    "ast_hash": "71f071d9fb9ef3fe01ee4f9bdd1840ed",
+    "mtime": 1787916367.3851993,
+    "ast_hash": "94563cb02f8a0c2eef5b7cb67c02cdd8",
     "semantic_hash": ""
   },
   "profile-data-structure.js": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "tests/label-normalizer.test.js": {
-    "mtime": 1787349847.9380195,
-    "ast_hash": "24a38125bab33c96ffe77522b526734e",
+    "mtime": 1787916384.9363258,
+    "ast_hash": "c978b0b51504f4aeb27f9acf9e30a4f4",
     "semantic_hash": ""
   },
   "charity-form-fixture.html": {

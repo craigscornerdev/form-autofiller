@@ -16,6 +16,9 @@ const { FieldSemantics: FuzzyFieldSemantics } = fuzzySemantics;
 const Fuse = typeof module !== 'undefined' && module.exports
   ? require('fuse.js')
   : globalThis.Fuse;
+const FuzzyLabelNormalizerClass = typeof module !== 'undefined' && module.exports
+  ? require('./label-normalizer')
+  : globalThis.CharityLabelNormalizer;
 
 class FuzzyFieldMatcher {
   constructor() {
@@ -46,7 +49,18 @@ class FuzzyFieldMatcher {
       url: ['url', 'text']
     };
 
-    this.fieldEntries = Object.entries(FuzzyFieldSemantics).flatMap(([fieldName, fieldDef]) => (
+    // One canonical normalizer: every alias enters the index in the same
+    // normalized form labels are reduced to before matching.
+    this.labelNormalizer = new FuzzyLabelNormalizerClass();
+    this.fieldDefs = {};
+    Object.entries(FuzzyFieldSemantics).forEach(([fieldName, fieldDef]) => {
+      this.fieldDefs[fieldName] = {
+        ...fieldDef,
+        aliases: (fieldDef.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
+      };
+    });
+
+    this.fieldEntries = Object.entries(this.fieldDefs).flatMap(([fieldName, fieldDef]) => (
       fieldDef.aliases || []
     ).map((alias) => ({ fieldName, alias })));
     this.fuzzyIndex = typeof Fuse === 'function'
@@ -70,7 +84,7 @@ class FuzzyFieldMatcher {
 
     // Fuse only retrieves likely aliases; our scorer still owns all safety decisions.
     this._retrieveFieldNames(normalizedLabel).forEach((fieldName) => {
-      const fieldDef = FuzzyFieldSemantics[fieldName];
+      const fieldDef = this.fieldDefs[fieldName];
       const score = this._scoreMatch(normalizedLabel, fieldContext, fieldName, fieldDef);
       
       if (score > 0) {
@@ -102,7 +116,7 @@ class FuzzyFieldMatcher {
 
   _retrieveFieldNames(normalizedLabel) {
     if (!this.fuzzyIndex) {
-      return Object.keys(FuzzyFieldSemantics);
+      return Object.keys(this.fieldDefs);
     }
 
     const fieldNames = [];

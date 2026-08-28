@@ -11,6 +11,8 @@
  */
 
 const LabelNormalizer = require('../label-normalizer');
+const FieldMatcher = require('../field-matcher');
+const FuzzyFieldMatcher = require('../fuzzy-field-matcher');
 
 describe('Label Normalizer - Step 3 Validation', () => {
   let normalizer;
@@ -66,6 +68,12 @@ describe('Label Normalizer - Step 3 Validation', () => {
     test('preserves slashes for compound terms', () => {
       expect(normalizer.normalize('State/Province')).toBe('state/province');
       expect(normalizer.normalize('First/Last Name')).toBe('first/last name');
+    });
+
+    test('a tight slash is a compound; a spaced slash is a separator', () => {
+      expect(normalizer.normalize('State/Province')).toBe('state/province');
+      expect(normalizer.normalize('State / Province')).toBe('state province');
+      expect(normalizer.normalize('State  /  Province')).toBe('state province');
     });
 
     test('handles mixed case with punctuation', () => {
@@ -206,7 +214,7 @@ describe('Label Normalizer - Step 3 Validation', () => {
 
     test('handles abbreviations in labels', () => {
       expect(normalizer.normalize('ORG. NAME')).toBe('org name');
-      expect(normalizer.normalize('ST / PROV.')).toBe('st / prov');
+      expect(normalizer.normalize('ST / PROV.')).toBe('st prov');
     });
 
     test('handles label with leading/trailing punctuation', () => {
@@ -302,6 +310,39 @@ describe('Label Normalizer - Step 3 Validation', () => {
     test('normalizes null field element gracefully', () => {
       const sources = normalizer.gatherLabelSources(null);
       expect(sources).toEqual([]);
+    });
+  });
+});
+
+describe('One canonical normalizer across call sites', () => {
+  test('FieldMatcher and FuzzyFieldMatcher normalize through LabelNormalizer', () => {
+    expect(new FieldMatcher({}).labelNormalizer).toBeInstanceOf(LabelNormalizer);
+    expect(new FuzzyFieldMatcher().labelNormalizer).toBeInstanceOf(LabelNormalizer);
+  });
+
+  test('a raw label reduces identically wherever it is normalized', () => {
+    const raw = '  FIRST/LAST NAME * ';
+    const canonical = new LabelNormalizer().normalize(raw);
+
+    expect(canonical).toBe('first/last name');
+    expect(new FieldMatcher({}).labelNormalizer.normalize(raw)).toBe(canonical);
+    expect(new FuzzyFieldMatcher().labelNormalizer.normalize(raw)).toBe(canonical);
+  });
+
+  test('every registry alias is stored in canonical normalized form', () => {
+    const canon = new LabelNormalizer();
+
+    new FieldMatcher({}).rules.forEach((rule) => {
+      rule.aliases.forEach((alias) => {
+        expect(alias).toBe(canon.normalize(alias));
+      });
+    });
+
+    const fuzzy = new FuzzyFieldMatcher();
+    Object.values(fuzzy.fieldDefs).forEach((fieldDef) => {
+      fieldDef.aliases.forEach((alias) => {
+        expect(alias).toBe(canon.normalize(alias));
+      });
     });
   });
 });

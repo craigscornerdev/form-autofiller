@@ -8,11 +8,18 @@ const FuzzyFieldMatcherClass = typeof module !== 'undefined' && module.exports
 const Gradient = typeof module !== 'undefined' && module.exports
   ? require('./confidence-gradient')
   : globalThis.ConfidenceGradient;
+const LabelNormalizerClass = typeof module !== 'undefined' && module.exports
+  ? require('./label-normalizer')
+  : globalThis.CharityLabelNormalizer;
 
 class FieldMatcher {
   constructor(profile = {}) {
     this.profile = profile;
-    this.rules = fieldRegistry.map((rule) => ({ ...rule }));
+    this.labelNormalizer = new LabelNormalizerClass();
+    this.rules = fieldRegistry.map((rule) => ({
+      ...rule,
+      aliases: (rule.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
+    }));
     this.fuzzyMatcher = new FuzzyFieldMatcherClass();
   }
 
@@ -64,7 +71,7 @@ class FieldMatcher {
   }
 
   getMatchingRule(label, autocomplete = "", fieldType = "") {
-    const normalizedLabel = this.normalize(label);
+    const normalizedLabel = this.labelNormalizer.normalize(label);
 
     const autocompleteFieldMap = {
       country: "organizationCountry",
@@ -210,16 +217,16 @@ class FieldMatcher {
       return null;
     }
 
-    const profileText = this.normalize(typeof profileValue === "string" ? profileValue : "");
-    const labelText = this.normalize(field.label || rule.source || "");
+    const profileText = this.labelNormalizer.normalize(typeof profileValue === "string" ? profileValue : "");
+    const labelText = this.labelNormalizer.normalize(field.label || rule.source || "");
     let bestOption = null;
     let bestScore = 0;
 
     options.forEach((option) => {
       const optionText = typeof option === "string" ? option : (option.text || option.label || option.value || "");
       const optionValue = typeof option === "string" ? option : (option.value || option.text || option.label || "");
-      const normalizedOption = this.normalize(optionText);
-      const normalizedOptionValue = this.normalize(optionValue);
+      const normalizedOption = this.labelNormalizer.normalize(optionText);
+      const normalizedOptionValue = this.labelNormalizer.normalize(optionValue);
       const profileScore = Math.max(
         this.scoreSelectOption(profileText, normalizedOption),
         this.scoreSelectOption(profileText, normalizedOptionValue)
@@ -319,17 +326,6 @@ class FieldMatcher {
     ].includes(profileField);
   }
 
-  normalize(value) {
-    if (!value || typeof value !== "string") {
-      return "";
-    }
-
-    return value
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

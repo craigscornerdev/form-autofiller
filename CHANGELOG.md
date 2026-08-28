@@ -3,7 +3,12 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
-## 0.14.0 — 2026-08-28 — Charity vocabulary as a preset
+## 0.15.0 — 2026-08-28 — One canonical label normalizer
+
+- `label-normalizer.js` now carries a dual-export footer (`module.exports` + `globalThis.CharityLabelNormalizer`) and `popup.html` loads it ahead of the matchers, so the same normalizer runs in the extension and in Node tests.
+- `field-matcher.js` and `fuzzy-field-matcher.js` both reduce labels through a `LabelNormalizer` instance instead of each carrying their own rules; every registry alias is run through it when the matcher is constructed, so the label side and the alias side are always compared in the same form.
+- The canonical normalizer keeps a tight slash as a compound (`"State/Province"` → `state/province`) but treats a spaced slash as a separator (`"EIN / Tax ID"` → `ein tax id`, `"State / Province"` → `state province`), so both wordings still resolve to their concept.
+- `tests/label-normalizer.test.js` adds cross-call-site parity cases (the matchers delegate to `LabelNormalizer`; a raw label reduces identically wherever it is normalized; every stored alias is already in canonical form); `tests/field-matcher.test.js` checks the matcher normalizes through the shared normalizer, slash handling included.
 
 - Added `presets/charity.js`: all 21 fields the current `FieldSemantics` registry describes, ported to domain-neutral `FieldConcept`s under the `org.*` and `event.*` namespaces. Every original alias is carried over, `organizationType`'s select-option map becomes `enumValues`, and the three `neverAutoFill` event fields (`event.name` / `event.date` / `event.description`) become `fillPolicy: "never"`. The array carries `extends: "base"`, so `concept-registry.load(['charity'])` unions the shared `contact.*` / `address.*` concepts underneath it. Dual export (`module.exports` + `globalThis.AutofillPresetCharity`). Nothing consumes it yet — the matcher still runs off `FieldRegistry`.
 - `org.ein` also answers to the fuller tax-id wordings (`federal tax identification number`, `tax identification number`, `federal employer identification number`, `fein`) so the semantic tier has anchors to match against later.

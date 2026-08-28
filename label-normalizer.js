@@ -24,6 +24,7 @@ class LabelNormalizer {
       .toLowerCase()           // Convert to lowercase
       .replace(/[*†‡]/g, '')   // Remove required markers (asterisk, obelus, etc.)
       .replace(/[^a-z0-9\s\/]/g, ' ')  // Replace punctuation with spaces (keep slashes for "state/province")
+      .replace(/\s*\/\s*/g, (m) => (m === '/' ? '/' : ' '))  // "a/b" keeps the slash; "a / b" is a separator
       .replace(/\s+/g, ' ')    // Collapse multiple spaces to single space
       .trim();                 // Remove leading/trailing whitespace
   }
@@ -171,4 +172,10 @@ class LabelNormalizer {
   }
 }
 
-module.exports = LabelNormalizer;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = LabelNormalizer;
+}
+
+if (typeof globalThis !== 'undefined') {
+  globalThis.CharityLabelNormalizer = LabelNormalizer;
+}

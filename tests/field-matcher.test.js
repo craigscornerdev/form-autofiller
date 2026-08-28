@@ -107,9 +107,12 @@ describe('FieldMatcher', () => {
     });
   });
 
-  test('normalize lowercases and trims punctuation', () => {
+  test('the matcher reduces labels through the one canonical normalizer', () => {
     const fm = new FieldMatcher({});
-    expect(fm.normalize('  Email Address (Work) ')).toBe('email address work');
+    expect(fm.labelNormalizer.normalize('  Email Address (Work) ')).toBe('email address work');
+    // a tight slash is kept as a compound; a spaced slash reads as a separator
+    expect(fm.labelNormalizer.normalize('First/Last Name')).toBe('first/last name');
+    expect(fm.labelNormalizer.normalize('State / Province')).toBe('state province');
   });
 
   test('getMatchingRule can combine split address data for a single address field', () => {
