@@ -27,15 +27,17 @@ class FuzzyFieldMatcher {
       NO_MATCH: 0.0      // < 0.60: No match
     };
 
-    // Scoring is now multiplicative/hierarchical, not additive
-    // This prevents accidental high scores from combining unrelated factors.
-    // Ceiling for a non-exact match is tokenOverlap * contextMatch * typeCompatibility
-    // = 1.0 * 0.9 * 0.95 = 0.855, always below HIGH so only true exact aliases auto-fill.
+    // Scoring is multiplicative/hierarchical, not additive: this prevents
+    // accidental high scores from combining unrelated factors. A token-overlap
+    // match is bounded by tokenOverlap * contextMatch * typeCompatibility, so a
+    // near-exact wording under a fitting heading still lands in review, not high
+    // — only true exact aliases and autocomplete tokens auto-fill.
     this.SCORING_WEIGHTS = {
       exactAlias: 1.0,           // Exact match to an alias (base score)
       tokenOverlap: 1.0,         // Token-based similarity multiplier (max)
-      contextMatch: 0.9,         // Context match multiplier
-      contextMismatch: 0.7,      // Context mismatch penalty
+      contextMatch: 0.9,         // Heading fits the concept's groupHints
+      contextUnknown: 0.95,      // No heading to judge by
+      contextMismatch: 0.7,      // Heading points at another section
       typeCompatibility: 0.95    // Type compatibility bonus (small)
     };
 
@@ -57,7 +59,8 @@ class FuzzyFieldMatcher {
         source: concept.label,
         fieldType: concept.controlTypes[0],
         neverAutoFill: concept.fillPolicy === 'never',
-        aliases: (concept.aliases || []).map((alias) => this.labelNormalizer.normalize(alias))
+        aliases: (concept.aliases || []).map((alias) => this.labelNormalizer.normalize(alias)),
+        groupHints: concept.groupHints || []
       };
     });
 
@@ -103,7 +106,7 @@ class FuzzyFieldMatcher {
     candidates.sort((a, b) => b.score - a.score);
 
     // Determine best match with tie-breaking
-    const bestMatch = this._selectBestMatchWithTieBreaking(candidates, normalizedLabel, fieldContext);
+    const bestMatch = this._selectBestMatchWithTieBreaking(candidates);
 
     return {
       matchedField: bestMatch ? bestMatch.fieldName : null,
@@ -134,6 +137,22 @@ class FuzzyFieldMatcher {
   }
 
   /**
+   * Context multiplier for a candidate: how the scanned section heading
+   * (`fieldContext.groupLabel`) token-fits this concept's `groupHints`.
+   * @private
+   * @param {Object} fieldContext - Field context carrying `groupLabel`
+   * @param {Object} fieldDef - Field definition carrying `groupHints`
+   * @returns {number} - 0.9 heading fits · 0.95 no heading · 0.7 heading points elsewhere
+   */
+  _contextMultiplier(fieldContext, fieldDef) {
+    switch (this.labelNormalizer.headingFit(fieldContext.groupLabel, fieldDef.groupHints)) {
+      case 'match': return this.SCORING_WEIGHTS.contextMatch;
+      case 'mismatch': return this.SCORING_WEIGHTS.contextMismatch;
+      default: return this.SCORING_WEIGHTS.contextUnknown;
+    }
+  }
+
+  /**
    * Score how well a field definition matches the given normalized label
    * @private
    * @param {string} normalizedLabel - Normalized label
@@ -158,20 +177,7 @@ class FuzzyFieldMatcher {
 
     // 1. Check for exact alias match (highest priority)
     if (fieldDef.aliases && fieldDef.aliases.includes(normalizedLabel)) {
-      // Base score for exact match
-      score = this.SCORING_WEIGHTS.exactAlias;  // 1.0
-      
-      // Apply context match/mismatch multiplier
-      if (fieldContext.context === fieldDef.context) {
-        score *= this.SCORING_WEIGHTS.contextMatch;  // Keep it high: 0.9
-      } else if (fieldContext.context === 'unknown') {
-        // Unknown context doesn't penalize exact matches as much
-        score *= 0.95;
-      } else {
-        // Mismatched context significantly penalizes
-        score *= this.SCORING_WEIGHTS.contextMismatch;  // 0.7
-      }
-      
+      score = this.SCORING_WEIGHTS.exactAlias * this._contextMultiplier(fieldContext, fieldDef);
       return Math.max(0, Math.min(1, score));
     }
 
@@ -190,18 +196,7 @@ class FuzzyFieldMatcher {
     }
 
     score = maxAliasScore * this.SCORING_WEIGHTS.tokenOverlap;  // Max 1.0
-
-    // Apply context multiplier
-    if (fieldContext.context === fieldDef.context) {
-      score *= this.SCORING_WEIGHTS.contextMatch;  // Boost to potentially 0.72
-    } else if (fieldContext.context === 'unknown') {
-      score *= 0.9;  // Slight boost for unknown context
-    } else {
-      // Mismatched context significantly penalizes
-      score *= this.SCORING_WEIGHTS.contextMismatch;  // Reduce to 0.56
-    }
-
-    // Apply small type compatibility bonus
+    score *= this._contextMultiplier(fieldContext, fieldDef);
     score *= this.SCORING_WEIGHTS.typeCompatibility;  // 0.95
 
     // Clamp score to 0-1 range
@@ -253,14 +248,12 @@ class FuzzyFieldMatcher {
 
   /**
    * Select the best match with tie-breaking logic
-   * Rejects ambiguous ties where top 2 scores are too close
+   * Rejects ambiguous ties where the top two scores are too close
    * @private
    * @param {Array} candidates - Sorted candidate list
-   * @param {string} normalizedLabel - Normalized label
-   * @param {Object} fieldContext - Field context
    * @returns {Object|null} - Best match or null if ambiguous
    */
-  _selectBestMatchWithTieBreaking(candidates, normalizedLabel, fieldContext) {
+  _selectBestMatchWithTieBreaking(candidates) {
     if (candidates.length === 0) {
       return null;
     }
@@ -278,15 +271,9 @@ class FuzzyFieldMatcher {
     const scoreDifference = best.score - secondBest.score;
     const TIE_THRESHOLD = 0.05;  // 5% difference considered ambiguous
 
-    // Special case: if best has exact context match and second doesn't, prefer best
-    if (best.fieldDef.context === fieldContext.context && 
-        secondBest.fieldDef.context !== fieldContext.context) {
-      return best;
-    }
-
     // If scores are too close and both are in "high" confidence, reject as ambiguous
-    if (scoreDifference < TIE_THRESHOLD && 
-        best.confidence === 'high' && 
+    if (scoreDifference < TIE_THRESHOLD &&
+        best.confidence === 'high' &&
         secondBest.confidence === 'high') {
       return null;
     }

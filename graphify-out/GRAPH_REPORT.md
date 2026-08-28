@@ -1,16 +1,16 @@
 # Graph Report - Form Autofiller  (2026-08-28)
 
 ## Corpus Check
-- 33 files · ~27,557 words
+- 33 files · ~28,276 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 287 nodes · 335 edges · 24 communities (21 shown, 3 thin omitted)
+- 288 nodes · 336 edges · 24 communities (21 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1e2f65e4`
+- Built from commit: `487c0da3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -39,14 +39,14 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Changelog` - 22 edges
-2. `FieldMatcher` - 16 edges
-3. `Design — Smart Form Autofiller` - 12 edges
-4. `FuzzyFieldMatcher` - 11 edges
+1. `Changelog` - 23 edges
+2. `FieldMatcher` - 17 edges
+3. `FuzzyFieldMatcher` - 12 edges
+4. `Design — Smart Form Autofiller` - 12 edges
 5. `Form Autofiller — Backlog` - 11 edges
-6. `Phase B — Generic concept model (remove the charity coupling)` - 9 edges
-7. `Phase D — Capture how the user fills forms` - 9 edges
-8. `scanCurrentPage()` - 8 edges
+6. `Phase D — Capture how the user fills forms` - 9 edges
+7. `scanCurrentPage()` - 8 edges
+8. `Phase B — Generic concept model (remove the charity coupling)` - 8 edges
 9. `Phase C — Local embedding label matching` - 8 edges
 10. `Phase E — Learning integration, custom fields, diagnostics` - 8 edges
 
@@ -63,8 +63,8 @@ Cohesion: 0.09
 Nodes (24): addFillResults(), addSuggestions(), fieldList, getActiveTab(), getProfileFromForm(), getScanErrorMessage(), loadProfile(), missingGlobals (+16 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.09
-Nodes (22): 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers, 0.11.0 — 2026-08-27 — Numeric confidence through the matcher, 0.12.0 — 2026-08-27 — Render the confidence spectrum, 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest, 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader, 0.15.0 — 2026-08-28 — One canonical label normalizer, 0.16.0 — 2026-08-28 — Matcher runs on the concept registry, 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight (+14 more)
+Cohesion: 0.08
+Nodes (23): 0.10.0 — 2026-08-27 — Gradient + fill-policy helpers, 0.11.0 — 2026-08-27 — Numeric confidence through the matcher, 0.12.0 — 2026-08-27 — Render the confidence spectrum, 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest, 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader, 0.15.0 — 2026-08-28 — One canonical label normalizer, 0.16.0 — 2026-08-28 — Matcher runs on the concept registry, 0.17.0 — 2026-08-28 — Field debug readout + quieter highlight (+15 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.33
@@ -87,12 +87,12 @@ Cohesion: 0.36
 Nodes (5): { compose }, compose(), joinAddressLine(), presentParts(), ValueCompose
 
 ### Community 10 - "Community 10"
-Cohesion: 0.26
-Nodes (4): LabelNormalizer, FieldMatcher, FuzzyFieldMatcher, LabelNormalizer
+Cohesion: 0.17
+Nodes (5): LabelNormalizer, FuzzyFieldMatcher, FieldMatcher, FuzzyFieldMatcher, LabelNormalizer
 
 ### Community 11 - "Community 11"
-Cohesion: 0.22
-Nodes (9): D1a — Injection + per-origin allowlist, D1b ▶ — SW message router, D2a — Capture denylist, D2b — Field-commit capture, D3a — Learning store reducers, D3b — SW is the sole writer, D4a ▶ — Opt-in + privacy panel, D4b — Retention sweep + PRIVACY.md (+1 more)
+Cohesion: 0.25
+Nodes (8): C1 — esbuild + service-worker skeleton, C2a — Vendor the model, C2b ▶ — Embedder module (local model, not in the matcher path yet), C3 — Build-time alias vectors, C4a — Embedding scorer, C4b ▶ — Embedding tier in the cascade + fallback, C5 — Drop Fuse.js, Phase C — Local embedding label matching
 
 ### Community 13 - "Community 13"
 Cohesion: 0.14
@@ -103,8 +103,8 @@ Cohesion: 0.33
 Nodes (5): Coding standards, Per-step workflow, Project Conventions, Tools, Where things live
 
 ### Community 16 - "Community 16"
-Cohesion: 0.08
-Nodes (25): C1 — esbuild + service-worker skeleton, C2a — Vendor the model, C2b ▶ — Embedder module (local model, not in the matcher path yet), C3 — Build-time alias vectors, C4a — Embedding scorer, C4b ▶ — Embedding tier in the cascade + fallback, C5 — Drop Fuse.js, E1a — learnedEntries in the cascade (+17 more)
+Cohesion: 0.07
+Nodes (26): B6b ▶ — Heading drives the context multiplier, B7a — Profile store keyed by concept id, B7b ▶ — Generated profile UI, B8a — Neutral global names, B8b — Matcher filename + one version string, B9a — Personal preset + the generic guard, B9b ▶ — Preset toggle proves generalization, D1a — Injection + per-origin allowlist (+18 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.09
@@ -131,8 +131,8 @@ Cohesion: 0.29
 Nodes (6): charityConcepts, EVENT_HINTS, EVENT_ORGANIZER_HINTS, ORG_ADDRESS_HINTS, ORG_CONTACT_HINTS, ORG_HINTS
 
 ### Community 23 - "Community 23"
-Cohesion: 0.22
-Nodes (9): B6a — Scan captures the section heading, B6b ▶ — Heading drives the context multiplier, B7a — Profile store keyed by concept id, B7b ▶ — Generated profile UI, B8a — Neutral global names, B8b — Matcher filename + one version string, B9a — Personal preset + the generic guard, B9b ▶ — Preset toggle proves generalization (+1 more)
+Cohesion: 0.25
+Nodes (8): E1a — learnedEntries in the cascade, E1b ▶ — Popup feeds the matcher from history, E2 — Provenance strength function, E3 — Conflict UX, E4a — Promotion state machine, E4b ▶ — Promoted concepts in the registry + popup, E5 ▶ — Diagnostics surface, Phase E — Learning integration, custom fields, diagnostics
 
 ## Knowledge Gaps
 - **152 isolated node(s):** `VALUE_TYPES`, `FILL_POLICIES`, `ConceptRegistry`, `ConfidenceGradient`, `FillPolicy` (+147 more)
@@ -143,16 +143,16 @@ Nodes (9): B6a — Scan captures the section heading, B6b ▶ — Heading drives
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `FieldMatcher` connect `Community 4` to `Community 13`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `Form Autofiller — Backlog` connect `Community 16` to `Community 11`, `Community 23`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `FuzzyFieldMatcher` connect `Community 8` to `Community 10`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **What connects `VALUE_TYPES`, `FILL_POLICIES`, `ConceptRegistry` to the rest of the system?**
   _152 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.08522727272727272 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 13` be split into smaller, more focused modules?**
   _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
-- **Should `Community 16` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._

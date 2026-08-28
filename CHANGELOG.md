@@ -3,6 +3,35 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.21.0 — 2026-08-28 — Heading drives the context multiplier
+
+- `label-normalizer.js` gains `headingFit(groupLabel, groupHints)` →
+  `'match' | 'absent' | 'mismatch'`: a hint fits when every one of its tokens is
+  present in the normalized heading. `detectContext` and its keyword table are
+  gone; `createFieldContext` no longer carries a `context` field.
+- `fuzzy-field-matcher.js` scores the context multiplier from the heading: a
+  candidate's `groupHints` vs `fieldContext.groupLabel` through `headingFit` —
+  `×0.9` fits, `×0.95` no heading, `×0.7` fits none — applied to both the
+  exact-alias and token-overlap branches via one `_contextMultiplier` helper.
+  `SCORING_WEIGHTS` gains `contextUnknown`; the dead `fieldDef.context`
+  tie-break branch is removed.
+- `field-matcher.js`: when one normalized label is an exact alias for several
+  concepts, `pickExactRuleByHeading` lets the heading choose — the concept whose
+  `groupHints` the heading fits wins, ties fall to the later preset, and a
+  heading that fits none of several rivals drops the match to review
+  (`strength 0.7`) with a "section heading points elsewhere" reason. A lone
+  exact match keeps full strength. Rules now carry `groupHints`.
+- `presets/charity.js`: `org.legal_name` gains the bare alias `name`, so a
+  section heading is what separates a bare "Name" between the org and the
+  contact.
+- `demos/sections-demo.html` (new): "Name" and "Email" under an *Organization*
+  heading and again under a *Primary contact* heading — the heading alone fills
+  each with the right value.
+- Tests: `tests/label-normalizer.test.js` swaps context-detection cases for
+  `headingFit` coverage; `tests/fuzzy-field-matcher.test.js` adds
+  heading-multiplier cases; `tests/field-matcher.test.js` adds the
+  identical-label disambiguation and contradicting-heading cases.
+
 ## 0.20.0 — 2026-08-28 — Scan captures the section heading
 
 - `popup.js` `describeField` adds `groupLabel`: a new nested `getGroupLabel(field)`

@@ -1,7 +1,7 @@
 {
   "field-matcher.js": {
-    "mtime": 1787923662.1134584,
-    "ast_hash": "ac02d8162032fff7192a38a96d22f31d",
+    "mtime": 1787924844.5102909,
+    "ast_hash": "2673c600b0a8fa0cfc3a9e54a87f5371",
     "semantic_hash": ""
   },
   "manifest.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "tests/field-matcher.test.js": {
-    "mtime": 1787923681.4459405,
-    "ast_hash": "319f12fbbc3fc196c7be6d7833bd0fca",
+    "mtime": 1787924998.0143926,
+    "ast_hash": "ca98a5b15095f5c591de79231882e54a",
     "semantic_hash": ""
   },
   ".agent.md": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787923390.0416512,
-    "ast_hash": "32fee042e9f6166661d5adce485a7fa0",
+    "mtime": 1787923702.1118202,
+    "ast_hash": "813720c889d4c841eec83fc4fe2abb44",
     "semantic_hash": ""
   },
   "README.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1787923396.2665894,
-    "ast_hash": "e53a67b7a97cd94c5645d402da1aeb1e",
+    "mtime": 1787923710.8147788,
+    "ast_hash": "e5464325ce3a171d3c8a9adf0e03d322",
     "semantic_hash": ""
   },
   "popup.html": {
@@ -60,23 +60,23 @@
     "semantic_hash": ""
   },
   "fuzzy-field-matcher.js": {
-    "mtime": 1787917690.2798777,
-    "ast_hash": "0eb7ed4871c3209cfd300a37998b0661",
+    "mtime": 1787924815.1849146,
+    "ast_hash": "a933fbfb4e1b3f9c65e9373670d57d70",
     "semantic_hash": ""
   },
   "label-normalizer.js": {
-    "mtime": 1787916367.3851993,
-    "ast_hash": "94563cb02f8a0c2eef5b7cb67c02cdd8",
+    "mtime": 1787924755.4195118,
+    "ast_hash": "8f3dbfae28c6dc2c1cc0345d4ab861c0",
     "semantic_hash": ""
   },
   "tests/fuzzy-field-matcher.test.js": {
-    "mtime": 1787917873.5341847,
-    "ast_hash": "4d38b6ffa43e651387fbe75058697667",
+    "mtime": 1787924950.1129215,
+    "ast_hash": "1e84792ae9ed594f845fdf611882063c",
     "semantic_hash": ""
   },
   "tests/label-normalizer.test.js": {
-    "mtime": 1787916384.9363258,
-    "ast_hash": "c978b0b51504f4aeb27f9acf9e30a4f4",
+    "mtime": 1787924922.531805,
+    "ast_hash": "eb63440bda8b5fdabcd8b4f4e337e590",
     "semantic_hash": ""
   },
   "charity-form-fixture.html": {
@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "presets/charity.js": {
-    "mtime": 1787917589.3076866,
-    "ast_hash": "46175ab17729da9d878e263eceaada02",
+    "mtime": 1787924849.2294269,
+    "ast_hash": "ab567d86245d67581faa876b8b9d1fab",
     "semantic_hash": ""
   },
   "tests/presets-charity.test.js": {
-    "mtime": 1787917825.7590272,
-    "ast_hash": "702e04700b091262d663cbafd28b0230",
+    "mtime": 1787925004.0630953,
+    "ast_hash": "a60e1699ff3f5e1cc84dabe142f1855c",
     "semantic_hash": ""
   },
   "tests/value-compose.test.js": {
@@ -182,6 +182,11 @@
   "value-compose.js": {
     "mtime": 1787922947.8597288,
     "ast_hash": "ee6cdf3c4fd9362748491229c58025bb",
+    "semantic_hash": ""
+  },
+  "demos/sections-demo.html": {
+    "mtime": 1787925028.6986852,
+    "ast_hash": "b19e98790f67f539a15509606b600e6e",
     "semantic_hash": ""
   }
 }

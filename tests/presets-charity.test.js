@@ -17,7 +17,7 @@ const { load, validateConcept } = require('../concept-registry');
 const VOCABULARY = {
   'org.legal_name': {
     label: 'Organization name',
-    aliases: ['organization name', 'name of organization', 'charity name', 'nonprofit name', 'non profit name', 'organization legal name']
+    aliases: ['organization name', 'name of organization', 'charity name', 'nonprofit name', 'non profit name', 'organization legal name', 'name']
   },
   'org.type': {
     label: 'Organization type',

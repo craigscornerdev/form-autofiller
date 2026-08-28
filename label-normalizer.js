@@ -92,61 +92,27 @@ class LabelNormalizer {
   }
 
   /**
-   * Detect the context/section of a field (organization, event, etc.)
-   * @param {string} label - Normalized or raw label
-   * @param {string} context - Optional explicit context
-   * @returns {string} - Detected context: 'organization', 'organizationContact', 'event', or 'unknown'
+   * How a scanned section heading sits against a concept's `groupHints`.
+   * A hint fits when every token of the hint is present in the heading, so
+   * "primary contact" fits the heading "Primary contact" but not "Organization".
+   * @param {string} groupLabel - Nearest section heading text ('' when none)
+   * @param {string[]} groupHints - Words likely in a heading for this concept
+   * @returns {'match'|'absent'|'mismatch'}
    */
-  detectContext(label, context) {
-    if (!label) return 'unknown';
-
-    const normalized = this.normalize(label);
-
-    // Explicit context provided
-    if (context) {
-      return context;
+  headingFit(groupLabel, groupHints) {
+    const heading = this.normalize(groupLabel || '');
+    if (!heading) {
+      return 'absent';
     }
 
-    // Check for event-related keywords
-    if (this._matchesPattern(normalized, ['event', 'organizer', 'coordinator', 'campaign'])) {
-      return 'event';
-    }
+    const headingTokens = new Set(heading.split(' ').filter(Boolean));
+    const hints = Array.isArray(groupHints) ? groupHints : [];
+    const fits = hints.some((hint) => {
+      const hintTokens = this.normalize(hint).split(' ').filter(Boolean);
+      return hintTokens.length > 0 && hintTokens.every((token) => headingTokens.has(token));
+    });
 
-    // Check for organization contact keywords
-    if (this._matchesPattern(normalized, ['contact', 'primary contact'])) {
-      return 'organizationContact';
-    }
-
-    // Check for organization address keywords
-    if (this._matchesPattern(normalized, ['address', 'street', 'city', 'state', 'postal', 'country'])) {
-      return 'organization';
-    }
-
-    // Check for organization information keywords
-    if (this._matchesPattern(normalized, [
-      'organization',
-      'charity',
-      'nonprofit',
-      'ein',
-      'tax id',
-      'mission',
-      'website'
-    ])) {
-      return 'organization';
-    }
-
-    return 'unknown';
-  }
-
-  /**
-   * Check if a normalized label matches any pattern
-   * @private
-   * @param {string} normalized - Normalized label
-   * @param {string[]} patterns - Patterns to match
-   * @returns {boolean}
-   */
-  _matchesPattern(normalized, patterns) {
-    return patterns.some(pattern => normalized.includes(pattern));
+    return fits ? 'match' : 'mismatch';
   }
 
   /**
@@ -158,13 +124,11 @@ class LabelNormalizer {
   createFieldContext(fieldElement, rawLabel) {
     const sources = this.gatherLabelSources(fieldElement);
     const normalized = this.normalize(rawLabel || '');
-    const context = this.detectContext(normalized, fieldElement.context);
 
     return {
       rawLabel: rawLabel || '',          // Original label for display
       normalized: normalized,             // Normalized for matching
       sources: sources,                   // All label sources (name, id, placeholder, aria)
-      context: context,                   // Section context
       fieldType: fieldElement.fieldType || 'text',
       fieldName: fieldElement.name || '',
       fieldId: fieldElement.id || ''

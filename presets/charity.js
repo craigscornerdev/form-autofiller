@@ -30,7 +30,7 @@ const charityConcepts = [
     label: 'Organization name',
     aliases: [
       'organization name', 'name of organization', 'charity name',
-      'nonprofit name', 'non profit name', 'organization legal name'
+      'nonprofit name', 'non profit name', 'organization legal name', 'name'
     ],
     autocompleteTokens: ['organization'],
     groupHints: ORG_HINTS,

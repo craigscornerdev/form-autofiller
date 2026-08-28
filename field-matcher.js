@@ -33,6 +33,7 @@ class FieldMatcher {
         source: concept.label,
         aliases: (concept.aliases || []).map((alias) => this.labelNormalizer.normalize(alias)),
         autocompleteTokens: concept.autocompleteTokens || [],
+        groupHints: concept.groupHints || [],
         controlTypes: concept.controlTypes || [],
         valueType: concept.valueType,
         fillPolicy: concept.fillPolicy,
@@ -115,11 +116,12 @@ class FieldMatcher {
       return null;
     }
 
-    const exactRule = this.findLastRule((rule) => rule.aliases.includes(normalizedLabel));
-    if (exactRule) {
+    const exactRules = this.rules.filter((rule) => rule.aliases.includes(normalizedLabel));
+    if (exactRules.length > 0) {
+      const { rule, strength } = this.pickExactRuleByHeading(exactRules, groupLabel);
       return {
-        ...exactRule,
-        _labelMatch: { strategy: "exact-alias", strength: 1, matchedAlias: normalizedLabel, normalizedLabel },
+        ...rule,
+        _labelMatch: { strategy: "exact-alias", strength, matchedAlias: normalizedLabel, normalizedLabel },
         _rejected: []
       };
     }
@@ -127,8 +129,33 @@ class FieldMatcher {
     return this.getFuzzyMatchingRule(normalizedLabel, fieldType, groupLabel);
   }
 
+  // When one alias is exact for several concepts, the scanned section heading
+  // breaks the tie: pick the concept whose `groupHints` the heading fits, and
+  // fall to the later preset (registry-union precedence) when the heading fits
+  // more than one or none. A heading that fits none of several rivals drops the
+  // match to review so a contradicting section can't stay green; a lone exact
+  // match has no rival and keeps full strength.
+  pickExactRuleByHeading(exactRules, groupLabel) {
+    if (exactRules.length === 1) {
+      return { rule: exactRules[0], strength: 1 };
+    }
+
+    const RANK = { match: 2, absent: 1, mismatch: 0 };
+    let chosen = exactRules[0];
+    let chosenRank = -1;
+    exactRules.forEach((rule) => {
+      const rank = RANK[this.labelNormalizer.headingFit(groupLabel, rule.groupHints)];
+      if (rank >= chosenRank) {   // >= so a later preset wins an equal-rank tie
+        chosen = rule;
+        chosenRank = rank;
+      }
+    });
+
+    return { rule: chosen, strength: chosenRank === RANK.mismatch ? 0.7 : 1 };
+  }
+
   // Later presets refine earlier ones, so a concept defined later wins an
-  // alias / autocomplete-token collision (same convention as the registry union).
+  // autocomplete-token collision (same convention as the registry union).
   findLastRule(predicate) {
     for (let i = this.rules.length - 1; i >= 0; i -= 1) {
       if (predicate(this.rules[i])) {
@@ -139,7 +166,7 @@ class FieldMatcher {
   }
 
   getFuzzyMatchingRule(normalizedLabel, fieldType, groupLabel = "") {
-    const fieldContext = { fieldType: fieldType || "text", context: "unknown", groupLabel: groupLabel || "" };
+    const fieldContext = { fieldType: fieldType || "text", groupLabel: groupLabel || "" };
     const result = this.fuzzyMatcher.findBestMatch(normalizedLabel, fieldContext);
 
     if (!result.matchedField || result.confidence === "no-match") {
@@ -311,6 +338,10 @@ class FieldMatcher {
     const opener = labelMatch.strategy === "autocomplete"
       ? `Autocomplete token match for ${rule.source}`
       : `Exact alias match for ${rule.source}`;
+
+    if (labelMatch.strength < 0.9) {
+      return `${opener}, but the section heading points elsewhere — please review.`;
+    }
 
     const valueType = this.resolvedValueType(field, rule);
     if (valueType === "enum") {

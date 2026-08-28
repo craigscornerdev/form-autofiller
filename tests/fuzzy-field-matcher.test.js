@@ -3,20 +3,19 @@
  *
  * Validates:
  * - retrieval-only Fuse index, our scorer owns every safety decision
- * - exact-alias scoring (unknown heading context ⇒ ×0.95)
+ * - exact-alias scoring (no heading ⇒ ×0.95)
+ * - the context multiplier: a `groupLabel` that token-fits a concept's
+ *   `groupHints` scores ×0.9, one that fits none scores ×0.7
  * - token-overlap similarity is bounded well below the auto-fill line
  * - confidence thresholds (high / review / no-match)
  * - field-type compatibility gating
  * - `fillPolicy: "never"` concepts are excluded
  * - tie-breaking rejects ambiguous matches
- *
- * The matcher always calls `findBestMatch` with `context: 'unknown'` — heading
- * context lands in a later step — so the tests pass it that way too.
  */
 
 const FuzzyFieldMatcher = require('../fuzzy-field-matcher');
 
-const ctx = (over = {}) => ({ fieldType: 'text', context: 'unknown', ...over });
+const ctx = (over = {}) => ({ fieldType: 'text', groupLabel: '', ...over });
 
 describe('Fuzzy Field Matcher over the concept registry', () => {
   let matcher;
@@ -43,7 +42,7 @@ describe('Fuzzy Field Matcher over the concept registry', () => {
   });
 
   describe('Exact Alias Matching', () => {
-    test('an exact alias on an unknown heading context scores 0.95 / high', () => {
+    test('an exact alias with no heading to judge by scores 0.95 / high', () => {
       const result = matcher.findBestMatch('organization name', ctx({ rawLabel: 'ORGANIZATION NAME' }));
 
       expect(result.score).toBeCloseTo(0.95, 5);
@@ -63,6 +62,39 @@ describe('Fuzzy Field Matcher over the concept registry', () => {
 
       expect(result.score).toBeCloseTo(0.95, 5);
       expect(result.matchedField).toBe('event.organizer_name');
+    });
+  });
+
+  describe('Heading drives the context multiplier', () => {
+    test('a groupLabel that fits the concept groupHints scores ×0.9', () => {
+      const result = matcher.findBestMatch('organization name', ctx({ groupLabel: 'Organization' }));
+
+      expect(result.score).toBeCloseTo(0.9, 5);
+      expect(result.confidence).toBe('high');
+      expect(result.matchedField).toBe('org.legal_name');
+    });
+
+    test('a groupLabel that fits none of the groupHints scores ×0.7', () => {
+      const result = matcher.findBestMatch('organization name', ctx({ groupLabel: 'Primary contact' }));
+
+      expect(result.score).toBeCloseTo(0.7, 5);
+      expect(result.confidence).toBe('review');
+      expect(result.matchedField).toBe('org.legal_name');
+    });
+
+    test('the heading also scales a token-overlap match', () => {
+      const fitted = matcher.findBestMatch(
+        'primary contact email address',
+        ctx({ fieldType: 'email', groupLabel: 'Primary contact' })
+      );
+      const contradicted = matcher.findBestMatch(
+        'primary contact email address',
+        ctx({ fieldType: 'email', groupLabel: 'Event details' })
+      );
+
+      expect(fitted.matchedField).toBe('org.contact.email');
+      expect(contradicted.matchedField).toBe('org.contact.email');
+      expect(fitted.score).toBeGreaterThan(contradicted.score);
     });
   });
 

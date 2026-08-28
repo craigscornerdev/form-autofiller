@@ -40,22 +40,6 @@ composition, the context signal, the profile store, and naming onto it, then
 proving the pipeline generalizes with a second preset. `charity` stays
 default-enabled throughout. DESIGN.md §3–§5.
 
-### B6b ▶ — Heading drives the context multiplier
-Files: `fuzzy-field-matcher.js`, `label-normalizer.js`,
-`demos/sections-demo.html` (new)
-Tests: update context cases in `tests/fuzzy-field-matcher.test.js` and
-`tests/label-normalizer.test.js`
-Read: DESIGN.md §3.2, §4
-- [ ] The fuzzy tier token-matches `groupLabel` against `concept.groupHints` for
-  the context multiplier (match `×0.9`, absent heading `×0.95`, mismatch `×0.7`).
-  `detectContext` and its keyword table are deleted from `label-normalizer.js`.
-- [ ] Build `demos/sections-demo.html`: the label "Name" appears under an
-  "Organization" heading and again under a "Primary contact" heading; likewise
-  "Email".
-- [ ] **Demo:** scan `demos/sections-demo.html`. Expect: the org-section "Name"
-  fills with the organization name, the contact-section "Name" fills with the
-  contact name — heading text alone disambiguated them, no charity code involved.
-
 ### B7a — Profile store keyed by concept id
 Files: `popup.js`, `presets/charity.js` (`profileBindings` → migration map only)
 Tests: `tests/profile-store.test.js` (new — form ⇄ `{conceptId:{value}}`, and

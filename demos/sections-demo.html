@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sections Demo — Headings Disambiguate Identical Labels</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 40px auto; padding: 20px; background: #f5f5f5; color: #222; }
+    form { background: #fff; padding: 28px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    h1 { margin: 0 0 24px; font-size: 22px; }
+    section { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid #e2e2e2; }
+    section:last-of-type { border-bottom: none; }
+    h2 { font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0 0 16px; }
+    .row { margin-bottom: 16px; }
+    label { display: block; font-weight: bold; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+    .note { font-size: 12px; color: #777; margin-top: 3px; }
+    button { background: #0066cc; color: #fff; border: 0; border-radius: 4px; padding: 10px 20px; font-size: 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Partnership Enquiry</h1>
+
+  <!--
+    Both sections ask for "Name" and "Email" with the exact same label text.
+    Nothing in the field names, ids, or the labels themselves says which is
+    which — only the section heading above them does.
+
+    Watch this form with the default sample profile (Paws & Whiskers Cat Shelter).
+    Expected:
+      green   - "Name" under Organization    -> "Paws & Whiskers Cat Shelter"
+              - "Name" under Primary contact  -> "Jamie Lee"
+              - "Email" under Primary contact -> "contact@pawsandwhiskers.example"
+      yellow  - "Email" under Organization    -> same address, review band: the
+                heading fits no email concept, so an otherwise-exact match is
+                dropped to review rather than shown green.
+    The heading text alone splits the two "Name" fields — no charity-specific
+    code is involved, the same mechanism separates "Billing" from "Shipping".
+  -->
+
+  <form id="partnership-enquiry">
+    <section>
+      <h2>Organization</h2>
+
+      <div class="row">
+        <label for="f-org-name">Name</label>
+        <input type="text" id="f-org-name" name="name" placeholder="Name">
+      </div>
+
+      <div class="row">
+        <label for="f-org-email">Email</label>
+        <input type="email" id="f-org-email" name="email" placeholder="name@example.org">
+      </div>
+    </section>
+
+    <section>
+      <h2>Primary contact</h2>
+
+      <div class="row">
+        <label for="f-contact-name">Name</label>
+        <input type="text" id="f-contact-name" name="name" placeholder="Name">
+      </div>
+
+      <div class="row">
+        <label for="f-contact-email">Email</label>
+        <input type="email" id="f-contact-email" name="email" placeholder="name@example.org">
+      </div>
+    </section>
+
+    <button type="submit">Send enquiry</button>
+  </form>
+
+  <script>
+    document.getElementById('partnership-enquiry').addEventListener('submit', function (e) {
+      e.preventDefault();
+      console.log('Submission prevented — demo fixture.');
+    });
+  </script>
+</body>
+</html>

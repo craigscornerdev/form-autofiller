@@ -85,13 +85,13 @@ describe('FieldMatcher', () => {
     expect(suggestion).toMatchObject({
       source: 'Organization contact email',
       value: 'alice@example.org',
-      confidence: expect.closeTo(0.64125, 5),
+      confidence: expect.closeTo(0.676875, 5),
       band: 'review',
       reason: 'Possible match for Organization contact email — please review.',
       signals: {
         labelMatch: {
           strategy: 'fuzzy',
-          strength: expect.closeTo(0.64125, 5),
+          strength: expect.closeTo(0.676875, 5),
           matchedAlias: null,
           normalizedLabel: 'email address for contact'
         },
@@ -103,8 +103,8 @@ describe('FieldMatcher', () => {
       expect.arrayContaining([
         {
           conceptId: 'event.organizer_email',
-          score: expect.closeTo(0.342, 5),
-          reason: 'Low confidence match: "Event organizer email" (score: 34%)'
+          score: expect.closeTo(0.361, 5),
+          reason: 'Low confidence match: "Event organizer email" (score: 36%)'
         }
       ])
     );
@@ -331,9 +331,14 @@ describe('FieldMatcher', () => {
     });
 
     expect(capturedContext.groupLabel).toBe('Primary contact');
-    // nothing scores on the heading yet — same band and score as without it
+    // 'Primary contact' fits org.contact.email's groupHints ⇒ context ×0.9
+    // (0.75 token overlap × 0.9 × 0.95 type); without a heading it would be ×0.95
     expect(suggestion.band).toBe('review');
     expect(suggestion.confidence).toBeCloseTo(0.64125, 5);
+
+    const noHeading = new FieldMatcher({ email: 'alice@example.org' })
+      .getSuggestion({ label: 'Email Address for Contact', type: 'text' });
+    expect(noHeading.confidence).toBeCloseTo(0.676875, 5);
   });
 
   test('defaults the fuzzy group context to an empty string when the descriptor has no heading', () => {
@@ -347,6 +352,31 @@ describe('FieldMatcher', () => {
     fm.getSuggestion({ label: 'Some Unmatched Label', type: 'text' });
 
     expect(capturedContext.groupLabel).toBe('');
+  });
+
+  test('the section heading alone disambiguates an identical label', () => {
+    const fm = new FieldMatcher({
+      organizationName: 'Paws & Whiskers',
+      organizationContact: { name: 'Jamie Lee' }
+    });
+
+    const underOrg = fm.getSuggestion({ label: 'Name', type: 'text', groupLabel: 'Organization' });
+    const underContact = fm.getSuggestion({ label: 'Name', type: 'text', groupLabel: 'Primary contact' });
+
+    expect(underOrg.value).toBe('Paws & Whiskers');
+    expect(underOrg.band).toBe('high');
+    expect(underContact.value).toBe('Jamie Lee');
+    expect(underContact.band).toBe('high');
+  });
+
+  test('an exact alias under a contradicting heading drops to review', () => {
+    const fm = new FieldMatcher({ email: 'alice@example.org' });
+    const suggestion = fm.getSuggestion({ label: 'Email', type: 'email', groupLabel: 'Organization' });
+
+    expect(suggestion.value).toBe('alice@example.org');
+    expect(suggestion.band).toBe('review');
+    expect(suggestion.confidence).toBeCloseTo(0.7, 5);
+    expect(suggestion.reason).toContain('the section heading points elsewhere');
   });
 
   test('uses standard autocomplete semantics when a website label is ambiguous', () => {

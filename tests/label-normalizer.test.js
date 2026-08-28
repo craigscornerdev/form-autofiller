@@ -1,12 +1,12 @@
 /**
- * Tests for Step 3: Label Normalization and Field Context Detection
- * 
+ * Tests for the label normalizer.
+ *
  * Validates:
  * - Basic normalization (case, punctuation, whitespace)
  * - Required marker removal (asterisks, etc.)
  * - Uppercase label handling
  * - Label gathering from multiple sources
- * - Context detection (organization vs event)
+ * - `headingFit`: how a section heading token-fits a concept's groupHints
  * - Field context object creation
  */
 
@@ -161,48 +161,39 @@ describe('Label Normalizer - Step 3 Validation', () => {
     });
   });
 
-  // Test 5: Context detection
-  describe('Context Detection', () => {
-    test('detects organization context', () => {
-      expect(normalizer.detectContext('organization name')).toBe('organization');
-      expect(normalizer.detectContext('charity name')).toBe('organization');
-      expect(normalizer.detectContext('ein')).toBe('organization');
-      expect(normalizer.detectContext('mission statement')).toBe('organization');
+  // Test 5: Heading fit against a concept's groupHints
+  describe('headingFit', () => {
+    const orgHints = ['organization', 'organisation', 'about your organization'];
+    const contactHints = ['organization contact', 'primary contact', 'contact person'];
+
+    test('a hint whose every token is in the heading is a match', () => {
+      expect(normalizer.headingFit('Organization', orgHints)).toBe('match');
+      expect(normalizer.headingFit('About your organization', orgHints)).toBe('match');
+      expect(normalizer.headingFit('Primary contact', contactHints)).toBe('match');
     });
 
-    test('detects organization address context', () => {
-      expect(normalizer.detectContext('street address')).toBe('organization');
-      expect(normalizer.detectContext('city')).toBe('organization');
-      expect(normalizer.detectContext('postal code')).toBe('organization');
+    test('is case- and punctuation-insensitive through the normalizer', () => {
+      expect(normalizer.headingFit('  PRIMARY CONTACT: ', contactHints)).toBe('match');
     });
 
-    test('detects organization contact context', () => {
-      expect(normalizer.detectContext('primary contact name')).toBe('organizationContact');
-      expect(normalizer.detectContext('contact email')).toBe('organizationContact');
-      expect(normalizer.detectContext('contact phone')).toBe('organizationContact');
+    test('a heading that fits no hint is a mismatch', () => {
+      expect(normalizer.headingFit('Primary contact', orgHints)).toBe('mismatch');
+      expect(normalizer.headingFit('Organization', contactHints)).toBe('mismatch');
     });
 
-    test('detects event context', () => {
-      expect(normalizer.detectContext('event name')).toBe('event');
-      expect(normalizer.detectContext('organizer name')).toBe('event');
-      expect(normalizer.detectContext('event organizer')).toBe('event');
-      expect(normalizer.detectContext('coordinator')).toBe('event');
+    test('a partial hint token overlap does not count as a match', () => {
+      // "organization" alone does not satisfy the two-token hint "organization contact"
+      expect(normalizer.headingFit('Organization', ['organization contact'])).toBe('mismatch');
     });
 
-    test('handles uppercase labels for context detection', () => {
-      expect(normalizer.detectContext('ORGANIZATION NAME')).toBe('organization');
-      expect(normalizer.detectContext('EVENT ORGANIZER')).toBe('event');
-      expect(normalizer.detectContext('CONTACT EMAIL')).toBe('organizationContact');
+    test('no heading text is absent, not a mismatch', () => {
+      expect(normalizer.headingFit('', orgHints)).toBe('absent');
+      expect(normalizer.headingFit(null, orgHints)).toBe('absent');
     });
 
-    test('respects explicit context parameter', () => {
-      expect(normalizer.detectContext('name', 'event')).toBe('event');
-      expect(normalizer.detectContext('email', 'organizationContact')).toBe('organizationContact');
-    });
-
-    test('returns unknown for ambiguous labels', () => {
-      expect(normalizer.detectContext('text')).toBe('unknown');
-      expect(normalizer.detectContext('field')).toBe('unknown');
+    test('no hints to judge against is a mismatch when a heading is present', () => {
+      expect(normalizer.headingFit('Organization', [])).toBe('mismatch');
+      expect(normalizer.headingFit('Organization', undefined)).toBe('mismatch');
     });
   });
 
@@ -243,10 +234,9 @@ describe('Label Normalizer - Step 3 Validation', () => {
         fieldType: 'text'
       };
       const context = normalizer.createFieldContext(field, 'ORGANIZATION NAME *');
-      
+
       expect(context.rawLabel).toBe('ORGANIZATION NAME *');
       expect(context.normalized).toBe('organization name');
-      expect(context.context).toBe('organization');
       expect(context.fieldType).toBe('text');
       expect(context.sources.length).toBeGreaterThan(0);
     });
@@ -259,27 +249,17 @@ describe('Label Normalizer - Step 3 Validation', () => {
       expect(context.normalized).toBe('email address');
     });
 
-    test('handles email field context', () => {
+    test('carries the field type and gathered sources', () => {
       const field = {
         label: 'Contact Email',
         name: 'email',
         fieldType: 'email'
       };
       const context = normalizer.createFieldContext(field, 'Contact Email');
-      
-      expect(context.normalized).toBe('contact email');
-      expect(context.context).toBe('organizationContact');
-    });
 
-    test('handles event organizer context', () => {
-      const field = {
-        label: 'Event Organizer Name',
-        name: 'event_organizer_name',
-        fieldType: 'text'
-      };
-      const context = normalizer.createFieldContext(field, 'EVENT ORGANIZER NAME');
-      
-      expect(context.context).toBe('event');
+      expect(context.normalized).toBe('contact email');
+      expect(context.fieldType).toBe('email');
+      expect(context.sources).toContain('Contact Email');
     });
   });
 
