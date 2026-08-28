@@ -38,10 +38,10 @@ Build the neutral structure in parallel (B1–B3), swap onto it (B4), then refin
 Files: `concept-registry.js`, `presets/base.js` (new)
 Tests: `tests/concept-registry.test.js` (new)
 Read: DESIGN.md §3
-- [ ] `FieldConcept` JSDoc typedef. `concept-registry.js`:
+- [x] `FieldConcept` JSDoc typedef. `concept-registry.js`:
   `load(enabledPresets, customConcepts)` → validated, unioned active registry;
   rejects malformed concepts.
-- [ ] `presets/base.js`: the concepts every domain shares (`contact.*`,
+- [x] `presets/base.js`: the concepts every domain shares (`contact.*`,
   `address.*`) as `FieldConcept[]`.
 
 ### B2 — Port the charity vocabulary to a preset

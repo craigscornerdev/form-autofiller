@@ -3,6 +3,13 @@
 This file records completed work and version history. New entries use the format
 `version — YYYY-MM-DD — title`.
 
+## 0.13.0 — 2026-08-28 — FieldConcept schema + registry loader
+
+- Added `concept-registry.js`: the `FieldConcept` JSDoc typedef (domain-neutral shape from DESIGN.md §3.1) plus `load(enabledPresets, customConcepts)`, which resolves each enabled preset (by built-in name or inline), pulls `extends` dependencies depth-first (a shared base is collected once), validates every concept, and unions them by `id` into a single active registry — custom concepts appended last so they win an id collision while the original slot order is kept.
+- `validateConcept` returns a normalized clone with defaults applied (`fillPolicy: "auto"`, `sensitive: false`, empty `autocompleteTokens` / `groupHints` / `examples`, `null` `enumValues` / `compose`) and throws a `concept-registry: …` error on a missing/non-namespaced `id`, a bad `valueType` / `fillPolicy`, malformed `aliases` / `controlTypes`, an `enum` without `enumValues` (or `enumValues` on a non-enum), or a `composite` without a valid `compose` (or vice-versa).
+- Added `presets/base.js`: the `contact.*` and `address.*` concepts every domain shares, as a `FieldConcept[]`. Dual export (`module.exports` + `globalThis.AutofillPresetBase`).
+- Added `tests/concept-registry.test.js` covering the base preset shape, `load` union / defaults / clone / id-collision / `extends` de-duplication, enum + composite round-trips, and every malformed-input rejection. Nothing consumes the registry yet; the matcher swaps onto it in a later step.
+
 ## 0.12.1 — 2026-08-27 — Keep the popup's script wiring honest
 
 - `fill-policy.js` no longer creates a module-level `ConfidenceGradient` binding — it resolves the gradient helper through a local `gradient()` accessor. As sibling classic scripts in `popup.html`, `fill-policy.js` and `confidence-gradient.js` had both declared `const ConfidenceGradient`, a global-scope collision that stopped `fill-policy.js` from defining `FillPolicy` and left `Scan Form` failing with the generic "This page cannot be scanned" message.

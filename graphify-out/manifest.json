@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1787878804.5958915,
-    "ast_hash": "5012c0e8e95a9877081164586c9ded23",
+    "mtime": 1787881162.516487,
+    "ast_hash": "2c5b0401b80c249aab2d21e07740ae1b",
     "semantic_hash": ""
   },
   "README.md": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1787881152.9167645,
-    "ast_hash": "49888a64cfde4402bef53244c0d3b183",
+    "mtime": 1787881169.8387449,
+    "ast_hash": "5960bac19ff6dcc876732478127090ca",
     "semantic_hash": ""
   },
   "DESIGN.md": {
@@ -162,6 +162,21 @@
   "tests/confidence-model.test.js": {
     "mtime": 1787878100.2910466,
     "ast_hash": "cb65be7300befc118a54f2bd7cde6433",
+    "semantic_hash": ""
+  },
+  "concept-registry.js": {
+    "mtime": 1787915099.8553958,
+    "ast_hash": "1a2a9a49b7b0f309a4ea285de2c6a024",
+    "semantic_hash": ""
+  },
+  "presets/base.js": {
+    "mtime": 1787915060.1188786,
+    "ast_hash": "8c6db08f2c2f8d4437b7d9d5e58e42e3",
+    "semantic_hash": ""
+  },
+  "tests/concept-registry.test.js": {
+    "mtime": 1787915126.7850444,
+    "ast_hash": "a80aa6cee0334651d428160058a23125",
     "semantic_hash": ""
   }
 }
